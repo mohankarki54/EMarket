@@ -14,17 +14,18 @@
     <a href="about">About us</a>
 </div>
 
-<form action="action_page.php" method="post">
+<form method="post" th:action="@{/login}"  th:object="${account}" style="border:1px solid #ccc">
+
     <div class="imgcontainer">
         <img src="/images/idea.png" th:src="@{/images/idea.png}" alt="Login" class="avatar">
     </div>
 
     <div class="container">
-        <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="uname" required>
+        <label ><b>Email</b></label>
+        <input type="text" placeholder="Enter your email address" th:field ="*{email}" name="uname" required>
         <br>
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
+        <label><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" th:field ="*{password}" name="psw" required>
 
         <button type="submit">Login</button>
         <br>
