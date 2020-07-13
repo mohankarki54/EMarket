@@ -10,6 +10,8 @@ public class Product {
     String type;
     int sellerid;
 
+    String[] category = {"electronics", "furniture", "vechicle"};
+
     //For image define
 
     public int getSellerid() {
@@ -20,13 +22,7 @@ public class Product {
         this.sellerid = sellerid;
     }
 
-    public String getType() {
-        return type;
-    }
 
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public String getProductType() {
         return productType;

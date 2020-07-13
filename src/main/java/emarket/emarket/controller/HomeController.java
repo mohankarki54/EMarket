@@ -32,8 +32,7 @@ public class HomeController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String dologin(@ModelAttribute("account") Account account){
-        System.out.println(account.getEmail());
-        System.out.println(account.getPassword());
+
         String sql = "SELECT pass FROM user WHERE email = ?";
         String userpass = jdbcTemplate.queryForObject(sql, new Object[]{account.getEmail()}, String.class);
         System.out.println(userpass);
