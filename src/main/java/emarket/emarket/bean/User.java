@@ -42,20 +42,5 @@ public class User {
         return firstname;
     }
 
-
-
-
     public User(){}
-
-
-
 }
-
-/* @Autowired
-    JdbcTemplate jdbcTemplate;
-
-    public List<String> getAllUserNames() {
-        List<String> username = new ArrayList<>();
-        username.addAll(jdbcTemplate.queryForList("select email from user;", String.class));
-        return  username;
-    }*/

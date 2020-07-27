@@ -15,7 +15,7 @@
     <a href="about">About us</a>
 </div>
 
-<form method="post" th:action="@{/product}"  th:object="${product}" style="border:1px solid #ccc">
+<form method="post" th:action="@{/product}"  th:object="${product}" enctype="multipart/form-data" style="border:1px solid #ccc">
     <div class="container">
         <h1>Add the new product</h1>
         <hr>
@@ -34,8 +34,8 @@
             <option th:value="'Vechicle'" th:text="Vechicle"></option>
         </select>
         <br>
-        <label ><b>Insert Image</b></label> <br>
-        <input type="file" name="file"/> <br/><br/>
+        <label ><b>Insert Image</b></label>
+        <input type="file" name="files" /> <br/><br/>
         <br>
 
         <div class="clearfix">

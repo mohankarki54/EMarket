@@ -20,6 +20,8 @@
         <img src="/images/idea.png" th:src="@{/images/idea.png}" alt="Login" class="avatar">
     </div>
 
+    <center> <span th:text="${message}"></span> <br/> </center>
+
     <div class="container">
         <label ><b>Email</b></label>
         <input type="text" placeholder="Enter your email address" th:field ="*{email}" name="uname" required>

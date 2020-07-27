@@ -4,6 +4,7 @@ import emarket.emarket.bean.Account;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,16 +12,31 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import emarket.emarket.bean.User;
+import org.springframework.web.servlet.ModelAndView;
+
 
 @Controller
 public class HomeController {
 
     @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
     JdbcTemplate jdbcTemplate;
 
-    @GetMapping("/home")
-    public  String check(){
-        return  "home";
+    @GetMapping(value = {"/","/home"})
+    public  ModelAndView check(ModelAndView modelAndView, @ModelAttribute("account") Account account){
+
+        if(Account.instance.getIsauthenciated()){
+            account.setIsauthenciated(true);
+        }
+        else {
+            account.setIsauthenciated(false);
+        }
+        System.out.println(account.getIsauthenciated());
+        modelAndView.addObject("isAuthenciated", account.getIsauthenciated());
+        modelAndView.setViewName("home");
+        return modelAndView;
     }
 
     @GetMapping(path = "/login")
@@ -31,18 +47,22 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String dologin(@ModelAttribute("account") Account account){
+    public ModelAndView dologin(ModelAndView modelAndView, @ModelAttribute("account") Account account){
 
         String sql = "SELECT pass FROM user WHERE email = ?";
         String userpass = jdbcTemplate.queryForObject(sql, new Object[]{account.getEmail()}, String.class);
-        System.out.println(userpass);
         boolean status = checkPass(account.getPassword(),userpass);
         if (status){
-            return "home";
+            Account.instance.setIsauthenciated(true);
+            modelAndView.addObject("isAuthenciated", true);
+            modelAndView.setViewName("home");
         }
         else{
-            return "login";
+            Account.instance.setIsauthenciated(false);
+            modelAndView.addObject("message", "Incorrect password. Try again.");
+            modelAndView.setViewName("login");
         }
+        return modelAndView;
     }
 
     @GetMapping(path = "/signup")
@@ -56,8 +76,11 @@ public class HomeController {
     public String doRegistration(@ModelAttribute("user1") User user){
 
         if(isUniqueEmail(user.getEmail())){
+            String pwd = user.getPassword();
+            String encryptPW = passwordEncoder.encode(pwd);
+            user.setPassword(encryptPW);
             jdbcTemplate.update(
-                    "INSERT INTO  user(firstname, lastname, email, pass) VALUES (?, ?, ?, ?)", user.getFirstname(), user.getLastname(), user.getEmail(), BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+                    "INSERT INTO  user(firstname, lastname, email, pass) VALUES (?, ?, ?, ?)", user.getFirstname(), user.getLastname(), user.getEmail(), user.getPassword());
             return "home";
         }
         else {

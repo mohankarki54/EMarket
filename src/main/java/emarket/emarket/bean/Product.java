@@ -1,5 +1,11 @@
 package emarket.emarket.bean;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 public class Product {
 
     int productid;
@@ -7,12 +13,36 @@ public class Product {
     String description;
     Float price;
     String productType;
-    String type;
     int sellerid;
 
-    String[] category = {"electronics", "furniture", "vechicle"};
+    byte[] image;
+    private Date createDate;
 
-    //For image define
+    public List<MultipartFile> getFiles() {
+        return files;
+    }
+
+    public void setFiles(List<MultipartFile> files) {
+        this.files = files;
+    }
+
+    private List<MultipartFile> files = new ArrayList<MultipartFile>();
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 
     public int getSellerid() {
         return sellerid;

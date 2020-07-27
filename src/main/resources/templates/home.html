@@ -8,13 +8,67 @@
 <body>
     <div class="topnav">
         <a class="active" href="/home">Home</a>
-        <a href="signup">Sign up</a>
-        <a href="login">Login</a>
+
+        <div th:if="${isAuthenciated}" class="login">
+            <a href="=logout">Log out</a>
+        </div>
+
+        <div th:if="${isAuthenciated} == false" class="login">
+            <a href="signup">Sign up</a>
+            <a href="login">Login</a>
+        </div>
+
         <a href="product">Add Product</a>
         <a href="about">About us</a>
     </div>
-<br><br><br>
-    Welcome to the HomeScreen of EMarket
+    <br><br><br>
+
+    <p th:if="${isAuthenciated}" class="display">Old user</p>
+
+
+    <br><br><br>
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <img src="/images/idea.png" th:src="@{/images/idea.png}" alt="Login" style="width:100%">
+                <h1>Tailored Jeans</h1>
+                <p class="price">$19.99</p>
+                <p>Some text about the jeans..</p>
+                <p><button>Add to Cart</button></p>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <img src="/images/idea.png" th:src="@{/images/idea.png}" alt="Login" style="width:100%">
+                <h1>Tailored Jeans</h1>
+                <p class="price">$19.99</p>
+                <p>Some text about the jeans..</p>
+                <p><button>Add to Cart</button></p>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <img src="/images/idea.png" th:src="@{/images/idea.png}" alt="Login" style="width:100%">
+                <h1>Tailored Jeans</h1>
+                <p class="price">$19.99</p>
+                <p>Some text about the jeans..</p>
+                <p><button>Add to Cart</button></p>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <img src="/images/idea.png" th:src="@{/images/idea.png}" alt="Login" style="width:100%">
+                <h1>Tailored Jeans</h1>
+                <p class="price">$19.99</p>
+                <p>Some text about the jeans..</p>
+                <p><button>Add to Cart</button></p>
+            </div>
+        </div>
+
+    </div>
     
 </body>
 </html>
