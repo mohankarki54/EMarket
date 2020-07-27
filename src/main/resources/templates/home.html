@@ -10,7 +10,7 @@
         <a class="active" href="/home">Home</a>
 
         <div th:if="${isAuthenciated}" class="login">
-            <a href="=logout">Log out</a>
+            <a href="melogout">Log out</a>
         </div>
 
         <div th:if="${isAuthenciated} == false" class="login">

@@ -6,6 +6,17 @@ import org.springframework.stereotype.Repository;
 public class Account {
     String email;
     String password;
+    boolean isauthenciated = false;
+
+    public static Account instance = new Account();
+
+    public boolean getIsauthenciated() {
+        return isauthenciated;
+    }
+
+    public void setIsauthenciated(boolean isauthenciated) {
+        this.isauthenciated = isauthenciated;
+    }
 
     public void setEmail(String email) {
         this.email = email;
@@ -24,4 +35,6 @@ public class Account {
     }
 
     public Account(){}
+
+
 }

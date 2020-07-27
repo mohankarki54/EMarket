@@ -25,7 +25,7 @@ public class HomeController {
     JdbcTemplate jdbcTemplate;
 
     @GetMapping(value = {"/","/home"})
-    public  ModelAndView check(ModelAndView modelAndView, @ModelAttribute("account") Account account){
+    public  ModelAndView home(ModelAndView modelAndView, @ModelAttribute("account") Account account){
 
         if(Account.instance.getIsauthenciated()){
             account.setIsauthenciated(true);
@@ -62,6 +62,16 @@ public class HomeController {
             modelAndView.addObject("message", "Incorrect password. Try again.");
             modelAndView.setViewName("login");
         }
+        return modelAndView;
+    }
+
+    @GetMapping(value = {"/melogout"})
+    public  ModelAndView logout(ModelAndView modelAndView, @ModelAttribute("account") Account account){
+
+        Account.instance.setIsauthenciated(false);
+        account.setIsauthenciated(false);
+        modelAndView.addObject("isAuthenciated", false);
+        modelAndView.setViewName("home");
         return modelAndView;
     }
 
