@@ -75,10 +75,10 @@ public class HomeController {
         return modelAndView;
     }
 
-    @GetMapping(path = "/signup")
+    /*@GetMapping(path = "/signup")
     public String singup(Model model){
-        User user1 = new User();
-        model.addAttribute("user1", user1);
+        //User user1 = new User();
+        //model.addAttribute("user1", user1);
         return "signup";
     }
 
@@ -99,7 +99,7 @@ public class HomeController {
         }
 
 
-    }
+    }*/
 
     @GetMapping(path = "/about")
     public String aboutus(){
