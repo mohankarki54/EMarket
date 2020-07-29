@@ -27,6 +27,15 @@ public class User{
     )
     private Collection<Role> roles;
 
+    public User(){ }
+
+    public User(String firstName, String lastName, String email, String password) {
+        this.firstname = firstName;
+        this.lastname = lastName;
+        this.email = email;
+        this.password = password;
+    }
+
     public User(String firstname, String lastname, String email, String password, Collection<Role> roles) {
         this.firstname = firstname;
         this.lastname = lastname;

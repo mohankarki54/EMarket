@@ -2,9 +2,10 @@ package emarket.emarket.Service;
 
 import emarket.emarket.bean.User;
 import emarket.emarket.controller.DTO.UserRegistrationDto;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-public abstract class UserService {
+public interface UserService extends UserDetailsService {
 
-    public abstract User save(UserRegistrationDto registrationDto);
-
+    User findByEmail(String email);
+    User save(UserRegistrationDto registrationDto);
 }

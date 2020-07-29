@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
@@ -8,37 +8,50 @@
 </head>
 <body>
 <div class="topnav">
-    <a class="active" href="home">Home</a>
-    <a href="signup">Sign up</a>
-    <a href="login">Login</a>
+    <a class="active" href="/home">Home</a>
+
+    <div sec:authorize="!isAuthenticated()">
+        <a href="signup">Sign up</a>
+        <a href="login">Login</a>
+    </div>
+
+    <div sec:authorize="isAuthenticated()">
+        <a th:href="@{/logout}">Logout</a>
+    </div>
+
+    <a href="product">Add Product</a>
     <a href="about">About us</a>
 </div>
 
 
-<form method="post" th:action="@{/login}"  th:object="${account}" style="border:1px solid #ccc">
+<form method="post" th:action="@{/login}"  style="border:1px solid #ccc">
 
     <div class="imgcontainer">
         <img src="/images/idea.png" th:src="@{/images/idea.png}" alt="Login" class="avatar">
     </div>
 
-    <center> <span th:text="${message}"></span> <br/> </center>
+    <div th:if = "${param.error}">Invalid username or password.</div>
+
+    <!--logout -->
+    <div th:if="${param.logout}">You have been logout.</div>
 
     <div class="container">
-        <label ><b>Email</b></label>
-        <input type="text" placeholder="Enter your email address" th:field ="*{email}" name="uname" required>
-        <br>
-        <label><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" th:field ="*{password}" name="psw" required>
-
-        <button type="submit">Login</button>
-        <br>
+        <p>
+            E-mail: <input type="email" name="username" required />
+        </p>
+        <p>
+            Password: <input type="password" name="password" required />
+        </p>
+        <p>
+            <input type="submit" value="Login" />
+        </p>
         <label>
             <input type="checkbox" checked="checked" name="remember"> Remember me
         </label>
     </div>
 
     <div class="container" style="background-color:#f1f1f1">
-        <button type="button" class="cancelbtn">Cancel</button>
+        <span>New user? <a href="/" th:href="@{/signup}">Register here</a> </span>
         <span class="psw">Forgot <a href="#">password?</a></span>
     </div>
 </form>
