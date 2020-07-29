@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/login.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="/css/home.css" type="text/css" media="screen">
+</head>
+<body>
+<div class="topnav">
+    <a class="active" href="home">Home</a>
+    <a href="signup">Sign up</a>
+    <a href="login">Login</a>
+    <a href="product">Add product</a>
+    <a href="about">About us</a>
+</div>
+
+<form method="post" th:action="@{/product}"  th:object="${product}" style="border:1px solid #ccc">
+    <div class="container">
+        <h1>Add the new product</h1>
+        <hr>
+        <label><b>Product Name</b></label> <br>
+        <input type="text" placeholder="Enter your product name." th:field="*{name}" name="firstname" required>
+
+        <br><label><b>Product Description</b></label> <br>
+        <input type="text" placeholder="Enter your product description." th:field="*{description}" name="lastname" required >
+        <br>
+        <label ><b>Price</b></label> <br>
+        <input type="text" placeholder="Enter Price" th:field="*{price}" name="email" required>
+        <br>
+        <label><b>Product Type</b></label>
+        <select th:field="*{productType}">
+            <option th:value="'Electronics'" th:text="Electronics"></option>
+            <option th:value="'Vechicle'" th:text="Vechicle"></option>
+        </select>
+        <br>
+        <label ><b>Insert Image</b></label> <br>
+        <input type="file" name="file"/> <br/><br/>
+        <br>
+
+        <div class="clearfix">
+            <button type="submit" class="signupbtn">Add product</button>
+        </div>
+    </div>
+</form>
+
+</body>
+</html>
