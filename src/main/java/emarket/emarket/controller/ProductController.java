@@ -2,6 +2,7 @@ package emarket.emarket.controller;
 
 import emarket.emarket.DTO.ProductRegistrationDTO;
 import emarket.emarket.Repository.ProductRepository;
+import emarket.emarket.bean.Account;
 import emarket.emarket.bean.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,6 +40,7 @@ public class ProductController {
 
     @PostMapping
     public ModelAndView addProduct(@RequestParam("file") MultipartFile file, @ModelAttribute("product")ProductRegistrationDTO productRegistrationDTO,ModelAndView modelAndView) throws IOException {
+        String ownerEmail = Account.instance.currentUserName();
         String name = productRegistrationDTO.getProductName();
         String type = productRegistrationDTO.getProductType();
         Double price = productRegistrationDTO.getPrice();
@@ -46,8 +48,7 @@ public class ProductController {
 
         try {
             byte[] bytes = file.getBytes();
-            //Blob blob = new javax.sql.rowset.serial.SerialBlob(bytes);
-            product = new Product(name,type, price, bytes);
+            product = new Product(name,type, price, bytes,ownerEmail);
             System.out.println(product.getImage());
 
         } catch (IOException e) {

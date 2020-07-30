@@ -24,17 +24,18 @@ public class Product {
 
     @Lob
     private byte[] Image;
-
+    private String ownerEmail;
     private String imagename;
 
     public Product() {
     }
 
-    public Product(String ProductName, String ProductType, double price,byte[] data) {
+    public Product(String ProductName, String ProductType, double price,byte[] data, String ownerEmail) {
         this.ProductName= ProductName;
         this.ProductType = ProductType;
         this.price = price;
         this.Image = data;
+        this.ownerEmail = ownerEmail;
     }
 
 
