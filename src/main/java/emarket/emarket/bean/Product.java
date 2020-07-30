@@ -1,97 +1,42 @@
 package emarket.emarket.bean;
 
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
+import java.sql.Blob;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "Product", uniqueConstraints = @UniqueConstraint(columnNames = "id"))
 public class Product {
 
-    int productid;
-    String name;
-    String description;
-    Float price;
-    String productType;
-    int sellerid;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    byte[] image;
-    private Date createDate;
+    private String ProductName;
+    private double price;
+    private String ProductType;
 
-    public List<MultipartFile> getFiles() {
-        return files;
+    @Lob
+    private byte[] Image;
+
+    private String imagename;
+
+    public Product() {
     }
 
-    public void setFiles(List<MultipartFile> files) {
-        this.files = files;
-    }
-
-    private List<MultipartFile> files = new ArrayList<MultipartFile>();
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public int getSellerid() {
-        return sellerid;
-    }
-
-    public void setSellerid(int sellerid) {
-        this.sellerid = sellerid;
-    }
-
-
-
-    public String getProductType() {
-        return productType;
-    }
-
-    public void setProductType(String productType) {
-        this.productType = productType;
-    }
-
-    public Float getPrice() {
-        return price;
-    }
-
-    public void setPrice(Float price) {
+    public Product(String ProductName, String ProductType, double price,byte[] data) {
+        this.ProductName= ProductName;
+        this.ProductType = ProductType;
         this.price = price;
+        this.Image = data;
     }
 
-    public String getDescription() {
-        return description;
-    }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getProductid() {
-        return productid;
-    }
-
-    public void setProductid(int productid) {
-        this.productid = productid;
-    }
 
 }

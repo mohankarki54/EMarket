@@ -28,22 +28,19 @@
         <h1>Add the new product</h1>
         <hr>
         <label><b>Product Name</b></label> <br>
-        <input type="text" placeholder="Enter your product name." th:field="*{name}" name="firstname" required>
-
-        <br><label><b>Product Description</b></label> <br>
-        <input type="text" placeholder="Enter your product description." th:field="*{description}" name="lastname" required >
+        <input type="text" placeholder="Enter your product name." th:field="*{ProductName}" name="firstname" required>
         <br>
         <label ><b>Price</b></label> <br>
         <input type="text" placeholder="Enter Price" th:field="*{price}" name="email" required>
         <br>
         <label><b>Product Type</b></label>
-        <select th:field="*{productType}">
+        <select th:field="*{ProductType}">
             <option th:value="'Electronics'" th:text="Electronics"></option>
             <option th:value="'Vechicle'" th:text="Vechicle"></option>
         </select>
         <br>
         <label ><b>Insert Image</b></label>
-        <input type="file" name="files" /> <br/><br/>
+        <input type="file" name="file" /> <br/><br/>
         <br>
 
         <div class="clearfix">

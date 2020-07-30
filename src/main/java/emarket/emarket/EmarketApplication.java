@@ -10,7 +10,7 @@ import java.io.File;
 public class EmarketApplication {
 
     public static void main(String[] args) {
-        new File(ProductController.uploadDirectory).mkdir();
+
         SpringApplication.run(EmarketApplication.class, args);
     }
 

@@ -2,7 +2,7 @@ package emarket.emarket.controller;
 
 import emarket.emarket.Service.UserService;
 import emarket.emarket.bean.User;
-import emarket.emarket.controller.DTO.UserRegistrationDto;
+import emarket.emarket.DTO.UserRegistrationDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;

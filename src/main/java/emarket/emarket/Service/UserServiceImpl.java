@@ -3,7 +3,7 @@ package emarket.emarket.Service;
 import emarket.emarket.Repository.UserRepository;
 import emarket.emarket.bean.Role;
 import emarket.emarket.bean.User;
-import emarket.emarket.controller.DTO.UserRegistrationDto;
+import emarket.emarket.DTO.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

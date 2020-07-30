@@ -1,4 +1,4 @@
-package emarket.emarket.controller.DTO;
+package emarket.emarket.DTO;
 
 import emarket.emarket.bean.Role;
 import lombok.Getter;
