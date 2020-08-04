@@ -49,10 +49,8 @@ public class ProductController {
         try {
             byte[] bytes = file.getBytes();
             product = new Product(name,type, price, bytes,ownerEmail);
-            System.out.println(product.getImage());
 
         } catch (IOException e) {
-            System.out.println("I am here to see the error. ");
             e.printStackTrace();
         }
 

@@ -30,7 +30,6 @@ public class HomeController {
     public ModelAndView root(ModelAndView modelAndView) {
 
         List<Product> products  = productRepository.findAll();
-
        for(Product product : products)
         {
             String imagename = "data:image/png;base64," + Base64.getEncoder().encodeToString(product.getImage());
@@ -39,6 +38,12 @@ public class HomeController {
         modelAndView.addObject("products", products);
         modelAndView.setViewName("home");
         return modelAndView;
+    }
+
+    @PostMapping(params = "info", path = {"/","/home"})
+    public String displayInfo(@RequestParam("info") int index){
+        System.out.println(index);
+        return "about";
     }
 
     @GetMapping("/login")
