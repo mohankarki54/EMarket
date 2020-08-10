@@ -11,33 +11,29 @@ import java.sql.Blob;
 @Getter
 @Setter
 @Entity
-@Table(name = "Product", uniqueConstraints = @UniqueConstraint(columnNames = "id"))
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String ProductName;
-    private double price;
-    private String ProductType;
-
     @Lob
     private byte[] Image;
-    private String ownerEmail;
-    private String imagename;
+    private String name;
+    private String type;
+    private double price;
+    private String owner;
+    private String Imagename;
 
-    public Product() {
-    }
 
-    public Product(String ProductName, String ProductType, double price,byte[] data, String ownerEmail) {
-        this.ProductName= ProductName;
-        this.ProductType = ProductType;
+    public Product() {}
+
+    public Product(String name, String type, double price,byte[] data, String ownerEmail) {
+        this.name= name;
+        this.type = type;
         this.price = price;
         this.Image = data;
-        this.ownerEmail = ownerEmail;
+        this.owner = owner;
     }
-
 
 
 }

@@ -1,76 +1,92 @@
-* {box-sizing: border-box}
-
-/* Full-width input fields */
-input[type=text], input[type=password] {
-    width: 100%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-    display: inline-block;
-    border: none;
-    background: #f1f1f1;
+body {
+    color: #fff;
+    background: #63738a;
+    font-family: 'Roboto', sans-serif;
 }
-
-input[type=text]:focus, input[type=password]:focus {
-    background-color: #ddd;
-    outline: none;
+.form-control {
+    height: 40px;
+    box-shadow: none;
+    color: #969fa4;
 }
-
-hr {
-    border: 1px solid #f1f1f1;
-    margin-bottom: 25px;
+.form-control:focus {
+    border-color: #5cb85c;
 }
-
-/* Set a style for all buttons */
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    opacity: 0.9;
+.form-control, .btn {
+    border-radius: 3px;
 }
-
-button:hover {
-    opacity:1;
+.signup-form {
+    width: 450px;
+    margin: 0 auto;
+    padding: 30px 0;
+    font-size: 15px;
 }
-
-/* Extra styles for the cancel button */
-.cancelbtn {
-    padding: 14px 20px;
-    background-color: #f44336;
+.signup-form h2 {
+    color: #636363;
+    margin: 0 0 15px;
+    position: relative;
+    text-align: center;
 }
-
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
-    float: left;
-    width: 50%;
-}
-
-/* Add padding to container elements */
-.container {
-    padding: 16px;
-    position: absolute;
-    width: 300px;
-    height: 200px;
-    z-index: 15;
-    top: 50%;
-    left: 50%;
-    margin: -100px 0 0 -150px;
-    background: red;;
-}
-
-/* Clear floats */
-.clearfix::after {
+.signup-form h2:before, .signup-form h2:after {
     content: "";
-    clear: both;
-    display: table;
+    height: 2px;
+    width: 30%;
+    background: #d4d4d4;
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+}
+.signup-form h2:before {
+    left: 0;
+}
+.signup-form h2:after {
+    right: 0;
+}
+.signup-form .hint-text {
+    color: #999;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.signup-form form {
+    color: #999;
+    border-radius: 3px;
+    margin-bottom: 15px;
+    background: #f2f3f7;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+.signup-form .form-group {
+    margin-bottom: 20px;
+}
+.signup-form input[type="checkbox"] {
+    margin-top: 3px;
+}
+.signup-form .btn {
+    font-size: 16px;
+    font-weight: bold;
+    min-width: 140px;
+    outline: none !important;
+}
+.signup-form .row div:first-child {
+    padding-right: 10px;
+}
+.signup-form .row div:last-child {
+    padding-left: 10px;
+}
+.signup-form a {
+    color: #fff;
+    text-decoration: underline;
+}
+.signup-form a:hover {
+    text-decoration: none;
+}
+.signup-form form a {
+    color: #5cb85c;
+    text-decoration: none;
+}
+.signup-form form a:hover {
+    text-decoration: underline;
 }
 
-/* Change styles for cancel button and signup button on extra small screens */
-@media screen and (max-width: 300px) {
-    .cancelbtn, .signupbtn {
-        width: 100%;
-    }
+.error{
+    color: #f5071d;
 }

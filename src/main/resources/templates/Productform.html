@@ -2,52 +2,115 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/css/login.css" type="text/css" media="screen">
+    <title>Post an Ad</title>
+    <link rel="stylesheet" href="/css/signup.css" type="text/css" media="screen">
     <link rel="stylesheet" href="/css/home.css" type="text/css" media="screen">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 <body>
-<div class="topnav">
-    <a class="active" href="/home">Home</a>
 
-    <div sec:authorize="!isAuthenticated()">
-        <a href="signup">Sign up</a>
-        <a href="login">Login</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="home">EMarket</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="product">Post an Ad</a>
+            </li>
+
+            <div sec:authorize="!isAuthenticated()">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Login
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="login">Login</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="signup">Register</a>
+                    </div>
+                </li>
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="about">About EMarket</a>
+            </li>
+
+            <div sec:authorize="isAuthenticated()">
+                <li class="nav-item">
+                    <a class="nav-link" href="account">Account</a>
+                </li>
+            </div>
+
+            <div sec:authorize="isAuthenticated()">
+                <li class="nav-item">
+                    <a class="nav-link" href="logout">Logout</a>
+                </li>
+
+            </div>
+
+        </ul>
+
     </div>
+</nav>
+<br>
 
-    <div sec:authorize="isAuthenticated()">
-        <a th:href="@{/logout}">Logout</a>
-    </div>
+<div class="signup-form">
+    <form method="post" th:action="@{/product}"  th:object="${product}" enctype="multipart/form-data" style="border:1px solid #ccc">
+        <h2>Post an Ad</h2>
+        <p class="hint-text">It's free and only takes a minute.</p>
 
-    <a href="product">Add Product</a>
-    <a href="about">About us</a>
+        <div class="form-group">
+            <div class="row">
+                <label>Product Name: </label>
+                <div class="col"><input type="text" th:field="*{name}" class="form-control" name="first_name" placeholder="Name" required="required"></div>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <label>Price: $</label>
+                <div class="col"><input type="number" min="0" step="0.01" th:field="*{price}" class="form-control" name="last_name" placeholder="price" required="required"></div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label>Product Type</label>
+            <select th:field="*{type}">
+                <option th:value="'Electronics'" th:text="Electronics"></option>
+                <option th:value="'Vechicle'" th:text="Vechicle"></option>
+                <option th:value="'Clothes'" th:text="Clothes"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label >Insert Image</label>
+            <input type="file" class="form-control" name="file" accept="image/*" /> <br/><br/>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
+        </div>
+    </form>
+
 </div>
 
-<form method="post" th:action="@{/product}"  th:object="${product}" enctype="multipart/form-data" style="border:1px solid #ccc">
-    <div class="container">
-        <h1>Add the new product</h1>
-        <hr>
-        <label><b>Product Name</b></label> <br>
-        <input type="text" placeholder="Enter your product name." th:field="*{ProductName}" name="firstname" required>
-        <br>
-        <label ><b>Price</b></label> <br>
-        <input type="text" placeholder="Enter Price" th:field="*{price}" name="email" required>
-        <br>
-        <label><b>Product Type</b></label>
-        <select th:field="*{ProductType}">
-            <option th:value="'Electronics'" th:text="Electronics"></option>
-            <option th:value="'Vechicle'" th:text="Vechicle"></option>
-        </select>
-        <br>
-        <label ><b>Insert Image</b></label>
-        <input type="file" name="file" /> <br/><br/>
-        <br>
 
-        <div class="clearfix">
-            <button type="submit" class="signupbtn">Add product</button>
-        </div>
-    </div>
-</form>
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </body>
 </html>
