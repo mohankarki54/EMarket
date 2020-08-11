@@ -44,8 +44,17 @@
             </li>
 
             <div sec:authorize="isAuthenticated()">
-                <li class="nav-item">
-                    <a class="nav-link" href="account">Account</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Account
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="dashboard">Dashboard</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="favorite">Favorite</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="listedproduct">Listed Product</a>
+                    </div>
                 </li>
             </div>
 
@@ -57,7 +66,6 @@
             </div>
 
         </ul>
-
     </div>
 </nav>
 <br>

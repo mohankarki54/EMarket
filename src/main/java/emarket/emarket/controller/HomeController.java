@@ -1,9 +1,8 @@
 package emarket.emarket.controller;
 
-import emarket.emarket.Repository.ProductRepository;
+import emarket.emarket.Service.FavService;
 import emarket.emarket.Service.ProductService;
-import emarket.emarket.bean.Product;
-import emarket.emarket.bean.Search;
+import emarket.emarket.bean.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -21,11 +21,13 @@ public class HomeController {
     @Autowired
     private ProductService service;
 
+    @Autowired
+    private FavService favService;
+
     @GetMapping(value = {"/","/home", "/productInfo"})
     public ModelAndView root(ModelAndView modelAndView) {
 
         List<Product> products = service.listAll();
-
         if (products != null) {
 
         for (Product product : products) {
@@ -57,6 +59,17 @@ public class HomeController {
         }
         modelAndView.setViewName("home");
         return modelAndView;
+    }
+
+    @PostMapping(path = {"/addFav"})
+    public String addFav(@RequestParam String action, RedirectAttributes redirectAttrs ){
+        int value = Integer.parseInt(action);
+        Product product = service.get(value);
+        String owner = Account.instance.currentUserName();
+        Favroite favroite = new Favroite(owner, product.getId());
+        favService.save(favroite);
+        redirectAttrs.addAttribute("success","Added to the Favorite List" );
+        return "redirect:/";
     }
 
     @GetMapping(value = {"/productdisplay"})
@@ -103,11 +116,38 @@ public class HomeController {
         return "login";
     }
 
+    @GetMapping("/dashboard")
+    public String dashboard() {
+        return "dashboard";
+    }
+
     @GetMapping("/about")
     public String about() {
         return "about";
     }
 
+    @GetMapping("/favorite")
+    public ModelAndView displayFavroite(ModelAndView modelAndView){
+        List<Favroite> favroites = favService.favroiteSearch(Account.instance.currentUserName());
+        ArrayList<FavBean> favproducts = new ArrayList<FavBean>() {};
+
+        for(Favroite fav: favroites){
+            FavBean f = new FavBean(fav.getOwner(),service.get(fav.getProductid()),fav.getId());
+            favproducts.add(f);
+        }
+
+        modelAndView.addObject("listProducts", favproducts);
+        modelAndView.addObject("fav", favroites);
+        modelAndView.setViewName("favorite");
+        return modelAndView;
+    }
+
+    @GetMapping("/remove/{id}")
+    public String delete(@PathVariable(name = "id") int id, RedirectAttributes redirectAttrs) {
+        favService.delete(id);
+        redirectAttrs.addAttribute("success","Successfully removed." );
+        return "redirect:/favorite";
+    }
 
 
 }

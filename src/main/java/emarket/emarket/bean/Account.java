@@ -14,6 +14,5 @@ public class Account {
         String currentPrincipalName = authentication.getName();
         return currentPrincipalName;
     }
-
-
 }
+

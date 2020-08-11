@@ -48,7 +48,7 @@
                             Account
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="login">Dashboard</a>
+                            <a class="dropdown-item" href="dashboard">Dashboard</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="favorite">Favorite</a>
                             <div class="dropdown-divider"></div>
@@ -75,7 +75,9 @@
     <br>
 
     <div class="text-center"><h3><span th:text="${message}"></span></h3></div>
-<br>
+    <div class="text-center"><h3><span th:text=" ${#request.getParameter('success')}"></span></h3></div>
+
+    <br>
 
     <div class="container">
        <h3>Latest Items</h3>
@@ -85,10 +87,18 @@
                <div class="card-body">
                    <h5 class="card-title"><h5 th:text="${product.name}"></h5></h5>
                    <p class="card-text"><p th:text="'Price: $'+${product.price}"> </p></p>
-                   <form method="post" th:action="@{/productInfo}">
-                       <button type="submit" class="btn btn-success"  th:name="action" th:value="${product.id}">View</button>
-                   </form>
+                   <div class="row">
+                       <form method="post" th:action="@{/productInfo}">
+                           <button type="submit" class="btn btn-success"  th:name="action" th:value="${product.id}">View</button>
+                       </form>
 
+                       <div sec:authorize="isAuthenticated()">
+                           <form method="post" th:action="@{/addFav}">
+                               <button type="submit" class="btn btn-success"  th:name="action" th:value="${product.id}">Favorite</button>
+                           </form>
+                       </div>
+
+                   </div>
                </div>
            </div>
        </div>
