@@ -39,7 +39,10 @@ public class ProductService {
 
     public List<Product> productSearch(String word){
         return repo.findProductBynameContaining(word);
+    }
 
+    public List<Product> listbyOwner(String email){
+        return repo.findProductByOwner(email);
     }
 
 

@@ -42,7 +42,7 @@ public class ProductController {
 
     @PostMapping
     public ModelAndView addProduct(@RequestParam("file") MultipartFile file, @ModelAttribute("product")ProductRegistrationDTO productRegistrationDTO,ModelAndView modelAndView) throws IOException {
-        String ownerEmail = Account.instance.currentUserName();
+        String owner= Account.instance.currentUserName();
         String name = productRegistrationDTO.getName();
         String type = productRegistrationDTO.getType();
         Double price = productRegistrationDTO.getPrice();
@@ -50,7 +50,7 @@ public class ProductController {
 
         try {
             byte[] bytes = file.getBytes();
-            product = new Product(name,type, price, bytes,ownerEmail);
+            product = new Product(name,type, price, bytes,owner);
 
         } catch (IOException e) {
             e.printStackTrace();

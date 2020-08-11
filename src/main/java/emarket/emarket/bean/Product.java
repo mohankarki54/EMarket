@@ -27,7 +27,7 @@ public class Product {
 
     public Product() {}
 
-    public Product(String name, String type, double price,byte[] data, String ownerEmail) {
+    public Product(String name, String type, double price,byte[] data, String owner) {
         this.name= name;
         this.type = type;
         this.price = price;
