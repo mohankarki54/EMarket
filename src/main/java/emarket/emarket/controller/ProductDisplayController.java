@@ -59,7 +59,6 @@ public class ProductDisplayController {
         int value = Integer.parseInt(action);
         Helper.instance.setId(value);
         List<Comment> comments = commentService.find((long)value);
-        System.out.println(comments.size());
         Product product = service.get(value);
 
         if (product != null) {
