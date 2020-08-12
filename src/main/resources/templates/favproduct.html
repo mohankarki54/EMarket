@@ -42,17 +42,8 @@
             </li>
 
             <div sec:authorize="isAuthenticated()">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Account
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="dashboard">Dashboard</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="favorite">Favorite</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="listedproduct">Listed Product</a>
-                    </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="account">Account</a>
                 </li>
             </div>
 
@@ -64,9 +55,10 @@
             </div>
 
         </ul>
+
+
     </div>
 </nav>
-<br>
 <div align="center">
     <h1>Product List</h1>
     <a href="/product">Create New Product</a>
@@ -85,13 +77,13 @@
         </thead>
         <tbody>
         <tr th:each="product : ${listProducts}">
-            <td><img th:src="${product.imagename}"  alt="..." width="100" height="100"></td>
+            <td><img th:src="${product.imagename}"  alt="..." width="300" height="300"></td>
             <td th:text="${product.name}">Name</td>
             <td th:text="${product.price}">Price</td>
             <td>
-                <a th:href="'/edit/' + ${product.id}">Edit</a>
+                <a th:href="'/view/' + ${product.id}">View</a>
                 &nbsp;&nbsp;&nbsp;
-                <a th:href="'/delete/' + ${product.id}">Delete</a>
+                <a th:href="'/remove/' + ${product.id}">Remove</a>
             </td>
         </tr>
         </tbody>

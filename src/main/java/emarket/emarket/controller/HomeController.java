@@ -2,6 +2,8 @@ package emarket.emarket.controller;
 
 import emarket.emarket.Service.FavService;
 import emarket.emarket.Service.ProductService;
+import emarket.emarket.Service.UserService;
+import emarket.emarket.Service.UserServiceImpl;
 import emarket.emarket.bean.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,8 @@ public class HomeController {
 
     @Autowired
     private FavService favService;
+    @Autowired
+    private UserServiceImpl userService;
 
     @GetMapping(value = {"/","/home", "/productInfo"})
     public ModelAndView root(ModelAndView modelAndView) {
@@ -57,7 +61,7 @@ public class HomeController {
             modelAndView.addObject("products", products);
             modelAndView.addObject("search", new Search());
         }
-        modelAndView.setViewName("home");
+        modelAndView.setViewName("productView");
         return modelAndView;
     }
 
@@ -117,8 +121,12 @@ public class HomeController {
     }
 
     @GetMapping("/dashboard")
-    public String dashboard() {
-        return "dashboard";
+    public ModelAndView dashboard(ModelAndView modelAndView) {
+        User user = userService.findByEmail(Account.instance.currentUserName());
+        String hello = "Hello, " + user.getFirstname();
+        modelAndView.addObject("username", hello);
+        modelAndView.setViewName("dashboard");
+        return modelAndView;
     }
 
     @GetMapping("/about")
@@ -132,7 +140,9 @@ public class HomeController {
         ArrayList<FavBean> favproducts = new ArrayList<FavBean>() {};
 
         for(Favroite fav: favroites){
-            FavBean f = new FavBean(fav.getOwner(),service.get(fav.getProductid()),fav.getId());
+            Product product = service.get(fav.getProductid());
+            String imagename = "data:image/png;base64," + Base64.getEncoder().encodeToString(product.getImage());
+            FavBean f = new FavBean(fav.getOwner(),product,fav.getId(),imagename);
             favproducts.add(f);
         }
 
@@ -148,6 +158,8 @@ public class HomeController {
         redirectAttrs.addAttribute("success","Successfully removed." );
         return "redirect:/favorite";
     }
+
+
 
 
 }
