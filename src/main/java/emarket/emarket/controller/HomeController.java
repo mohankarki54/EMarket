@@ -1,8 +1,9 @@
 package emarket.emarket.controller;
 
+import emarket.emarket.DTO.FavBean;
+import emarket.emarket.Service.CommentService;
 import emarket.emarket.Service.FavService;
 import emarket.emarket.Service.ProductService;
-import emarket.emarket.Service.UserService;
 import emarket.emarket.Service.UserServiceImpl;
 import emarket.emarket.bean.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,10 @@ public class HomeController {
     @Autowired
     private UserServiceImpl userService;
 
-    @GetMapping(value = {"/","/home", "/productInfo"})
+    @GetMapping(value = {"/","/home"})
     public ModelAndView root(ModelAndView modelAndView) {
 
-        List<Product> products = service.listAll();
+      List<Product> products = service.listAll();
         if (products != null) {
 
         for (Product product : products) {
@@ -43,25 +44,6 @@ public class HomeController {
         modelAndView.addObject("search", new Search());
     }
         modelAndView.setViewName("home");
-        return modelAndView;
-    }
-
-    @PostMapping(path = {"/productInfo"})
-    public ModelAndView displayInfo(@RequestParam String action, ModelAndView modelAndView ){
-        int value = Integer.parseInt(action);
-        List<Product> products = new ArrayList<Product>();
-        products.add(service.get(value));
-        if (products != null) {
-
-            for (Product product : products) {
-                String imagename = "data:image/png;base64," + Base64.getEncoder().encodeToString(product.getImage());
-                product.setImagename(imagename);
-            }
-
-            modelAndView.addObject("products", products);
-            modelAndView.addObject("search", new Search());
-        }
-        modelAndView.setViewName("productView");
         return modelAndView;
     }
 
@@ -158,8 +140,5 @@ public class HomeController {
         redirectAttrs.addAttribute("success","Successfully removed." );
         return "redirect:/favorite";
     }
-
-
-
 
 }

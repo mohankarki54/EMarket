@@ -3,7 +3,7 @@
 <head>
     <title>EMarket</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="/css/home.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="/css/productView.css" type="text/css" media="screen">
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -74,16 +74,16 @@
 <br>
 
 <div class="container">
-    <h3>Latest Items</h3>
-    <div class="row" style="display: flex; overflow-x: scroll">
-        <div class="card" th:each="product : ${products}">
+<div class="row">
+    <div class="col-8">
+        <div class="card">
             <img th:src="${product.imagename}" class="card-img-top" alt="..." width="300" height="300">
             <div class="card-body">
                 <h5 class="card-title"><h5 th:text="${product.name}"></h5></h5>
                 <p class="card-text"><p th:text="'Price: $'+${product.price}"> </p></p>
                 <div class="row">
                     <div sec:authorize="isAuthenticated()">
-                        <form method="post" th:action="@{/addFav}">
+                        <form method="post" th:action="@{/addFavorite}">
                             <button type="submit" class="btn btn-success"  th:name="action" th:value="${product.id}">Add to Favorite</button>
                         </form>
                     </div>
@@ -92,8 +92,65 @@
             </div>
         </div>
     </div>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Description</h5>
+            <p class="card-text">Here, is the product description.</p>
+        </div>
+    </div>
+
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Seller Infromation</h5>
+                <p class="card-text" th:text="${seller.firstname}"></p>
+                <p class="card-text">Phone Number: 000-000-0000</p>
+                <a href="#" class="btn btn-primary">Contact</a>
+            </div>
+        </div>
+    </div>
 </div>
-<br><br>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Review</h5>
+                    <div th:each="comment : ${comments}" >
+                        <div class="row">
+                            <p class="card-text" th:text="${comment.description}"></p>
+                        </div>
+                        <div class="row">
+                            <p class="card-text" th:text="${comment.username}"></p>
+                        </div>
+                        <div class="row">
+                            <p class="card-text" th:text="${comment.created}"></p>
+                        </div>
+                        <br>
+                    </div>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container pb-cmnt-container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-info">
+                <div class="panel-body">
+                    <form class="form-inline" method="post" th:action="@{/savecomment}" th:object="${commentBean}">
+                        <textarea th:field="*{description}" placeholder="Write your comment here!" class="pb-cmnt-textarea" required="required"></textarea>
+                        <button class="btn btn-primary pull-right" type="submit" th:name="action" th:value="${product.id}">Share</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

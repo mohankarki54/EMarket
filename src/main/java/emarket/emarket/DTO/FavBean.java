@@ -1,5 +1,6 @@
-package emarket.emarket.bean;
+package emarket.emarket.DTO;
 
+import emarket.emarket.bean.Product;
 import lombok.Getter;
 import lombok.Setter;
 
