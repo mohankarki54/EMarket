@@ -7,6 +7,11 @@ import emarket.emarket.bean.Search;
 import emarket.emarket.bean.User;
 import emarket.emarket.DTO.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,12 +20,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Base64;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 
 @Controller
 @RequestMapping("/signup")
 public class UserRegistrationController {
+
+    @Autowired
+    protected AuthenticationManager authenticationManager;
 
     @Autowired
     private UserService userService;
@@ -43,7 +52,7 @@ public class UserRegistrationController {
     }
 
     @PostMapping
-    public ModelAndView registerUserAccount(@ModelAttribute("user")UserRegistrationDto registrationDto, BindingResult result, ModelAndView modelAndView){
+    public ModelAndView registerUserAccount(@ModelAttribute("user")UserRegistrationDto registrationDto, BindingResult result, ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response){
 
         User existing = userService.findByEmail(registrationDto.getEmail());
         if (existing != null) {
@@ -57,22 +66,17 @@ public class UserRegistrationController {
         }
 
         userService.save(registrationDto);
+        authWithAuthManager(request,registrationDto.getEmail(),registrationDto.getPassword());
 
-        List<Product> products = service.listAll();
-        if (products != null) {
-
-            for (Product product : products) {
-                String imagename = "data:image/png;base64," + Base64.getEncoder().encodeToString(product.getImage());
-                product.setImagename(imagename);
-            }
-
-            modelAndView.addObject("products", products);
-            modelAndView.addObject("search", new Search());
-        }
-
-        modelAndView.addObject("success", "Thank you for signing up for EMarket.");
-        modelAndView.setViewName("home");
+        modelAndView.setViewName("redirect:/home");
         return modelAndView;
 
+    }
+
+    public void authWithAuthManager(HttpServletRequest request, String email, String password) {
+        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(email, password);
+        authToken.setDetails(new WebAuthenticationDetails(request));
+        Authentication authentication = authenticationManager.authenticate(authToken);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 }

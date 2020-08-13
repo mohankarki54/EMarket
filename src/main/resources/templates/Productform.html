@@ -93,7 +93,7 @@
 
         <div class="form-group">
             <label>Product Type</label>
-            <select th:field="*{type}">
+            <select th:field="*{type}" required="required">
                 <option th:value="'Electronics'" th:text="Electronics"></option>
                 <option th:value="'Vechicle'" th:text="Vechicle"></option>
                 <option th:value="'Clothes'" th:text="Clothes"></option>
@@ -101,8 +101,13 @@
         </div>
 
         <div class="form-group">
-            <label >Insert Image</label>
-            <input type="file" class="form-control" name="file" accept="image/*" /> <br/><br/>
+            <label >Insert Display Image</label>
+            <input type="file" class="form-control" name="file" accept="image/*" required/>
+        </div>
+
+        <div class="form-group">
+            <label >Insert second image</label>
+            <input type="file" class="form-control" name="file" accept="image/*" required/> <br/><br/>
         </div>
 
         <div class="form-group">
