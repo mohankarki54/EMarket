@@ -42,8 +42,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers(
-                "/signup**","/home**","/about**",
-                "/js/**","/css/**","/images/**").permitAll()
+                "/signup**","/home**","/about**","/forgot-password**","/reset-password**",
+                "/confirm-account**","/error**","/js/**","/css/**","/images/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -56,6 +56,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login?logout")
                 .permitAll();
+
+        http
+                .csrf().disable();
+
+
     }
 
     @Bean(name = BeanIds.AUTHENTICATION_MANAGER)

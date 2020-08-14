@@ -80,6 +80,7 @@ public class HomeController {
 
     @PostMapping(path = {"/productdisplay"})
     public ModelAndView displaypro(@ModelAttribute("search") Search search, ModelAndView modelAndView){
+        System.out.println("I am here");
         Search.instance.setWord(search.getWord());
         List<Product> products = new ArrayList<Product>();
         products = service.productSearch(search.getWord());

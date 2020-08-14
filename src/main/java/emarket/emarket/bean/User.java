@@ -1,11 +1,14 @@
 package emarket.emarket.bean;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 import java.util.Collection;
 
-
+@Getter
+@Setter
 @Entity
 @Table(name = "User", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User{
@@ -18,6 +21,7 @@ public class User{
     private String lastname;
     private String email;
     private String password;
+    private boolean isEnabled;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
