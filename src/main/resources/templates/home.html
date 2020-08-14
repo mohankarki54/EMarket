@@ -21,10 +21,9 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="product">Post an Ad</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about">About EMarket</a>
+                        <p class="navbar-btn">
+                            <a href="product" class="btn btn-success">Post an Ad</a>
+                        </p>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -47,10 +46,15 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="listedproduct">Listed Product</a>
                                 <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/forgot-password">Reset password</a>
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="logout">Log out</a>
                             </div>
                         </div>
 
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about">About EMarket</a>
                     </li>
                     ...
                 </ul>
@@ -88,7 +92,24 @@
 
 
     <div class="text-center"><h3><span th:text="${message}"></span></h3></div>
-    <div class="text-center"><h3><span th:text=" ${#request.getParameter('success')}"></span></h3></div>
+    <div class="text-center"><h3></span></h3></div>
+
+    <div class="container">
+    <div class="card text-center" th:if="${#request.getParameter('var')}">
+        <div class="card-header">
+            Verification Needed
+        </div>
+        <div class="card-body">
+            <p class="card-text"><span th:text=" ${#request.getParameter('verify')}"></span></p>
+            <!--<a href="/home" class="btn btn-primary">Resend Activation Link</a>-->
+        </div>
+        <div class="card-footer text-muted">
+            Thank you for joining with us.
+        </div>
+        <br><br>
+    </div>
+    </div>
+
 
 
     <div class="container">

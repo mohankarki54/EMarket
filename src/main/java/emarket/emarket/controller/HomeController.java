@@ -1,12 +1,12 @@
 package emarket.emarket.controller;
 
+
 import emarket.emarket.DTO.FavBean;
-import emarket.emarket.Service.CommentService;
-import emarket.emarket.Service.FavService;
-import emarket.emarket.Service.ProductService;
-import emarket.emarket.Service.UserServiceImpl;
+import emarket.emarket.Repository.ConfirmationTokenRepository;
+import emarket.emarket.Service.*;
 import emarket.emarket.bean.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,13 +17,19 @@ import java.util.List;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 
 @Controller
 public class HomeController {
 
     @Autowired
     private ProductService service;
-
+    @Autowired
+    private ConfirmationTokenRepository confirmationTokenRepository;
+    @Autowired
+    private EmailService emailService;
     @Autowired
     private FavService favService;
     @Autowired
@@ -141,5 +147,25 @@ public class HomeController {
         redirectAttrs.addAttribute("success","Successfully removed." );
         return "redirect:/favorite";
     }
+
+    /*@GetMapping("/resendActivation")
+    public ModelAndView resendActivation(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response){
+        User user = ;
+        ConfirmationToken confirmationToken = new ConfirmationToken(userService.findByEmail(registrationDto.getEmail()));
+        confirmationTokenRepository.save(confirmationToken);
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(registrationDto.getEmail());
+        mailMessage.setSubject("Complete Registration!");
+        mailMessage.setFrom("technewsandblog@gmail.com");
+        String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+        mailMessage.setText("To confirm your account, please click here : "
+                +url+ "/confirm-account?token="+confirmationToken.getConfirmationtoken());
+
+        emailService.sendRegisterEmail(mailMessage);
+
+        modelAndView.addObject("verify","A re-verification email has been sent to " + registrationDto.getEmail());
+        modelAndView.setViewName("redirect:/home");
+        return modelAndView;
+    }*/
 
 }

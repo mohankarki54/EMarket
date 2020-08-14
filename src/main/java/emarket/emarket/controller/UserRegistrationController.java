@@ -77,7 +77,8 @@ public class UserRegistrationController {
 
             emailService.sendRegisterEmail(mailMessage);
 
-            modelAndView.addObject("success","A verification email has been sent to " + registrationDto.getEmail());
+            modelAndView.addObject("var", true);
+            modelAndView.addObject("verify","A verification email has been sent to " + registrationDto.getEmail());
             modelAndView.setViewName("redirect:/home");
 
         }
