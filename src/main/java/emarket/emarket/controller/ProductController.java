@@ -41,7 +41,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ModelAndView addProduct(@RequestParam("file") MultipartFile file, @ModelAttribute("product")ProductRegistrationDTO productRegistrationDTO,ModelAndView modelAndView) throws IOException {
+    public String addProduct(@RequestParam("file") MultipartFile file, @ModelAttribute("product")ProductRegistrationDTO productRegistrationDTO) throws IOException {
         String owner= Account.instance.currentUserName();
         String name = productRegistrationDTO.getName();
         String type = productRegistrationDTO.getType();
@@ -58,7 +58,9 @@ public class ProductController {
 
         service.save(product);
 
-        List<Product> products = service.listAll();
+        return "redirect:/home";
+
+        /*List<Product> products = service.listAll();
 
         if (products != null) {
 
@@ -72,7 +74,7 @@ public class ProductController {
         }
 
         modelAndView.setViewName("home");
-        return modelAndView;
+        return modelAndView;*/
     }
 
 }

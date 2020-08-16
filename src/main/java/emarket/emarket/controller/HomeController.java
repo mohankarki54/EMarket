@@ -48,6 +48,7 @@ public class HomeController {
 
         modelAndView.addObject("products", products);
         modelAndView.addObject("search", new Search());
+        modelAndView.addObject("count", products.size());
     }
         modelAndView.setViewName("home");
         return modelAndView;
