@@ -17,9 +17,6 @@ import java.util.List;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 
 @Controller
 public class HomeController {
@@ -87,7 +84,6 @@ public class HomeController {
 
     @PostMapping(path = {"/productdisplay"})
     public ModelAndView displaypro(@ModelAttribute("search") Search search, ModelAndView modelAndView){
-        System.out.println("I am here");
         Search.instance.setWord(search.getWord());
         List<Product> products = new ArrayList<Product>();
         products = service.productSearch(search.getWord());

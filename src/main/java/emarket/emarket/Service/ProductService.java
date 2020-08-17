@@ -45,5 +45,8 @@ public class ProductService {
         return repo.findProductByOwner(email);
     }
 
+    public List<Product> categoryList(String category){
+        return repo.findProductByType(category);
+    }
 
 }

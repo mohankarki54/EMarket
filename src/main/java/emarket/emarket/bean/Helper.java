@@ -8,4 +8,5 @@ import lombok.Setter;
 public class Helper {
     int id;
     public static Helper instance = new Helper();
+    String category;
 }
