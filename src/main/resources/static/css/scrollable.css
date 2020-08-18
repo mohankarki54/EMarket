@@ -2,24 +2,18 @@
     overflow-x: auto;
 }
 
-body{
-    background-color: black;
-    color: #fff;
-    font-family: 'system-ui';
-}
-
-h1{
-    font-weight: 800;
-    font-size: 3em;
-}
-
-.subtitle{
-    font-size: 1.25em;
-    opacity: 0.65;
-}
-
 .card-block{
     height: 400px;
+    width: 390px;
     background-color: #fff;
     border: none;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.jumbotron{
+    background-image: url('http://placehold.jp/006699/cccc00/150x100.png');
+    background-size: cover;
+    height: 40%;
+    text-align:Center;
 }

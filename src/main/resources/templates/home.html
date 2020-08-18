@@ -40,6 +40,23 @@
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Category
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="product">Electronics</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="product">Beauty</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="product">Vechicle</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="product">Clothes</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="product">Other</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Account
                         </a>
                         <div sec:authorize="!isAuthenticated()">
@@ -73,34 +90,41 @@
             </div>
 
         </div>
+
+
     </nav>
 
-    <div class="jumbotron">
-    <div class="container-fluid">
-        <br/>
+    <div class="jumbotron ">
         <div class="row justify-content-center">
             <div class="col">
-                <form class="card card-sm" th:action="@{/productdisplay}" method="post" th:object="${search}">
+
+            </div>
+            <div class="col-8">
+                <form class="card card-lg" th:action="@{/productdisplay}" method="post" th:object="${search}">
                     <div class="card-body row no-gutters align-items-center">
                         <div class="col-auto">
                             <i class="fas fa-search h4 text-body"></i>
                         </div>
-                        <!--end of col-->
-                            <div class="col">
-                                <input class="form-control mr-sm-2" type="search" placeholder="Search topics or keywords" th:field="*{word}" required >
+                            <div class="col-8">
+                                <input class="form-control mr-sm-2" type="search" placeholder="Keywords..." th:field="*{word}" required >
                             </div>
-                            <!--end of col-->
+
                             <div class="col-auto">
-                                <button class="btn btn-lg btn-success" type="submit">Search</button>
+                                <button class="btn btn-success" type="submit">Search</button>
                             </div>
-                            <!--end of col-->
                     </div>
                 </form>
             </div>
-            <!--end of col-->
+            <div class="col-0">
+
+            </div>
+
         </div>
+
+
     </div>
-    </div>
+
+
 
     <div class="text-center"><h3><span th:text="${message}"></span></h3></div>
     <div class="text-center"><h3></span></h3></div>
@@ -124,8 +148,7 @@
     <div class="container-fluid">
         <h3>Featured Items</h3>
         <div class="scrolling-wrapper row flex-row flex-nowrap ">
-
-            <div class="col-8" th:each="product : ${products}">
+            <div class="col-3" th:each="product : ${products}">
                 <div class="card card-block">
                     <img th:src="${product.imagename}" class="card-img-top" alt="..." width="200" height="200">
                     <div class="card-body">
@@ -151,6 +174,7 @@
         </div>
     </div>
     <br>
+
     <div class="container">
     <h3> Items</h3>
     <div class="card-group">
@@ -199,7 +223,6 @@
 
     <br>
     <br>
-
     <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
         <div class="container text-center">
             <small>Copyright &copy; EMarket</small>
