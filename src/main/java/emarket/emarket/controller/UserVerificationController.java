@@ -45,7 +45,6 @@ public class UserVerificationController {
             user.setEnabled(true);
             userRepository.save(user);
             modelAndView.setViewName("accountVerified");
-           // authWithAuthManager(request,user.getEmail(), user.getPassword());
         }
         else
         {

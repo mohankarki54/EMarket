@@ -20,9 +20,9 @@ public class CategoryController {
     private ProductService service;
 
     @GetMapping(value = {"/category"})
-    public ModelAndView root(ModelAndView modelAndView) {
-
-        List<Product> products = service.listAll();
+    public ModelAndView root(@RequestParam String category, ModelAndView modelAndView) {
+        Helper.instance.setCategory(category);
+        List<Product> products = service.categoryList(category);
         if (products != null) {
 
             for (Product product : products) {
@@ -40,7 +40,6 @@ public class CategoryController {
 
     @PostMapping(path = {"/category"})
     public ModelAndView addFav(@RequestParam String action,ModelAndView modelAndView ){
-
         Helper.instance.setCategory(action);
         List<Product> products = service.categoryList(action);
         if (products != null) {

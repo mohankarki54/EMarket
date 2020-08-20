@@ -13,14 +13,16 @@ public class UserRegistrationDto {
     private String lastname;
     private String email;
     private String password;
+    private boolean address;
 
     public UserRegistrationDto() {
     }
 
-    public UserRegistrationDto(String firstname, String lastname, String email, String password) {
+    public UserRegistrationDto(String firstname, String lastname, String email, String password, boolean address) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
+        this.address = address;
     }
 }

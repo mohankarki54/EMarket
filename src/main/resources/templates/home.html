@@ -26,15 +26,29 @@
                             Post an Ad
                         </button>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="product">Electronics</a>
+                                <div class="dropdown-item">
+                                <form method="get" th:action="@{/product}">
+                                    <button type="submit" class="btn btn-light"  th:name="category" th:value="${'electronics'}">Electronics </button>
+                                </form>
+                                </div>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="product">Beauty</a>
+                                <div class="dropdown-item">
+                                    <form method="get" th:action="@{/product}">
+                                        <button type="submit" class="btn btn-light"  th:name="category" th:value="${'beauty'}">Beauty</button>
+                                    </form>
+                                </div>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="product">Vechicle</a>
+                                <div class="dropdown-item">
+                                    <form method="get" th:action="@{/product}">
+                                        <button type="submit" class="btn btn-light"  th:name="category" th:value="${'vehicle'}">vehicle </button>
+                                    </form>
+                                </div>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="product">Clothes</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="product">Other</a>
+                                <div class="dropdown-item">
+                                    <form method="get" th:action="@{/product}">
+                                        <button type="submit" class="btn btn-light"  th:name="category" th:value="${'clothes'}">clothes </button>
+                                    </form>
+                                </div>
                             </div>
                     </li>
 
@@ -43,15 +57,29 @@
                             Category
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="product">Electronics</a>
+                            <div class="dropdown-item">
+                                <form method="get" th:action="@{/category}">
+                                    <button type="submit" class="btn btn-light"  th:name="category" th:value="${'electronics'}">Electronics </button>
+                                </form>
+                            </div>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="product">Beauty</a>
+                            <div class="dropdown-item">
+                                <form method="get" th:action="@{/category}">
+                                    <button type="submit" class="btn btn-light"  th:name="category" th:value="${'beauty'}">Beauty</button>
+                                </form>
+                            </div>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="product">Vechicle</a>
+                            <div class="dropdown-item">
+                                <form method="get" th:action="@{/category}">
+                                    <button type="submit" class="btn btn-light"  th:name="category" th:value="${'vehicle'}">vehicle </button>
+                                </form>
+                            </div>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="product">Clothes</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="product">Other</a>
+                            <div class="dropdown-item">
+                                <form method="get" th:action="@{/category}">
+                                    <button type="submit" class="btn btn-light"  th:name="category" th:value="${'clothes'}">clothes </button>
+                                </form>
+                            </div>
                         </div>
                     </li>
 
@@ -90,11 +118,11 @@
             </div>
 
         </div>
-
-
     </nav>
 
-    <div class="jumbotron ">
+    <!--<div class="jumbotron ">
+        <h3>Sell Out Old Bring in New</h3>
+        <p>Search from over the thousand Classified ads.</p>
         <div class="row justify-content-center">
             <div class="col">
 
@@ -120,11 +148,25 @@
             </div>
 
         </div>
+    </div>-->
 
+    <div class="container-fluid ">
+        <div class="card text-center col-12">
+            <div class="card-header">
+                <h3>Sell Out Old Bring in New</h3>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Search from over the thousands of classifies Ads.</h5>
+                <p class="card-text">
+                <form class="card card-lg" th:action="@{/productdisplay}" method="post" th:object="${search}">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Keywords..." th:field="*{word}" required >
+                    <button class="btn btn-success" type="submit">Search</button>
+                </form>
+                </p>
 
+            </div>
+        </div>
     </div>
-
-
 
     <div class="text-center"><h3><span th:text="${message}"></span></h3></div>
     <div class="text-center"><h3></span></h3></div>
@@ -145,6 +187,23 @@
     </div>
     </div>
     <br>
+
+
+    <div class="container-fluid " th:if="${address}">
+        <div class="card text-center col-12">
+        <div class="card-header">
+            <h4>Reach More customer</h4>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Update your Address</h5>
+            <p class="card-text">Adding your address will help your too reach as many as customers.</p>
+            <a href="/address" class="btn btn-primary">Add</a>
+        </div>
+        </div>
+    </div>
+    <br>
+
+
     <div class="container-fluid">
         <h3>Featured Items</h3>
         <div class="scrolling-wrapper row flex-row flex-nowrap ">
@@ -177,13 +236,13 @@
 
     <div class="container">
     <h3> Items</h3>
-    <div class="card-group">
+    <div class="card-column">
         <div class="card">
             <img class="card-img-top" src="https://img.icons8.com/color/48/000000/pc-on-desk.png" width="100" height="100">
             <div class="card-body">
                 <h5 class="card-title">Electronics</h5>
-                <form method="post" th:action="@{/category}">
-                    <button type="submit" class="btn btn-success"  th:name="action" th:value="${'electronics'}">Show <span class="badge"><h4 th:text="${count}"></h4></span></button>
+                <form method="get" th:action="@{/category}">
+                    <button type="submit" class="btn btn-success"  th:name="category" th:value="${'electronics'}">Show <span class="badge"><h4 th:text="${ecount}"></h4></span></button>
                 </form>
             </div>
         </div>
@@ -192,8 +251,8 @@
             <img class="card-img-top" src="https://img.icons8.com/color/48/000000/car.png" alt="Card image cap" width="100" height="100">
             <div class="card-body">
                 <h5 class="card-title">Vechicles</h5>
-                <form method="post" th:action="@{/category}">
-                    <button type="submit" class="btn btn-success"  th:name="action" th:value="${'Vechicle'}">Show <span class="badge"><h4 th:text="${count}"></h4></span></button>
+                <form method="get" th:action="@{/category}">
+                    <button type="submit" class="btn btn-success"  th:name="category" th:value="${'Vehicle'}">Show <span class="badge"><h4 th:text="${vcount}"></h4></span></button>
                 </form>
             </div>
         </div>
@@ -202,8 +261,8 @@
             <img class="card-img-top" src="https://img.icons8.com/color/48/000000/nail-polish.png" alt="Card image cap" width="100" height="100">
             <div class="card-body">
                 <h5 class="card-title">Beauty</h5>
-                <form method="post" th:action="@{/category}">
-                    <button type="submit" class="btn btn-success"  th:name="action" th:value="${'Beauty'}">Show <span class="badge"><h4 th:text="${count}"></h4></span></button>
+                <form method="get" th:action="@{/category}">
+                    <button type="submit" class="btn btn-success"  th:name="category" th:value="${'Beauty'}">Show <span class="badge"><h4 th:text="${bcount}"></h4></span></button>
                 </form>
             </div>
         </div>
@@ -212,8 +271,28 @@
             <img class="card-img-top" src="https://img.icons8.com/plasticine/100/000000/clothesline.png" alt="Card image cap" width="100" height="100">
             <div class="card-body">
                 <h5 class="card-title">Clothes</h5>
-                <form method="post" th:action="@{/category}">
-                    <button type="submit" class="btn btn-success"  th:name="action" th:value="${'Clothes'}">Show <span class="badge"><h4 th:text="${count}"></h4></span></button>
+                <form method="get" th:action="@{/category}">
+                    <button type="submit" class="btn btn-success"  th:name="category" th:value="${'Clothes'}">Show <span class="badge"><h4 th:text="${ccount}"></h4></span></button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card">
+            <img class="card-img-top" src="https://img.icons8.com/plasticine/100/000000/clothesline.png" alt="Card image cap" width="100" height="100">
+            <div class="card-body">
+                <h5 class="card-title">Real Estate</h5>
+                <form method="get" th:action="@{/category}">
+                    <button type="submit" class="btn btn-success"  th:name="category" th:value="${'estate'}">Show <span class="badge"><h4 th:text="${ccount}"></h4></span></button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card">
+            <img class="card-img-top" src="https://img.icons8.com/plasticine/100/000000/clothesline.png" alt="Card image cap" width="100" height="100">
+            <div class="card-body">
+                <h5 class="card-title">Furniture</h5>
+                <form method="get" th:action="@{/category}">
+                    <button type="submit" class="btn btn-success"  th:name="category" th:value="${'furniture'}">Show <span class="badge"><h4 th:text="${ccount}"></h4></span></button>
                 </form>
             </div>
         </div>
@@ -223,11 +302,12 @@
 
     <br>
     <br>
-    <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+
+    <div class="footer">
         <div class="container text-center">
             <small>Copyright &copy; EMarket</small>
         </div>
-    </footer>
+    </div>
 
 
    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

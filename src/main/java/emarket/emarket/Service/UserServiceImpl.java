@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -60,6 +61,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updatePassword(String password, Long userId) {
         userRepository.updatePassword(password, userId);
+    }
+
+    @Override
+    @Transactional
+    public void updateAddressFlag(boolean address, Long userId) {
+        userRepository.updateAddressFlag(address,userId);
     }
 
 

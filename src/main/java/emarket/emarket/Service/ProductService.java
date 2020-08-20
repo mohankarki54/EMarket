@@ -46,7 +46,7 @@ public class ProductService {
     }
 
     public List<Product> categoryList(String category){
-        return repo.findProductByType(category);
+        return repo.findProductByCategory(category);
     }
 
 }

@@ -42,7 +42,9 @@ public class ProductDisplayController {
         Product product = service.get(Helper.instance.getId());
         if (product != null) {
             String imagename = "data:image/png;base64," + Base64.getEncoder().encodeToString(product.getImage());
+            String imagename1 = "data:image/png;base64," + Base64.getEncoder().encodeToString(product.getImage2());
             product.setImagename(imagename);
+            product.setBackname(imagename1);
             modelAndView.addObject("product", product);
         }
         modelAndView.addObject("comments", comments);
@@ -63,7 +65,9 @@ public class ProductDisplayController {
 
         if (product != null) {
             String imagename = "data:image/png;base64," + Base64.getEncoder().encodeToString(product.getImage());
+            String imagename1 = "data:image/png;base64," + Base64.getEncoder().encodeToString(product.getImage2());
             product.setImagename(imagename);
+            product.setBackname(imagename1);
 
             modelAndView.addObject("product", product);
         }

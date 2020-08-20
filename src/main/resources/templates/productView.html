@@ -79,7 +79,7 @@
                         <img th:src="${product.imagename}" class="card-img-top" alt="..." >
                     </div>
                     <div class="flip-box-back">
-                        <img th:src="${product.imagename}" class="card-img-top" alt="..." >
+                        <img th:src="${product.backname}" class="card-img-top" alt="..." >
                     </div>
                 </div>
             </div>
@@ -105,6 +105,7 @@
         </div>
     </div>
 
+    <div sec:authorize="isAuthenticated()">
     <div class="col-4">
         <div class="card">
             <div class="card-body">
@@ -141,6 +142,19 @@
                 </div>
 
             </div>
+        </div>
+    </div>
+    </div>
+
+    <div sec:authorize="!isAuthenticated()">
+        <div class="col-4">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Seller Information</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Please, register to see the contact information.</h6>
+                <a href="/signup" class="card-link">Register</a>
+            </div>
+        </div>
         </div>
     </div>
 </div>

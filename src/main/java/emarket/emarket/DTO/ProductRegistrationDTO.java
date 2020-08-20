@@ -12,6 +12,14 @@ public class ProductRegistrationDTO {
     private String type;
     private byte[] Image;
 
+    //Vehicle
+    String model;
+    String color;
+    int year;
+    int millage;
+
+   //clothes
+   String size;
 
     public ProductRegistrationDTO() {
     }
@@ -22,4 +30,13 @@ public class ProductRegistrationDTO {
         this.price = price;
         this.Image = data;
     }
+
+    public ProductRegistrationDTO( String model, String color, int year, int millage) {
+        this.model = model;
+        this.color = color;
+        this.year = year;
+        this.millage = millage;
+    }
+
+
 }

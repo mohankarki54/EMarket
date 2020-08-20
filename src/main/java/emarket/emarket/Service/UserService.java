@@ -9,4 +9,5 @@ public interface UserService extends UserDetailsService {
     User findByEmail(String email);
     User save(UserRegistrationDto registrationDto);
     void updatePassword(String password, Long userId);
+    void updateAddressFlag(boolean address,Long userId);
 }

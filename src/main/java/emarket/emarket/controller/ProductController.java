@@ -4,6 +4,7 @@ import emarket.emarket.DTO.ProductRegistrationDTO;
 import emarket.emarket.Repository.ProductRepository;
 import emarket.emarket.Service.ProductService;
 import emarket.emarket.bean.Account;
+import emarket.emarket.bean.Helper;
 import emarket.emarket.bean.Product;
 import emarket.emarket.bean.Search;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,6 @@ import java.util.Base64;
 import java.util.List;
 
 @Controller
-@RequestMapping("/product")
 public class ProductController {
 
     @Autowired
@@ -35,23 +35,36 @@ public class ProductController {
     }
 
 
-    @GetMapping
-    public String product(Model model){
+    @GetMapping("/product")
+    public String product(Model model, @RequestParam String category){
+        Helper.instance.setCategory(category);
+        model.addAttribute("category",category);
         return  "Productform";
     }
 
-    @PostMapping
-    public String addProduct(@RequestParam("file") MultipartFile file, @ModelAttribute("product")ProductRegistrationDTO productRegistrationDTO) throws IOException {
+    @PostMapping("/product")
+    public String addProduct(@RequestParam("file") MultipartFile file,@RequestParam("file1") MultipartFile file1, @ModelAttribute("product")ProductRegistrationDTO productRegistrationDTO) throws IOException {
+        String category = Helper.instance.getCategory();
         String owner= Account.instance.currentUserName();
         String name = productRegistrationDTO.getName();
         String type = productRegistrationDTO.getType();
         Double price = productRegistrationDTO.getPrice();
+
+        //Vehicle
+        String model = productRegistrationDTO.getModel();
+        String color = productRegistrationDTO.getColor();
+        int year = productRegistrationDTO.getYear();
+        int millage = productRegistrationDTO.getMillage();
+
+        //Clothes
+        String size = productRegistrationDTO.getSize();
+
         Product product = new Product();
 
         try {
             byte[] bytes = file.getBytes();
-            product = new Product(name,type, price, bytes,owner);
-
+            byte[] bytes1 = file1.getBytes();
+            product = new Product(name,type, price, bytes,bytes1,model,color,year,millage,size ,owner,category);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -59,22 +72,6 @@ public class ProductController {
         service.save(product);
 
         return "redirect:/home";
-
-        /*List<Product> products = service.listAll();
-
-        if (products != null) {
-
-            for (Product product1 : products) {
-                String imagename = "data:image/png;base64," + Base64.getEncoder().encodeToString(product1.getImage());
-                product1.setImagename(imagename);
-            }
-
-            modelAndView.addObject("products", products);
-            modelAndView.addObject("search", new Search());
-        }
-
-        modelAndView.setViewName("home");
-        return modelAndView;*/
     }
 
 }

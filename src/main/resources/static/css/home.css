@@ -87,3 +87,17 @@ body {
     box-shadow: none;
 }
 
+#sticky-footer {
+    flex-shrink: none;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #623c3c;
+    color: white;
+    text-align: center;
+}
+

@@ -10,6 +10,7 @@ import java.util.Collection;
 @Getter
 @Setter
 @Entity
+
 @Table(name = "User", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User{
 
@@ -22,6 +23,7 @@ public class User{
     private String email;
     private String password;
     private boolean isEnabled;
+    private boolean address;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(

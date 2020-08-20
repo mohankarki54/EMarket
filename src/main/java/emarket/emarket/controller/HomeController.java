@@ -34,8 +34,12 @@ public class HomeController {
 
     @GetMapping(value = {"/","/home"})
     public ModelAndView root(ModelAndView modelAndView) {
-
+        User user = userService.findByEmail(Account.instance.currentUserName());
       List<Product> products = service.listAll();
+      List<Product> electronic = service.categoryList("electronics");
+      List<Product> vehicle = service.categoryList("vehicle");
+      List<Product> beauty = service.categoryList("beauty");
+      List<Product> clothes= service.categoryList("clothes");
         if (products != null) {
 
         for (Product product : products) {
@@ -46,7 +50,15 @@ public class HomeController {
         modelAndView.addObject("products", products);
         modelAndView.addObject("search", new Search());
         modelAndView.addObject("count", products.size());
-    }
+        modelAndView.addObject("ecount", electronic.size());
+        modelAndView.addObject("vcount", vehicle.size());
+        modelAndView.addObject("bcount", beauty.size());
+        modelAndView.addObject("ccount", clothes.size());
+        }
+
+        if(user.isAddress()){
+            modelAndView.addObject("address", true);
+        }
         modelAndView.setViewName("home");
         return modelAndView;
     }
@@ -106,14 +118,6 @@ public class HomeController {
         return "login";
     }
 
-    @GetMapping("/dashboard")
-    public ModelAndView dashboard(ModelAndView modelAndView) {
-        User user = userService.findByEmail(Account.instance.currentUserName());
-        String hello = "Hello, " + user.getFirstname();
-        modelAndView.addObject("username", hello);
-        modelAndView.setViewName("dashboard");
-        return modelAndView;
-    }
 
     @GetMapping("/about")
     public String about() {

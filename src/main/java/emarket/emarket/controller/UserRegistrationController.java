@@ -2,7 +2,6 @@ package emarket.emarket.controller;
 
 import emarket.emarket.Repository.ConfirmationTokenRepository;
 import emarket.emarket.Service.EmailService;
-import emarket.emarket.Service.ProductService;
 import emarket.emarket.Service.UserService;
 import emarket.emarket.bean.ConfirmationToken;
 import emarket.emarket.bean.User;
@@ -33,8 +32,6 @@ public class UserRegistrationController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private ProductService service;
 
     public UserRegistrationController(UserService userService) {
         this.userService = userService;
