@@ -34,7 +34,7 @@ public class HomeController {
 
     @GetMapping(value = {"/","/home"})
     public ModelAndView root(ModelAndView modelAndView) {
-        User user = userService.findByEmail(Account.instance.currentUserName());
+
       List<Product> products = service.listAll();
       List<Product> electronic = service.categoryList("electronics");
       List<Product> vehicle = service.categoryList("vehicle");
@@ -56,9 +56,14 @@ public class HomeController {
         modelAndView.addObject("ccount", clothes.size());
         }
 
-        if(user.isAddress()){
-            modelAndView.addObject("address", true);
+        if(Account.instance.currentUserName() != "anonymousUser" && Account.instance.currentUserName() != null ){
+            User user = userService.findByEmail(Account.instance.currentUserName());
+            boolean add = user.isAddress();
+            if(add){
+                modelAndView.addObject("address", true);
+            }
         }
+
         modelAndView.setViewName("home");
         return modelAndView;
     }

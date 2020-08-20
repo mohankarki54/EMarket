@@ -74,32 +74,26 @@
     </div>
 </nav>
 
-<div class="jumbotron">
-    <div class="container-fluid">
-        <br/>
-        <div class="row justify-content-center">
-            <div class="col">
-                <form class="card card-sm" th:action="@{/productdisplay}" method="post" th:object="${search}">
-                    <div class="card-body row no-gutters align-items-center">
-                        <div class="col-auto">
-                            <i class="fas fa-search h4 text-body"></i>
-                        </div>
-                        <!--end of col-->
-                        <div class="col">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search topics or keywords" th:field="*{word}" required >
-                        </div>
-                        <!--end of col-->
-                        <div class="col-auto">
-                            <button class="btn btn-lg btn-success" type="submit">Search</button>
-                        </div>
-                        <!--end of col-->
-                    </div>
+<div class="container-fluid ">
+    <div class="card text-center col-12">
+        <div class="card-header">
+            <h3>Sell Out Old Bring in New</h3>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Search from over the thousands of classifies Ads.</h5>
+            <h6 class="card-title">
+                <form th:action="@{/productdisplay}" method="post" th:object="${search}">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Keywords..." th:field="*{word}" required >
+                    <br>
+                    <button class="btn btn-success" type="submit">Search</button>
                 </form>
-            </div>
-            <!--end of col-->
+            </h6>
+
         </div>
     </div>
 </div>
+
+<br><br>
 
 <div class="text-center"><h3><span th:text="${message}"></span></h3></div>
 <div class="text-center"><h3></span></h3></div>

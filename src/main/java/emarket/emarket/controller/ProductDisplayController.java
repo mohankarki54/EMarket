@@ -36,7 +36,9 @@ public class ProductDisplayController {
     private CommentService commentService;
 
     @GetMapping(value = {"/productInfo"})
-    public ModelAndView root(ModelAndView modelAndView) {
+    public ModelAndView root(@RequestParam String action, ModelAndView modelAndView) {
+        int value = Integer.parseInt(action);
+        Helper.instance.setId(value);
         CommentBean commentBean = new CommentBean();
         List<Comment> comments = commentService.find(Long.valueOf(Helper.instance.getId()));
         Product product = service.get(Helper.instance.getId());

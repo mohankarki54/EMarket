@@ -106,10 +106,10 @@
     </div>
 
     <div sec:authorize="isAuthenticated()">
-    <div class="col-4">
+    <div class="col">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Seller Infromation</h5>
+                <h5 class="card-title">Seller Information</h5>
                 <p class="card-text" th:text="${seller.firstname}"></p>
                 <p class="card-text">Phone Number: 000-000-0000</p>
 
@@ -147,12 +147,13 @@
     </div>
 
     <div sec:authorize="!isAuthenticated()">
-        <div class="col-4">
+        <div class="col">
         <div class="card" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">Seller Information</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Please, register to see the contact information.</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Please register or Login to see the contact information.</h6>
                 <a href="/signup" class="card-link">Register</a>
+                <a href="/login" class="card-link">Login</a>
             </div>
         </div>
         </div>
