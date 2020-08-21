@@ -6,9 +6,13 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 
 public interface AddressRepository extends JpaRepository<Address, Long> {
     Address findAddressByOwner(String email);
+
+    List<Address> findAddressByZipcode(int zipcode);
 
     @Modifying
     @Query("update Address u set u.street = :street, u.apartment = :apartment, u.city = :city , u.state = :state , u.zipcode = :zipcode  where u.id = :id")
