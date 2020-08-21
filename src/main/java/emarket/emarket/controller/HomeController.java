@@ -59,7 +59,7 @@ public class HomeController {
         if(Account.instance.currentUserName() != "anonymousUser" && Account.instance.currentUserName() != null ){
             User user = userService.findByEmail(Account.instance.currentUserName());
             boolean add = user.isAddress();
-            if(add){
+            if(!add){
                 modelAndView.addObject("address", true);
             }
         }
@@ -79,44 +79,6 @@ public class HomeController {
         return "redirect:/";
     }
 
-    @GetMapping(value = {"/productdisplay"})
-    public ModelAndView preRoot(ModelAndView modelAndView) {
-
-        Search.instance.setWord(" ");
-        List<Product> products = new ArrayList<Product>();
-        products = service.productSearch(Search.instance.getWord());
-        if (products != null) {
-
-            for (Product product : products) {
-                String imagename = "data:image/png;base64," + Base64.getEncoder().encodeToString(product.getImage());
-                product.setImagename(imagename);
-            }
-
-            modelAndView.addObject("products", products);
-            modelAndView.addObject("search", new Search());
-        }
-        modelAndView.setViewName("home");
-        return modelAndView;
-    }
-
-    @PostMapping(path = {"/productdisplay"})
-    public ModelAndView displaypro(@ModelAttribute("search") Search search, ModelAndView modelAndView){
-        Search.instance.setWord(search.getWord());
-        List<Product> products = new ArrayList<Product>();
-        products = service.productSearch(search.getWord());
-        if (products != null) {
-
-            for (Product product : products) {
-                String imagename = "data:image/png;base64," + Base64.getEncoder().encodeToString(product.getImage());
-                product.setImagename(imagename);
-            }
-
-            modelAndView.addObject("products", products);
-            modelAndView.addObject("search", new Search());
-        }
-        modelAndView.setViewName("home");
-        return modelAndView;
-    }
 
     @GetMapping("/login")
     public String login(Model model) {

@@ -158,18 +158,27 @@
             <div class="card-body">
                 <h5 class="card-title">Search from over the thousands of classifies Ads.</h5>
                 <h6 class="card-title">
-                <form th:action="@{/productdisplay}" method="post" th:object="${search}">
+                <form th:action="@{/productdisplay}" method="get" th:object="${search}">
                     <input class="form-control mr-sm-2" type="search" placeholder="Keywords..." th:field="*{word}" required >
                 <br>
                     <button class="btn btn-success" type="submit">Search</button>
                 </form>
                 </h6>
 
+                <h6 class="card-title">
+                    <form th:action="@{/zipsearch}" method="get" th:object="${search}">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Enter your zip code" th:field="*{word}" required >
+                        <div class="text-center"><h3 style="color:#ff0000;"><span th:text=" ${#request.getParameter('zip')}"></span></h3></div>
+                        <br>
+                        <button class="btn btn-success" type="submit">Search</button>
+                    </form>
+                </h6>
+
             </div>
         </div>
     </div>
 
-    <div class="text-center"><h3><span th:text="${message}"></span></h3></div>
+    <div class="text-center"><h3 style="color:#ffaa00;"><span th:text=" ${#request.getParameter('success')}"></span></h3></div>
     <div class="text-center"><h3></span></h3></div>
 
     <div class="container">
