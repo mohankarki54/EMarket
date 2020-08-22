@@ -56,7 +56,7 @@ public class ProductDisplayController {
         return modelAndView;
     }
 
-   @PostMapping(path = {"/productInfo"})
+   /*@PostMapping(path = {"/productInfo"})
     public ModelAndView displayInfo(@RequestParam String action, ModelAndView modelAndView ){
         CommentBean commentBean = new CommentBean();
         int value = Integer.parseInt(action);
@@ -79,7 +79,7 @@ public class ProductDisplayController {
         modelAndView.addObject("commentBean", commentBean);
         modelAndView.setViewName("productView");
         return modelAndView;
-    }
+    }*/
 
     @PostMapping(path = {"/savecomment"})
     public String saveComment(@RequestParam String action,@ModelAttribute("commentBean") CommentBean commentBean){
@@ -107,9 +107,6 @@ public class ProductDisplayController {
     @PostMapping(path = {"/sendEmail"})
     public String sendcontactEmail(@RequestParam String action, RedirectAttributes redirectAttrs, @ModelAttribute("contact") Contact contact, HttpServletRequest request ){
         redirectAttrs.addAttribute("success","Your message has been successfully sent." );
-        System.out.println(action);
-        System.out.println(contact.getPrice());
-        System.out.println(contact.getMessage());
 
         int value = Integer.parseInt(action);
         Product product = service.get(value);

@@ -36,10 +36,11 @@ public class Product {
     String size;
 
     String category;
+    String description;
 
     public Product() {}
 
-    public Product(String name, String type, double price,byte[] data, byte[] data1,  String model, String color, int year, int millage, String size, String owner, String category) {
+    public Product(String name, String type, double price,byte[] data, byte[] data1,  String model, String color, int year, int millage, String size, String owner, String category, String description) {
         this.name= name;
         this.type = type;
         this.price = price;
@@ -53,5 +54,6 @@ public class Product {
         this.millage = millage;
         this.size = size;
         this.category = category;
+        this.description = description;
     }
 }

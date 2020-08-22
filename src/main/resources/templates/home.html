@@ -181,8 +181,8 @@
     <div class="text-center"><h3 style="color:#ffaa00;"><span th:text=" ${#request.getParameter('success')}"></span></h3></div>
     <div class="text-center"><h3></span></h3></div>
 
-    <div class="container">
-    <div class="card text-center" th:if="${#request.getParameter('var')}">
+    <div class="container-fluid" th:if="${#request.getParameter('var')}">
+    <div class="card text-center col-12" >
         <div class="card-header">
             Verification Needed
         </div>

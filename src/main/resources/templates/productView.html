@@ -101,7 +101,7 @@
     <div class="card" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">Description</h5>
-            <p class="card-text">Here, is the product description.</p>
+            <p class="card-text" th:text="${product.description}"></p>
         </div>
     </div>
 
@@ -110,8 +110,14 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Seller Information</h5>
-                <p class="card-text" th:text="${seller.firstname}"></p>
-                <p class="card-text">Phone Number: 000-000-0000</p>
+                <div>
+                    <label>Seller name: <span class="card-text" th:text="${seller.firstname}"></span></label>
+                </div>
+
+                <div>
+                    <label>Email address: <span class="card-text" th:text="${seller.email}"></span></label>
+                </div>
+
 
                 <div class="container">
                     <!-- Trigger the modal with a button -->
@@ -189,7 +195,6 @@
                         </div>
                         <br>
                     </div>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
         </div>

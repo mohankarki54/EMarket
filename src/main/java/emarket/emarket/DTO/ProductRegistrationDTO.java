@@ -11,6 +11,7 @@ public class ProductRegistrationDTO {
     private double price;
     private String type;
     private byte[] Image;
+    private String description;
 
     //Vehicle
     String model;

@@ -49,6 +49,7 @@ public class ProductController {
         String name = productRegistrationDTO.getName();
         String type = productRegistrationDTO.getType();
         Double price = productRegistrationDTO.getPrice();
+        String description = productRegistrationDTO.getDescription();
 
         //Vehicle
         String model = productRegistrationDTO.getModel();
@@ -64,7 +65,7 @@ public class ProductController {
         try {
             byte[] bytes = file.getBytes();
             byte[] bytes1 = file1.getBytes();
-            product = new Product(name,type, price, bytes,bytes1,model,color,year,millage,size ,owner,category);
+            product = new Product(name,type, price, bytes,bytes1,model,color,year,millage,size ,owner,category,description);
         } catch (IOException e) {
             e.printStackTrace();
         }
