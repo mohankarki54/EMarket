@@ -62,7 +62,6 @@ public class PasswordResetController {
         String updatedPassword = passwordEncoder.encode(form.getPassword());
         userService.updatePassword(updatedPassword, user.getId());
         tokenRepository.delete(token);
-
         return "redirect:/login";
     }
 

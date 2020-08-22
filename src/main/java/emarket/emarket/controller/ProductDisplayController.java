@@ -2,10 +2,7 @@ package emarket.emarket.controller;
 
 import emarket.emarket.DTO.CommentBean;
 import emarket.emarket.DTO.UserRegistrationDto;
-import emarket.emarket.Service.CommentService;
-import emarket.emarket.Service.FavService;
-import emarket.emarket.Service.ProductService;
-import emarket.emarket.Service.UserServiceImpl;
+import emarket.emarket.Service.*;
 import emarket.emarket.bean.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,12 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class ProductDisplayController {
@@ -31,7 +26,8 @@ public class ProductDisplayController {
     private FavService favService;
     @Autowired
     private UserServiceImpl userService;
-
+    @Autowired
+    private EmailService emailService;
     @Autowired
     private CommentService commentService;
 
@@ -53,11 +49,14 @@ public class ProductDisplayController {
         User seller = userService.findByEmail(product.getOwner());
         modelAndView.addObject("seller",seller);
         modelAndView.addObject("commentBean", commentBean);
+
+        Contact contact = new Contact();
+        modelAndView.addObject("contact",contact);
         modelAndView.setViewName("productView");
         return modelAndView;
     }
 
-    @PostMapping(path = {"/productInfo"})
+   @PostMapping(path = {"/productInfo"})
     public ModelAndView displayInfo(@RequestParam String action, ModelAndView modelAndView ){
         CommentBean commentBean = new CommentBean();
         int value = Integer.parseInt(action);
@@ -91,7 +90,7 @@ public class ProductDisplayController {
         Date date = new Date();
         Comment comment = new Comment(Account.instance.currentUserName(),username, Long.valueOf(value),commentBean.getDescription(), date);
         commentService.save(comment);
-        return "redirect:/productInfo";
+        return "redirect:/productInfo?action="+action;
     }
 
     @PostMapping(path = {"/addFavorite"})
@@ -103,5 +102,39 @@ public class ProductDisplayController {
         favService.save(favroite);
         redirectAttrs.addAttribute("success","Added to the Favorite List" );
         return "redirect:/productInfo";
+    }
+
+    @PostMapping(path = {"/sendEmail"})
+    public String sendcontactEmail(@RequestParam String action, RedirectAttributes redirectAttrs, @ModelAttribute("contact") Contact contact, HttpServletRequest request ){
+        redirectAttrs.addAttribute("success","Your message has been successfully sent." );
+        System.out.println(action);
+        System.out.println(contact.getPrice());
+        System.out.println(contact.getMessage());
+
+        int value = Integer.parseInt(action);
+        Product product = service.get(value);
+        String user_email = Account.instance.currentUserName();
+        String seller = product.getOwner();
+        User user = userService.findByEmail(seller);
+        User user_customer = userService.findByEmail(user_email);
+
+        Mail mail = new Mail();
+        mail.setFrom("technewsandblog@gmail.com");
+        mail.setTo(user.getEmail());
+        mail.setSubject("Product contact from customer");
+
+        Map<String, Object> model = new HashMap<>();
+        model.put("user", "Hello "+ user.getFirstname() + ", ");
+        model.put("signature", "https://emarket.com");
+        String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+        model.put("productname", "Product Name: "+product.getName());
+        model.put("name", "Name: "+user_customer.getFirstname()+" "+ user_customer.getLastname());
+        model.put("email", "Email: "+user_customer.getEmail());
+        model.put("price", "Offered Price: $"+contact.getPrice());
+        model.put("msg", "Message: "+contact.getMessage());
+        mail.setModel(model);
+        emailService.sendcontactEmail(mail);
+
+        return "redirect:/productInfo?action="+action;
     }
 }

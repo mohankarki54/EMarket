@@ -26,17 +26,22 @@
     </tr>
     <tr>
         <td bgcolor="#eaeaea" style="padding: 40px 30px 40px 30px;">
-            <p th:text="${user}"></p>
+            <h3 th:text="${user}"></h3>
             <p>
-                You've requested a password reset.
-                <a th:href="${resetUrl}">Reset your password</a>
+                The customer below wants to contact your for the product you enlisted.
+                <br>
+            <p th:text="${productname}"></p>
+             <p th:text="${name}"></p>
+            <p th:text="${email}"></p>
+            <p th:text="${prise}"></p>
+            <p th:text="${msg}"></p>
             </p>
             <p>Thanks</p>
         </td>
     </tr>
     <tr>
-        <td bgcolor="#777777" style="padding: 30px 30px 30px 30px;">
-            <p th:text="${signature}"></p>
+        <td bgcolor="#eaeaea" style="padding: 30px 30px 30px 30px;">
+            <h6 th:text="${signature}"></h6>
         </td>
     </tr>
 </table>
