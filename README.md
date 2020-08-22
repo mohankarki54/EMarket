@@ -14,19 +14,19 @@ To integrate and run this project, please follow the following steps. [Note: Thi
 7) Select Import Maven projects automatically and leave the other fields with default values. Click Next.
 8) Once the project is opened, navigate to the file application.properties which will be like: 
 
-    spring.datasource.url= Your local sql server address
-    spring.datasource.username=root
-    spring.datasource.password= Password
-    spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-    .
-    .
-    .
-    spring.mail.host=smtp.gmail.com
-    spring.mail.username= Your email address for sending message
-    spring.mail.password=  Password
-    spring.mail.properties.mail.smtp.auth=true
-    spring.mail.properties.mail.smtp.starttls.enable=true
-    spring.mail.properties.mail.smtp.starttls.required=true
+   - spring.datasource.url= Your local sql server address 
+   - spring.datasource.username=root
+   - spring.datasource.password= Password
+   - spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+   - .
+   - .
+   - .
+   - spring.mail.host=smtp.gmail.com
+   - spring.mail.username= Your email address for sending message
+   - spring.mail.password=  Password
+   - spring.mail.properties.mail.smtp.auth=true
+   - spring.mail.properties.mail.smtp.starttls.enable=true
+   - spring.mail.properties.mail.smtp.starttls.required=true
 
 9) Run
 10) Go to http://localhost:8080
