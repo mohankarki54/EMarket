@@ -20,11 +20,18 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Base64;
+import java.util.Calendar;
+import java.util.Date;
+import java.text.DateFormat;
 import java.util.List;
 
 @Controller
 public class ProductController {
+
+    private static final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+
 
     @Autowired
     private ProductService service;
@@ -60,12 +67,25 @@ public class ProductController {
         //Clothes
         String size = productRegistrationDTO.getSize();
 
+        Date currentDate = new Date();
+        System.out.println(dateFormat.format(currentDate));
+
+        // convert date to calendar
+        Calendar c = Calendar.getInstance();
+        c.setTime(currentDate);
+
+        // manipulate date
+        c.add(Calendar.DATE, 10); //same with c.add(Calendar.DAY_OF_MONTH, 1);
+
+        // convert calendar to date
+        Date currentDatePlusOne = c.getTime();
+
         Product product = new Product();
 
         try {
             byte[] bytes = file.getBytes();
             byte[] bytes1 = file1.getBytes();
-            product = new Product(name,type, price, bytes,bytes1,model,color,year,millage,size ,owner,category,description);
+            product = new Product(name,type, price, bytes,bytes1,model,color,year,millage,size ,owner,category,description, currentDate, currentDatePlusOne);
         } catch (IOException e) {
             e.printStackTrace();
         }

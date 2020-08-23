@@ -32,4 +32,8 @@ public class FavService {
        return repo.findFavroiteByOwner(owner);
     }
 
+    public void deleteFavProduct(Long id){
+        repo.deleteFavProduct(id);
+    }
+
 }

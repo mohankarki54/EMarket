@@ -49,4 +49,12 @@ public class ProductService {
         return repo.findProductByCategory(category);
     }
 
+    public List<Product> findProductByEnddate(){
+        return repo.findProductByEnddate();
+    }
+
+    public void deleteProduct(){
+        repo.deleteProduct();
+    }
+
 }

@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Blob;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -38,9 +39,12 @@ public class Product {
     String category;
     String description;
 
+    Date listeddate;
+    Date enddate;
+
     public Product() {}
 
-    public Product(String name, String type, double price,byte[] data, byte[] data1,  String model, String color, int year, int millage, String size, String owner, String category, String description) {
+    public Product(String name, String type, double price,byte[] data, byte[] data1,  String model, String color, int year, int millage, String size, String owner, String category, String description, Date listeddate, Date enddate) {
         this.name= name;
         this.type = type;
         this.price = price;
@@ -55,5 +59,7 @@ public class Product {
         this.size = size;
         this.category = category;
         this.description = description;
+        this.listeddate = listeddate;
+        this.enddate = enddate;
     }
 }

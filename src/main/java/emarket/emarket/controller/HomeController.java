@@ -35,6 +35,13 @@ public class HomeController {
     @GetMapping(value = {"/","/home"})
     public ModelAndView root(ModelAndView modelAndView) {
 
+        List<Product> allDateProduct = service.findProductByEnddate();
+
+        for(int i =0; i< allDateProduct.size(); i++){
+            favService.deleteFavProduct(allDateProduct.get(i).getId());
+        }
+        service.deleteProduct();
+
       List<Product> products = service.listAll();
       List<Product> electronic = service.categoryList("electronics");
       List<Product> vehicle = service.categoryList("vehicle");
