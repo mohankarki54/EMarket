@@ -6,16 +6,14 @@ import emarket.emarket.Service.*;
 import emarket.emarket.bean.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.*;
 
 @Controller
@@ -38,6 +36,10 @@ public class ProductDisplayController {
         CommentBean commentBean = new CommentBean();
         List<Comment> comments = commentService.find(Long.valueOf(Helper.instance.getId()));
         Product product = service.get(Helper.instance.getId());
+        String category = product.getCategory();
+
+        List<Product> productCategory= service.categoryList(category);
+        Collections.shuffle(productCategory);
         if (product != null) {
             String imagename = "data:image/png;base64," + Base64.getEncoder().encodeToString(product.getImage());
             String imagename1 = "data:image/png;base64," + Base64.getEncoder().encodeToString(product.getImage2());
@@ -45,6 +47,16 @@ public class ProductDisplayController {
             product.setBackname(imagename1);
             modelAndView.addObject("product", product);
         }
+
+        if (productCategory != null) {
+            for (Product pro : productCategory) {
+                String image = "data:image/png;base64," + Base64.getEncoder().encodeToString(pro.getImage());
+                pro.setImagename(image);
+            }
+
+            modelAndView.addObject("productCategory", productCategory);
+        }
+
         modelAndView.addObject("comments", comments);
         User seller = userService.findByEmail(product.getOwner());
         modelAndView.addObject("seller",seller);
@@ -55,31 +67,6 @@ public class ProductDisplayController {
         modelAndView.setViewName("productView");
         return modelAndView;
     }
-
-   /*@PostMapping(path = {"/productInfo"})
-    public ModelAndView displayInfo(@RequestParam String action, ModelAndView modelAndView ){
-        CommentBean commentBean = new CommentBean();
-        int value = Integer.parseInt(action);
-        Helper.instance.setId(value);
-        List<Comment> comments = commentService.find((long)value);
-        Product product = service.get(value);
-
-        if (product != null) {
-            String imagename = "data:image/png;base64," + Base64.getEncoder().encodeToString(product.getImage());
-            String imagename1 = "data:image/png;base64," + Base64.getEncoder().encodeToString(product.getImage2());
-            product.setImagename(imagename);
-            product.setBackname(imagename1);
-
-            modelAndView.addObject("product", product);
-        }
-
-        User seller = userService.findByEmail(product.getOwner());
-        modelAndView.addObject("seller",seller);
-        modelAndView.addObject("comments", comments);
-        modelAndView.addObject("commentBean", commentBean);
-        modelAndView.setViewName("productView");
-        return modelAndView;
-    }*/
 
     @PostMapping(path = {"/savecomment"})
     public String saveComment(@RequestParam String action,@ModelAttribute("commentBean") CommentBean commentBean){
@@ -134,4 +121,24 @@ public class ProductDisplayController {
 
         return "redirect:/productInfo?action="+action;
     }
+
+    @GetMapping("/user_current_listed_product/{id}")
+    public ModelAndView user_current_listed_product(@PathVariable(name = "id") int id, RedirectAttributes redirectAttrs, ModelAndView modelAndView) {
+        Product product = service.get(id);
+        String seller = product.getOwner();
+        List<Product> products = service.listbyOwner(seller);
+        User user = userService.findByEmail(seller);
+        if (products != null) {
+            for (Product pro : products) {
+                String image = "data:image/png;base64," + Base64.getEncoder().encodeToString(pro.getImage());
+                pro.setImagename(image);
+            }
+
+            modelAndView.addObject("products", products);
+        }
+        modelAndView.addObject("message", "All active Ads posted by " + user.getFirstname() + user.getLastname());
+        modelAndView.setViewName("user_current_listed");
+        return modelAndView;
+    }
+
 }

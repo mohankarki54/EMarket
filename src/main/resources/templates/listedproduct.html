@@ -88,6 +88,7 @@
         <th scope="col">Image</th>
         <th scope="col">Name</th>
         <th scope="col">Price</th>
+        <th scope="col">Status</th>
         <th scope="col">Actions</th>
     </tr>
     </thead>
@@ -96,6 +97,15 @@
         <td><img th:src="${product.imagename}"  alt="..." width="100" height="100"></td>
         <td th:text="${product.name}">Name</td>
         <td th:text="${product.price}">Price</td>
+
+        <td th:if="${!product.sponsor}">
+            <a th:href="'/feature/' + ${product.id}">Feature Now</a>
+        </td>
+
+        <td th:if="${product.sponsor}">
+            <p>Featured</p>
+        </td>
+
         <td>
             <a th:href="'/edit/' + ${product.id}">Edit</a>
             &nbsp;&nbsp;&nbsp;
@@ -105,30 +115,7 @@
     </tbody>
 </table>
 
-<!--<div align="center">
 
-
-    <br/><br/>
-    <table border="1" cellpadding="10">
-        <thead>
-        <tr>
-
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="product : ${listProducts}">
-            <td><img th:src="${product.imagename}"  alt="..." width="100" height="100"></td>
-            <td th:text="${product.name}">Name</td>
-            <td th:text="${product.price}">Price</td>
-            <td>
-                <a th:href="'/edit/' + ${product.id}">Edit</a>
-                &nbsp;&nbsp;&nbsp;
-                <a th:href="'/delete/' + ${product.id}">Delete</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>-->
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

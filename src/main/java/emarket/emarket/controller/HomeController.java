@@ -42,26 +42,29 @@ public class HomeController {
         }
         service.deleteProduct();
 
-      List<Product> products = service.listAll();
+      List<Product> products = service.sponsorProduct(true);
       List<Product> electronic = service.categoryList("electronics");
       List<Product> vehicle = service.categoryList("vehicle");
       List<Product> beauty = service.categoryList("beauty");
       List<Product> clothes= service.categoryList("clothes");
-        if (products != null) {
 
+      if (products.size() != 0) {
+          System.out.println(products);
         for (Product product : products) {
             String imagename = "data:image/png;base64," + Base64.getEncoder().encodeToString(product.getImage());
             product.setImagename(imagename);
         }
-
         modelAndView.addObject("products", products);
+        modelAndView.addObject("present", true);
+        }
+
         modelAndView.addObject("search", new Search());
         modelAndView.addObject("count", products.size());
         modelAndView.addObject("ecount", electronic.size());
         modelAndView.addObject("vcount", vehicle.size());
         modelAndView.addObject("bcount", beauty.size());
         modelAndView.addObject("ccount", clothes.size());
-        }
+
 
         if(Account.instance.currentUserName() != "anonymousUser" && Account.instance.currentUserName() != null ){
             User user = userService.findByEmail(Account.instance.currentUserName());

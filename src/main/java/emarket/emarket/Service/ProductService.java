@@ -53,6 +53,10 @@ public class ProductService {
         return repo.findProductByEnddate();
     }
 
+    public List<Product> sponsorProduct(boolean value){
+        return repo.findProductBySponsor(value);
+    }
+
     public void deleteProduct(){
         repo.deleteProduct();
     }

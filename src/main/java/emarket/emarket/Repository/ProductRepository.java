@@ -16,6 +16,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findProductBynameContaining(String word);
     List<Product> findProductByOwner(String email);
     List<Product> findProductByCategory(String type);
+    List<Product> findProductBySponsor(boolean value);
 
     @Modifying
     @Query("DELETE from Product u where u.enddate < CURRENT_DATE")

@@ -38,13 +38,15 @@ public class Product {
 
     String category;
     String description;
+    boolean sponsor;
 
     Date listeddate;
     Date enddate;
 
     public Product() {}
 
-    public Product(String name, String type, double price,byte[] data, byte[] data1,  String model, String color, int year, int millage, String size, String owner, String category, String description, Date listeddate, Date enddate) {
+    public Product(Boolean sponsor, String name, String type, double price,byte[] data, byte[] data1,  String model, String color, int year, int millage, String size, String owner, String category, String description, Date listeddate, Date enddate) {
+        this.sponsor = sponsor;
         this.name= name;
         this.type = type;
         this.price = price;

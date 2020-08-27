@@ -85,7 +85,7 @@ public class ProductController {
         try {
             byte[] bytes = file.getBytes();
             byte[] bytes1 = file1.getBytes();
-            product = new Product(name,type, price, bytes,bytes1,model,color,year,millage,size ,owner,category,description, currentDate, currentDatePlusOne);
+            product = new Product(false, name,type, price, bytes,bytes1,model,color,year,millage,size ,owner,category,description, currentDate, currentDatePlusOne);
         } catch (IOException e) {
             e.printStackTrace();
         }
