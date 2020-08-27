@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -59,6 +60,10 @@ public class ProductService {
 
     public void deleteProduct(){
         repo.deleteProduct();
+    }
+
+    public void updateSponsorFlag(boolean sponsor, Date enddate, Long id){
+        repo.updateSponsorFlag(sponsor,enddate,id);
     }
 
 }

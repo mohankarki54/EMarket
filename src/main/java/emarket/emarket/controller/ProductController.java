@@ -73,10 +73,8 @@ public class ProductController {
         // convert date to calendar
         Calendar c = Calendar.getInstance();
         c.setTime(currentDate);
-
         // manipulate date
         c.add(Calendar.DATE, 10); //same with c.add(Calendar.DAY_OF_MONTH, 1);
-
         // convert calendar to date
         Date currentDatePlusOne = c.getTime();
 

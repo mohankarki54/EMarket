@@ -49,7 +49,6 @@ public class HomeController {
       List<Product> clothes= service.categoryList("clothes");
 
       if (products.size() != 0) {
-          System.out.println(products);
         for (Product product : products) {
             String imagename = "data:image/png;base64," + Base64.getEncoder().encodeToString(product.getImage());
             product.setImagename(imagename);
@@ -125,25 +124,5 @@ public class HomeController {
         redirectAttrs.addAttribute("success","Successfully removed." );
         return "redirect:/favorite";
     }
-
-    /*@GetMapping("/resendActivation")
-    public ModelAndView resendActivation(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response){
-        User user = ;
-        ConfirmationToken confirmationToken = new ConfirmationToken(userService.findByEmail(registrationDto.getEmail()));
-        confirmationTokenRepository.save(confirmationToken);
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setTo(registrationDto.getEmail());
-        mailMessage.setSubject("Complete Registration!");
-        mailMessage.setFrom("technewsandblog@gmail.com");
-        String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
-        mailMessage.setText("To confirm your account, please click here : "
-                +url+ "/confirm-account?token="+confirmationToken.getConfirmationtoken());
-
-        emailService.sendRegisterEmail(mailMessage);
-
-        modelAndView.addObject("verify","A re-verification email has been sent to " + registrationDto.getEmail());
-        modelAndView.setViewName("redirect:/home");
-        return modelAndView;
-    }*/
 
 }

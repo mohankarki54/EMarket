@@ -25,4 +25,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT e FROM Product e WHERE e.enddate < CURRENT_DATE")
     List<Product> findProductByEnddate();
 
+    @Modifying
+    @Query("update Product u set u.sponsor = :sponsor, u.enddate = :enddate where u.id = :id")
+    void updateSponsorFlag(@Param("sponsor") boolean sponsor, @Param("enddate") Date enddate, @Param("id") Long id);
+
+
+
 }
