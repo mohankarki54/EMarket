@@ -1,7 +1,6 @@
 package emarket.emarket.controller;
 
 import emarket.emarket.DTO.CommentBean;
-import emarket.emarket.DTO.UserRegistrationDto;
 import emarket.emarket.Service.*;
 import emarket.emarket.bean.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
 import java.util.*;
 
 @Controller
@@ -28,16 +26,20 @@ public class ProductDisplayController {
     private EmailService emailService;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private TimeCalculation timeCalculation;
+    @Autowired
+    private RatingService ratingService;
 
     @GetMapping(value = {"/productInfo"})
     public ModelAndView root(@RequestParam String action, ModelAndView modelAndView) {
+        Date currentDate = new Date();
         int value = Integer.parseInt(action);
         Helper.instance.setId(value);
         CommentBean commentBean = new CommentBean();
         List<Comment> comments = commentService.find(Long.valueOf(Helper.instance.getId()));
         Product product = service.get(Helper.instance.getId());
         String category = product.getCategory();
-
         List<Product> productCategory= service.categoryList(category);
         Collections.shuffle(productCategory);
         if (product != null) {
@@ -46,9 +48,12 @@ public class ProductDisplayController {
             product.setImagename(imagename);
             product.setBackname(imagename1);
             modelAndView.addObject("product", product);
+            Date start = product.getListeddate();
+            String posted = timeCalculation.timeDifference(currentDate, start);
+            modelAndView.addObject("posted", posted);
         }
 
-        if (productCategory != null) {
+        if (productCategory.size() != 0) {
             for (Product pro : productCategory) {
                 String image = "data:image/png;base64," + Base64.getEncoder().encodeToString(pro.getImage());
                 pro.setImagename(image);
@@ -61,9 +66,14 @@ public class ProductDisplayController {
         User seller = userService.findByEmail(product.getOwner());
         modelAndView.addObject("seller",seller);
         modelAndView.addObject("commentBean", commentBean);
-
+        double seller_rating = ratingService.sellerRating(product.getOwner());
+        if(seller_rating != 0){
+            modelAndView.addObject("seller_rating","Rating: "+seller_rating+" / 5");
+        }
         Contact contact = new Contact();
         modelAndView.addObject("contact",contact);
+        Rating rating = new Rating();
+        modelAndView.addObject("rating", rating);
         modelAndView.setViewName("productView");
         return modelAndView;
     }
@@ -88,7 +98,25 @@ public class ProductDisplayController {
         Favroite favroite = new Favroite(owner, product.getId());
         favService.save(favroite);
         redirectAttrs.addAttribute("success","Added to the Favorite List" );
-        return "redirect:/productInfo";
+        return "redirect:/productInfo?action="+action;
+    }
+
+    @PostMapping(path = {"/review"})
+    public String saveReview(@RequestParam String action, RedirectAttributes redirectAttrs, @ModelAttribute("rating") Rating rating ){
+        int value = Integer.parseInt(action);
+        Product product = service.get(value);
+        String currentUser = Account.instance.currentUserName();
+        String seller = product.getOwner();
+
+        if (!currentUser.trim().equals(seller.trim())){
+            Rating rating1 = new Rating(rating.getRatingvalue(), rating.getDescription(), currentUser);
+            ratingService.save(rating1);
+            redirectAttrs.addAttribute("success","Seller's Review successfully submitted. Thank you" );
+        }
+        else{
+            redirectAttrs.addAttribute("success","Error: You cannot review your self." );
+        }
+        return "redirect:/productInfo?action="+action;
     }
 
     @PostMapping(path = {"/sendEmail"})

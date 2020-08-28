@@ -6,7 +6,6 @@ import emarket.emarket.Repository.ConfirmationTokenRepository;
 import emarket.emarket.Service.*;
 import emarket.emarket.bean.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -39,12 +38,26 @@ public class HomeController {
     @GetMapping(value = {"/","/home"})
     public ModelAndView root(ModelAndView modelAndView) {
         Date currentDate = new Date();
+        if(Account.instance.currentUserName() != "anonymousUser" && Account.instance.currentUserName() != null ){
+            User user = userService.findByEmail(Account.instance.currentUserName());
+            boolean add = user.isAddress();
+            if(!add){
+                modelAndView.addObject("address", true);
+            }
+            List<Product> userProduct = service.listbyOwner(Account.instance.currentUserName());
+            if(userProduct.size() != 0){
+                modelAndView.addObject("promoteFlag", true);
+            }
+        }
+
+
         List<Product> allDateProduct = service.findProductByEnddate();
 
         for(int i =0; i< allDateProduct.size(); i++){
             favService.deleteFavProduct(allDateProduct.get(i).getId());
         }
         service.deleteProduct();
+
 
       List<Product> products = service.sponsorProduct(true);
       List<Product> electronic = service.categoryList("electronics");
@@ -94,13 +107,7 @@ public class HomeController {
         modelAndView.addObject("esateDate", estateDate);
         modelAndView.addObject("furnitureDate", furnitureDate);
 
-        if(Account.instance.currentUserName() != "anonymousUser" && Account.instance.currentUserName() != null ){
-            User user = userService.findByEmail(Account.instance.currentUserName());
-            boolean add = user.isAddress();
-            if(!add){
-                modelAndView.addObject("address", true);
-            }
-        }
+
 
         modelAndView.setViewName("home");
         return modelAndView;

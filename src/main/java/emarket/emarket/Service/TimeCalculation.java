@@ -1,4 +1,4 @@
-package emarket.emarket.bean;
+package emarket.emarket.Service;
 
 import org.springframework.stereotype.Service;
 
@@ -17,29 +17,29 @@ public class TimeCalculation {
 
             if (diffDays != 0) {
                 if (diffDays != 1) {
-                    value = "Last updated " + String.valueOf(diffDays) + " days";
+                    value = "Last updated " + String.valueOf(diffDays) + " days ago";
                 } else {
-                    value = "Last updated " + String.valueOf(diffDays) + " day";
+                    value = "Last updated " + String.valueOf(diffDays) + " day ago";
                 }
             } else if (diffHours != 0) {
                 if (diffHours != 1) {
-                    value = "Last updated " + String.valueOf(diffHours) + " hours";
+                    value = "Last updated " + String.valueOf(diffHours) + " hours ago";
                 } else {
-                    value = "Last updated " + String.valueOf(diffHours) + " hour";
+                    value = "Last updated " + String.valueOf(diffHours) + " hour ago";
                 }
 
             } else if (diffMinutes != 0) {
                 if (diffMinutes != 1) {
-                    value = "Last updated " + String.valueOf(diffMinutes) + " minutes";
+                    value = "Last updated " + String.valueOf(diffMinutes) + " minutes ago";
                 } else {
-                    value = "Last updated " + String.valueOf(diffMinutes) + " minute";
+                    value = "Last updated " + String.valueOf(diffMinutes) + " minute ago";
                 }
 
             } else if (diffSeconds != 0) {
                 if (diffSeconds != 1) {
-                    value = "Last updated " + String.valueOf(diffSeconds) + " seconds";
+                    value = "Last updated " + String.valueOf(diffSeconds) + " seconds ago";
                 } else {
-                    value = "Last updated " + String.valueOf(diffSeconds) + " second";
+                    value = "Last updated " + String.valueOf(diffSeconds) + " second ago";
                 }
             }
         }

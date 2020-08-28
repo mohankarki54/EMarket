@@ -76,10 +76,10 @@
             <div class="flip-box">
                 <div class="flip-box-inner">
                     <div class="flip-box-front">
-                        <img th:src="${product.imagename}" class="card-img-top" alt="..." height="300" >
+                        <img th:src="${product.imagename}" class="card-img-top" alt="..." height="250" >
                     </div>
                     <div class="flip-box-back">
-                        <img th:src="${product.backname}" class="card-img-top" alt="..." height="300" >
+                        <img th:src="${product.backname}" class="card-img-top" alt="..." height="250" >
                     </div>
                 </div>
             </div>
@@ -100,7 +100,7 @@
     </div>
     <div class="card" style="width: 20rem;">
         <div class="card-body">
-            <h5 class="card-title">Posted on: <span th:text="${product.listeddate}"></span></h5>
+            <h5 class="card-title"><span th:text="${posted}"></span></h5>
             <h5 class="card-title">Description</h5>
             <p class="card-text" th:text="${product.description}"></p>
         </div>
@@ -116,9 +116,9 @@
                     <a th:href="'/user_current_listed_product/' + ${product.id}"><span class="card-text" th:text="${seller.firstname}"></span></a>
                 </div>
 
-               <!-- <div>
-                    <label>Email address: <span class="card-text" th:text="${seller.email}"></span></label>
-                </div> -->
+               <div>
+                    <label><span class="card-text" th:text="${seller_rating}"></span></label>
+                </div>
 
 
                 <div class="container">
@@ -146,6 +146,53 @@
                                             <textarea th:field="*{message}" placeholder="Some text message here" class="pb-cmnt-textarea" required="required"></textarea>
                                         </div>
                                         <button class="btn btn-primary pull-right" type="submit" th:name="action" th:value="${product.id}">Contact</button>
+                                    </div>
+                                </form>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+
+                <div class="container">
+                    <!-- Trigger the modal with a button -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reportModal">Rate Seller</button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="reportModal" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Rate Seller</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <form class="form-inline" method="post" th:action="@{/review}" th:object="${rating}">
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <label> Rate : </label>
+                                            <select th:field="*{ratingvalue}">
+                                                <option th:value="${5}">Select value</option>
+                                                <option th:value="${1}" th:text="${1}"></option>
+                                                <option th:value="${2}" th:text="${2}"></option>
+                                                <option th:value="${3}" th:text="${3}"></option>
+                                                <option th:value="${4}" th:text="${4}"></option>
+                                                <option th:value="${5}" th:text="${5}"></option>
+                                            </select>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <label> Feedback </label>
+                                            <textarea th:field="*{description}" placeholder="Some text message here" class="pb-cmnt-textarea" required="required"></textarea>
+                                        </div>
+                                        <button class="btn btn-primary pull-right" type="submit" th:name="action" th:value="${product.id}">Submit Review</button>
                                     </div>
                                 </form>
                                 <div class="modal-footer">
