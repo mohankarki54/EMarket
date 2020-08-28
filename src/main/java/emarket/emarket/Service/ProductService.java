@@ -66,4 +66,8 @@ public class ProductService {
         repo.updateSponsorFlag(sponsor,enddate,id);
     }
 
+    public Date latestDate(String category){
+        return repo.latestDate(category);
+    }
+
 }

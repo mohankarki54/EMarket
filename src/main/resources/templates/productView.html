@@ -76,10 +76,10 @@
             <div class="flip-box">
                 <div class="flip-box-inner">
                     <div class="flip-box-front">
-                        <img th:src="${product.imagename}" class="card-img-top" alt="..." >
+                        <img th:src="${product.imagename}" class="card-img-top" alt="..." height="300" >
                     </div>
                     <div class="flip-box-back">
-                        <img th:src="${product.backname}" class="card-img-top" alt="..." >
+                        <img th:src="${product.backname}" class="card-img-top" alt="..." height="300" >
                     </div>
                 </div>
             </div>
@@ -98,8 +98,9 @@
             </div>
         </div>
     </div>
-    <div class="card" style="width: 18rem;">
+    <div class="card" style="width: 20rem;">
         <div class="card-body">
+            <h5 class="card-title">Posted on: <span th:text="${product.listeddate}"></span></h5>
             <h5 class="card-title">Description</h5>
             <p class="card-text" th:text="${product.description}"></p>
         </div>

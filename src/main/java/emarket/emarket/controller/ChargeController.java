@@ -30,7 +30,7 @@ public class ChargeController {
     @PostMapping("/charge")
     public String charge(ChargeRequest chargeRequest, RedirectAttributes model)
             throws StripeException, AuthenticationException {
-        chargeRequest.setDescription("Example charge");
+        chargeRequest.setDescription("Product promotion fee");
         chargeRequest.setCurrency(ChargeRequest.Currency.USD);
         Long productid = chargeRequest.getProductid();
         Charge charge = paymentsService.charge(chargeRequest);
@@ -45,7 +45,7 @@ public class ChargeController {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         // manipulate date
-        c.add(Calendar.DATE, 10); //same with c.add(Calendar.DAY_OF_MONTH, 1);
+        c.add(Calendar.DATE, 15); //same with c.add(Calendar.DAY_OF_MONTH, 1);
         // convert calendar to date
         Date newDate = c.getTime();
 

@@ -1,6 +1,7 @@
 package emarket.emarket.Repository;
 
 import emarket.emarket.bean.Product;
+import org.hibernate.sql.Select;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -28,6 +29,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Modifying
     @Query("update Product u set u.sponsor = :sponsor, u.enddate = :enddate where u.id = :id")
     void updateSponsorFlag(@Param("sponsor") boolean sponsor, @Param("enddate") Date enddate, @Param("id") Long id);
+
+    @Query("select max(u.listeddate) from Product u where u.category = :category")
+    Date latestDate(@Param("category") String category);
 
 
 

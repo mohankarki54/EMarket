@@ -25,15 +25,18 @@ public class AccController {
     private ProductService service;
 
     @GetMapping("/listedproduct")
-    public String viewHomePage(Model model) {
+    public String viewHomePage(Model model, RedirectAttributes redirectAttrs) {
         List<Product> listProducts = service.listbyOwner(Account.instance.currentUserName());
-        if (listProducts!= null) {
+        if (listProducts.size() != 0) {
 
             for (Product product : listProducts) {
                 String imagename = "data:image/png;base64," + Base64.getEncoder().encodeToString(product.getImage());
                 product.setImagename(imagename);
             }
             model.addAttribute("listProducts", listProducts);
+        }
+        else{
+            redirectAttrs.addAttribute("success","You have not listed any product." );
         }
         return "listedproduct";
     }

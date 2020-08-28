@@ -99,6 +99,8 @@
         <th scope="col">Image</th>
         <th scope="col">Name</th>
         <th scope="col">Price</th>
+        <th scope="">Listed</th>
+        <th scope="">Expiry</th>
         <th scope="col">Status</th>
         <th scope="col">Actions</th>
     </tr>
@@ -108,9 +110,10 @@
         <td><img th:src="${product.imagename}"  alt="..." width="100" height="100"></td>
         <td th:text="${product.name}">Name</td>
         <td th:text="${product.price}">Price</td>
-
+        <td th:text="${product.listeddate}">Listed</td>
+        <td th:text="${product.enddate}">Expiry</td>
         <td th:if="${!product.sponsor}">
-            <a th:href="'/feature/' + ${product.id}">Feature Now</a>
+            <a th:href="'/feature/' + ${product.id}">Promote</a>
         </td>
 
         <td th:if="${product.sponsor}">

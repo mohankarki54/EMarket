@@ -238,19 +238,19 @@
                 </form>
             </div>
             <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
+                <small class="text-muted"><span th:text="${electroDate}"></span></small>
             </div>
         </div>
         <div class="card">
             <img class="card-img-top" src="https://img.icons8.com/color/48/000000/car.png" alt="Card image cap" width="100" height="150">
             <div class="card-body">
-                <h5 class="card-title">Vechicles</h5>
+                <h5 class="card-title">Vehicles</h5>
                 <form method="get" th:action="@{/category}">
                     <button type="submit" class="btn btn-success"  th:name="category" th:value="${'Vehicle'}">Show <span class="badge"><h6 th:text="${vcount}"></h6></span></button>
                 </form>
             </div>
             <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
+                <small class="text-muted"><span th:text="${vehicleDate}"></span>o</small>
             </div>
         </div>
         <div class="card">
@@ -262,7 +262,7 @@
                 </form>
             </div>
             <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
+                <small class="text-muted"><span th:text="${beautyDate}"></span>o</small>
             </div>
         </div>
     </div>
@@ -279,7 +279,7 @@
                 </form>
             </div>
             <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
+                <small class="text-muted"><span th:text="${clothesDate}"></span></small>
             </div>
         </div>
         <div class="card">
@@ -291,7 +291,7 @@
                 </form>
             </div>
             <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
+                <small class="text-muted"><span th:text="${esateDate}"></span></small>
             </div>
         </div>
         <div class="card">
@@ -303,7 +303,7 @@
                 </form>
             </div>
             <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
+                <small class="text-muted"><span th:text="${furnitureDate}"></span></small>
             </div>
         </div>
     </div>

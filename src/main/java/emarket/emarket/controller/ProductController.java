@@ -66,10 +66,7 @@ public class ProductController {
 
         //Clothes
         String size = productRegistrationDTO.getSize();
-
         Date currentDate = new Date();
-        System.out.println(dateFormat.format(currentDate));
-
         // convert date to calendar
         Calendar c = Calendar.getInstance();
         c.setTime(currentDate);
