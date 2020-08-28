@@ -10,10 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -60,6 +58,7 @@ public class HomeController {
 
 
       List<Product> products = service.sponsorProduct(true);
+      Collections.shuffle(products);
       List<Product> electronic = service.categoryList("electronics");
       List<Product> vehicle = service.categoryList("vehicle");
       List<Product> beauty = service.categoryList("beauty");
