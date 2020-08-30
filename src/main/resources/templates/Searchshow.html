@@ -5,6 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="/css/home.css" type="text/css" media="screen">
     <link rel="stylesheet" href="/css/scrollable.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="/css/scrollable.css" type="text/css" media="screen">
+
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
@@ -50,6 +52,10 @@
                             </form>
                         </div>
                     </div>
+                </li>
+
+                <li class="nav-item" th:if="${promoteFlag}">
+                    <a class="nav-link" href="listedproduct">Promote Ad</a>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -120,6 +126,7 @@
     </div>
 </nav>
 
+
 <div class="container-fluid ">
     <div class="card text-center col-12">
         <div class="card-header">
@@ -127,20 +134,31 @@
         </div>
         <div class="card-body">
             <h5 class="card-title">Search from over the thousands of classifies Ads.</h5>
-            <h6 class="card-title">
-                <form th:action="@{/productdisplay}" method="get" th:object="${search}">
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="card-deck">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><form th:action="@{/productdisplay}" method="get" th:object="${search}">
                     <input class="form-control mr-sm-2" type="search" placeholder="Keywords..." th:field="*{word}" required >
                     <br>
                     <button class="btn btn-success" type="submit">Search</button>
-                </form>
-            </h6>
-            <h6 class="card-title">
-                <form th:action="@{/zipsearch}" method="get" th:object="${search}">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Enter your zip code" th:field="*{word}" required >
-                    <br>
-                    <button class="btn btn-success" type="submit">Search</button>
-                </form>
-            </h6>
+                </form></h5>
+            </div>
+
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <form th:action="@{/zipsearch}" method="get" th:object="${search}">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Enter your zip code" th:field="*{word}" required >
+                        <div class="text-center"><h3 style="color:#ff0000;"><span th:text=" ${#request.getParameter('zip')}"></span></h3></div>
+                        <br>
+                        <button class="btn btn-success" type="submit">Search</button>
+                    </form></h5>
+            </div>
         </div>
     </div>
 </div>
@@ -152,7 +170,7 @@
 <br>
 
 <div class="card" style="width: 18rem;" th:each="product : ${products}">
-    <img th:src="${product.imagename}" class="card-img-top" alt="...">
+    <img th:src="${product.imagename}" class="card-img-top" alt="..." width="250" height="250">
     <div class="card-body">
         <h5 class="card-title"><h5 th:text="${product.name}"></h5></h5>
         <p class="card-text"><p th:text="'Price: $'+${product.price}"></p></p>

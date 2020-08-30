@@ -1,31 +1,20 @@
 package emarket.emarket.controller;
 
 import emarket.emarket.DTO.ProductRegistrationDTO;
-import emarket.emarket.Repository.ProductRepository;
 import emarket.emarket.Service.ProductService;
 import emarket.emarket.bean.Account;
 import emarket.emarket.bean.Helper;
 import emarket.emarket.bean.Product;
-import emarket.emarket.bean.Search;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.sql.rowset.serial.SerialException;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.sql.Blob;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.text.DateFormat;
-import java.util.List;
 
 @Controller
 public class ProductController {
@@ -74,7 +63,6 @@ public class ProductController {
         c.add(Calendar.DATE, 10); //same with c.add(Calendar.DAY_OF_MONTH, 1);
         // convert calendar to date
         Date currentDatePlusOne = c.getTime();
-
         Product product = new Product();
 
         try {
@@ -82,6 +70,8 @@ public class ProductController {
             byte[] bytes1 = file1.getBytes();
             product = new Product(false, name,type, price, bytes,bytes1,model,color,year,millage,size ,owner,category,description, currentDate, currentDatePlusOne);
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

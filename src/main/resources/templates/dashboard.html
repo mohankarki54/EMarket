@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <link rel="stylesheet" href="/css/nav.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="/css/scrollable.css" type="text/css" media="screen">
+
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
@@ -48,6 +50,10 @@
                             </form>
                         </div>
                     </div>
+                </li>
+
+                <li class="nav-item" th:if="${promoteFlag}">
+                    <a class="nav-link" href="listedproduct">Promote Ad</a>
                 </li>
 
                 <li class="nav-item dropdown">

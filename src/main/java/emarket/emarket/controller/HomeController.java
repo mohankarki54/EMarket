@@ -15,6 +15,8 @@ import java.util.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 @Controller
 public class HomeController {
@@ -106,7 +108,8 @@ public class HomeController {
         modelAndView.addObject("esateDate", estateDate);
         modelAndView.addObject("furnitureDate", furnitureDate);
 
-
+        Contact contact = new Contact();
+        modelAndView.addObject("contact", contact);
 
         modelAndView.setViewName("home");
         return modelAndView;
@@ -122,7 +125,6 @@ public class HomeController {
         redirectAttrs.addAttribute("success","Added to the Favorite List" );
         return "redirect:/";
     }
-
 
     @GetMapping("/login")
     public String login(Model model) {
@@ -158,6 +160,25 @@ public class HomeController {
         favService.delete(id);
         redirectAttrs.addAttribute("success","Successfully removed." );
         return "redirect:/favorite";
+    }
+
+    @PostMapping(path = {"/sendEmailtoAdmin"})
+    public String sendEmailToAdmin(RedirectAttributes redirectAttrs, @ModelAttribute("contact") Contact contact, HttpServletRequest request ){
+        redirectAttrs.addAttribute("contact","Thank you for reaching the us. One of the associate will soon contact you as soon as possible." );
+        Mail mail = new Mail();
+        mail.setFrom("technewsandblog@gmail.com");
+        mail.setTo("technewsandblog@gmail.com");
+        mail.setSubject("User contact");
+        Map<String, Object> model = new HashMap<>();
+        model.put("user", "Hello, ");
+        model.put("signature", "https://emarket.com");
+        String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+        model.put("customer_email", "Customer Email: "+contact.getEmail());
+        model.put("phone", "Phone number: " + contact.getPhonenum());
+        model.put("msg", "Message: "+contact.getMessage());
+        mail.setModel(model);
+        emailService.sendcontactEmailAdmin(mail);
+        return "redirect:/";
     }
 
 }
