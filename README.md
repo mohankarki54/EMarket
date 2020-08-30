@@ -31,3 +31,7 @@ To integrate and run this project, please follow the following steps. [Note: Thi
 9) Run
 10) Go to http://localhost:8080
 
+
+-- Testing Card
+https://stripe.com/docs/testing#cards
+
