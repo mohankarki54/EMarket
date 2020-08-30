@@ -119,6 +119,25 @@ public class ProductDisplayController {
         return "redirect:/productInfo?action="+action;
     }
 
+    @PostMapping(path = {"/report"})
+    public String sendReport(@RequestParam String action, RedirectAttributes redirectAttrs, @ModelAttribute("contact") Contact contact, HttpServletRequest request ){
+        redirectAttrs.addAttribute("success","Thank you for reaching the us. We value your feedback and look forward to work it." );
+        Product product = service.get(Integer.parseInt(action));
+        Mail mail = new Mail();
+        mail.setFrom("technewsandblog@gmail.com");
+        mail.setTo("technewsandblog@gmail.com");
+        mail.setSubject("Report from User");
+        Map<String, Object> model = new HashMap<>();
+        model.put("user", "Hello, ");
+        model.put("signature", "https://emarket.com");
+        model.put("customer_email", "Customer Email: "+Account.instance.currentUserName());
+        model.put("phone","Seller email: " + product.getOwner() + " , Ad id: "+ action);
+        model.put("msg", "Message: "+contact.getMessage());
+        mail.setModel(model);
+        emailService.sendcontactEmailAdmin(mail);
+        return "redirect:/productInfo?action="+action;
+    }
+
     @PostMapping(path = {"/sendEmail"})
     public String sendcontactEmail(@RequestParam String action, RedirectAttributes redirectAttrs, @ModelAttribute("contact") Contact contact, HttpServletRequest request ){
         redirectAttrs.addAttribute("success","Your message has been successfully sent." );
@@ -164,9 +183,54 @@ public class ProductDisplayController {
 
             modelAndView.addObject("products", products);
         }
+        modelAndView.addObject("product", product);
+        Contact contact = new Contact();
+        modelAndView.addObject("contact",contact);
+        Rating rating = new Rating();
+        modelAndView.addObject("rating", rating);
         modelAndView.addObject("message", "All active Ads posted by " + user.getFirstname() + user.getLastname());
         modelAndView.setViewName("user_current_listed");
         return modelAndView;
     }
+
+    @PostMapping(path = {"/review1"})
+    public String saveReview1(@RequestParam String action, RedirectAttributes redirectAttrs, @ModelAttribute("rating") Rating rating ){
+        int value = Integer.parseInt(action);
+        Product product = service.get(value);
+        String currentUser = Account.instance.currentUserName();
+        String seller = product.getOwner();
+
+        if (!currentUser.trim().equals(seller.trim())){
+            Rating rating1 = new Rating(rating.getRatingvalue(), rating.getDescription(), currentUser);
+            ratingService.save(rating1);
+            redirectAttrs.addAttribute("success","Seller's Review successfully submitted. Thank you" );
+        }
+        else{
+            redirectAttrs.addAttribute("success","Error: You cannot review your self." );
+        }
+        return "redirect:/user_current_listed_product/"+action;
+    }
+
+    @PostMapping(path = {"/report1"})
+    public String sendReport1(@RequestParam String action, RedirectAttributes redirectAttrs, @ModelAttribute("contact") Contact contact, HttpServletRequest request ){
+        redirectAttrs.addAttribute("success","Thank you for reaching the us. We value your feedback and look forward to work it." );
+        Product product = service.get(Integer.parseInt(action));
+        Mail mail = new Mail();
+        mail.setFrom("technewsandblog@gmail.com");
+        mail.setTo("technewsandblog@gmail.com");
+        mail.setSubject("Report from User");
+        Map<String, Object> model = new HashMap<>();
+        model.put("user", "Hello, ");
+        model.put("signature", "https://emarket.com");
+        model.put("customer_email", "Customer Email: "+Account.instance.currentUserName());
+        model.put("phone","Seller email: " + product.getOwner() + " , Ad id: "+ action);
+        model.put("msg", "Message: "+contact.getMessage());
+        mail.setModel(model);
+        emailService.sendcontactEmailAdmin(mail);
+        return "redirect:/user_current_listed_product/"+action;
+    }
+
+
+
 
 }

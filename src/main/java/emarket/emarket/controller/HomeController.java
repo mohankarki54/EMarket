@@ -178,7 +178,7 @@ public class HomeController {
         model.put("msg", "Message: "+contact.getMessage());
         mail.setModel(model);
         emailService.sendcontactEmailAdmin(mail);
-        return "redirect:/";
+        return "redirect:/home";
     }
 
 }
