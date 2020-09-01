@@ -26,32 +26,17 @@
                         <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Post an Ad
                         </button>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <div class="dropdown-item">
-                                <form method="get" th:action="@{/product}">
-                                    <button type="submit" class="btn btn-light"  th:name="category" th:value="${'electronics'}">Electronics </button>
-                                </form>
-                                </div>
-                                <div class="dropdown-divider"></div>
-                                <div class="dropdown-item">
-                                    <form method="get" th:action="@{/product}">
-                                        <button type="submit" class="btn btn-light"  th:name="category" th:value="${'beauty'}">Beauty</button>
-                                    </form>
-                                </div>
-                                <div class="dropdown-divider"></div>
-                                <div class="dropdown-item">
-                                    <form method="get" th:action="@{/product}">
-                                        <button type="submit" class="btn btn-light"  th:name="category" th:value="${'vehicle'}">vehicle </button>
-                                    </form>
-                                </div>
-                                <div class="dropdown-divider"></div>
-                                <div class="dropdown-item">
-                                    <form method="get" th:action="@{/product}">
-                                        <button type="submit" class="btn btn-light"  th:name="category" th:value="${'clothes'}">clothes </button>
-                                    </form>
-                                </div>
-                            </div>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="/product/electronics">Electronics</a>
+                                    <div class="dropdown-divider"></div>
+                                     <a class="dropdown-item" href="/product/beauty">Beauty</a>
+                                    <div class="dropdown-divider"></div>
+                                     <a class="dropdown-item" href="/product/vehicle">Cars and Vehicle</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="/product/clothes">Clothes</a>
+                     </div>
                     </li>
+
 
                     <li class="nav-item" th:if="${promoteFlag}">
                         <a class="nav-link" href="listedproduct">Promote Ad</a>
@@ -62,29 +47,13 @@
                             Category
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <div class="dropdown-item">
-                                <form method="get" th:action="@{/category}">
-                                    <button type="submit" class="btn btn-light"  th:name="category" th:value="${'electronics'}">Electronics </button>
-                                </form>
-                            </div>
-                            <div class="dropdown-divider"></div>
-                            <div class="dropdown-item">
-                                <form method="get" th:action="@{/category}">
-                                    <button type="submit" class="btn btn-light"  th:name="category" th:value="${'beauty'}">Beauty</button>
-                                </form>
-                            </div>
-                            <div class="dropdown-divider"></div>
-                            <div class="dropdown-item">
-                                <form method="get" th:action="@{/category}">
-                                    <button type="submit" class="btn btn-light"  th:name="category" th:value="${'vehicle'}">vehicle </button>
-                                </form>
-                            </div>
-                            <div class="dropdown-divider"></div>
-                            <div class="dropdown-item">
-                                <form method="get" th:action="@{/category}">
-                                    <button type="submit" class="btn btn-light"  th:name="category" th:value="${'clothes'}">clothes </button>
-                                </form>
-                            </div>
+                                <a class="dropdown-item" href="/category/electronics">Electronics</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/category/beauty">Beauty</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/category/vehicle">Cars and Vehicle</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/category/clothes">Clothes</a>
                         </div>
                     </li>
 
@@ -361,11 +330,143 @@
         </div>
     </div>
 
-    <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+   <!-- <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
         <div class="container text-center">
             <small>Copyright &copy; EMarket</small>
         </div>
+    </footer>-->
+
+    <!-- Footer -->
+    <footer class="page-footer font-small stylish-color-dark pt-4 y-4 bg-dark text-white-50">
+
+        <!-- Footer Links -->
+        <div class="container text-center text-md-left">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-4 mx-auto">
+
+                    <!-- Content -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">EMarket</h5>
+                    <p>It is the classified Ads where users can post their AD for free.</p>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none">
+
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+
+                    <!-- Links -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Category</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="/category/electronics">Electronics</a>
+                        </li>
+                        <li>
+                            <a href="/category/beauty">Beauty</a>
+                        </li>
+                        <li>
+                            <a href="/category/vehicle">Cars and Vehicle</a>
+                        </li>
+                        <li>
+                            <a href="/category/clothes">Clothes</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none">
+
+                <!-- Grid column -->
+                <!--<div class="col-md-2 mx-auto">-->
+
+                    <!-- Links
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
+                    </ul>-->
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none">
+
+                <!-- Grid column
+                <div class="col-md-2 mx-auto">
+
+                   Links
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
+                    </ul>
+
+                </div>-->
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+        <!-- Footer Links -->
+
+        <hr>
+
+        <div sec:authorize="!isAuthenticated()">
+        <!-- Call to action -->
+        <ul class="list-unstyled list-inline text-center py-2">
+
+            <li class="list-inline-item">
+                <h5 class="mb-1">Register for free</h5>
+            </li>
+            <li class="list-inline-item">
+                <a href="/signup" class="btn btn-danger btn-rounded">Sign up!</a>
+            </li>
+
+        </ul>
+        </div>
+
+        <!-- Call to action -->
+
+        <hr>
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+            <a href="/home"> EMarket </a>
+        </div>
+        <!-- Copyright -->
+
     </footer>
+    <!-- Footer -->
 
     <script type="text/javascript" th:src="@{/javascript/Home.js}"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -31,8 +31,8 @@ public class ProductController {
     }
 
 
-    @GetMapping("/product")
-    public String product(Model model, @RequestParam String category){
+    @GetMapping("/product/{value}")
+    public String product(Model model, @PathVariable(name = "value") String category){
         Helper.instance.setCategory(category);
         model.addAttribute("category",category);
         return  "Productform";
