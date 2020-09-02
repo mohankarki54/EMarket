@@ -3,12 +3,13 @@
 <head>
     <title>EMarket</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="/css/home.css" type="text/css" media="screen">
-    <link rel="stylesheet" href="/css/scrollable.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="/css/floating.css" type="text/css" media="screen">
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    </head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
@@ -134,8 +135,6 @@
     <div class="text-center"><h3 style="color:#ffaa00;"><span th:text=" ${#request.getParameter('success')}"></span></h3></div>
     <div class="text-center"><h4 style="color:#ff8c00;"><span th:text=" ${#request.getParameter('contact')}"></span></h4></div>
 
-    <div class="text-center"><h3></span></h3></div>
-
     <div class="container-fluid" th:if="${#request.getParameter('var')}">
     <div class="card text-center col-12" >
         <div class="card-header">
@@ -164,10 +163,138 @@
         </div>
         </div>
     </div>
-    <br>
 
-    <div class="container-fluid" th:if="${present}">
-        <h3>Featured Items</h3>
+
+   <!-- <section class="pt-5 pb-5" th:if="${present}">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <h3 class="mb-3">Featured Ads </h3>
+                </div>
+                <div class="col-6 text-right">
+                    <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+                        <i class="fa fa-arrow-left"></i>
+                    </a>
+                    <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
+                        <i class="fa fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="col-12">
+                    <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+
+                        <div class="carousel-inner" th:each="product : ${products}">
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3" >
+                                        <div class="card">
+                                            <img class="img-fluid" alt="100%x280" th:src="${product.imagename}" th:width="200" th:height="200">
+                                            <div class="card-body">
+                                                <h4 class="card-title">Special title treatment</h4>
+                                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card">
+                                            <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=42b2d9ae6feb9c4ff98b9133addfb698">
+                                            <div class="card-body">
+                                                <h4 class="card-title">Special title treatment</h4>
+                                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card">
+                                            <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3d2e8a2039c06dd26db977fe6ac6186a">
+                                            <div class="card-body">
+                                                <h4 class="card-title">Special title treatment</h4>
+                                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card">
+                                            <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532771098148-525cefe10c23?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3f317c1f7a16116dec454fbc267dd8e4">
+                                            <div class="card-body">
+                                                <h4 class="card-title">Special title treatment</h4>
+                                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card">
+                                            <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532715088550-62f09305f765?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=ebadb044b374504ef8e81bdec4d0e840">
+                                            <div class="card-body">
+                                                <h4 class="card-title">Special title treatment</h4>
+                                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card">
+                                            <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=0754ab085804ae8a3b562548e6b4aa2e">
+                                            <div class="card-body">
+                                                <h4 class="card-title">Special title treatment</h4>
+                                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card">
+                                            <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=ee8417f0ea2a50d53a12665820b54e23">
+                                            <div class="card-body">
+                                                <h4 class="card-title">Special title treatment</h4>
+                                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card">
+                                            <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532777946373-b6783242f211?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=8ac55cf3a68785643998730839663129">
+                                            <div class="card-body">
+                                                <h4 class="card-title">Special title treatment</h4>
+                                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card">
+                                            <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532763303805-529d595877c5?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=5ee4fd5d19b40f93eadb21871757eda6">
+                                            <div class="card-body">
+                                                <h4 class="card-title">Special title treatment</h4>
+                                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>-->
+   <!-- <div class="container-fluid" th:if="${present}">
+        <h4 class="text-center">Featured Items</h4>
         <div class="scrolling-wrapper row flex-row flex-nowrap ">
             <div class="col-3" th:each="product : ${products}">
                 <div class="card card-block">
@@ -193,13 +320,127 @@
                 </div>
             </div>
         </div>
-    </div>
-    <br>
+    </div>-->
 
-    <br>
-    <div container="container">
+    <section class="pt-5 pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <h3 class="mb-3">Featured Ads</h3>
+                </div>
+                <div class="col-6 text-right">
+                    <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+                        <i class="fa fa-arrow-left"></i>
+                    </a>
+                    <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
+                        <i class="fa fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="col-12">
+                    <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3" th:if="${#lists.size(products) > 0}">
+                                        <div class="card">
+                                            <img class="card-img-top" alt="100%x280" th:src="${product1.imagename}" width="200" height="200">
+                                            <div class="card-body">
+                                                <h4 class="card-title"><span th:text="${product1.name}"></span></h4>
+                                                <p class="card-text"><span th:text="'Price: $' + ${product1.price}"></span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3" th:if="${#lists.size(products) > 1}">
+                                        <div class="card">
+                                            <img class="card-img-top" alt="100%x280" th:src="${product2.imagename}" width="200" height="200">
+                                            <div class="card-body">
+                                                <h4 class="card-title"><span th:text="${product2.name}"></span></h4>
+                                                <p class="card-text"><span th:text="'Price: $' + ${product2.price}"></span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3" th:if="${#lists.size(products) > 2}">
+                                        <div class="card">
+                                            <img class="card-img-top" alt="100%x280" th:src="${product3.imagename}" width="200" height="200">
+                                            <div class="card-body">
+                                                <h4 class="card-title"><span th:text="${product3.name}"></span></h4>
+                                                <p class="card-text"><span th:text="'Price: $' + ${product3.price}"></span></p>
+                                            </div>
+                                        </div>
+                                    </div>
 
-    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3" th:if="${#lists.size(products) > 3}">
+                                        <div class="card">
+                                            <img class="card-img-top" alt="100%x280" th:src="${product4.imagename}" width="200" height="200">
+                                            <div class="card-body">
+                                                <h4 class="card-title"><span th:text="${product4.name}"></span></h4>
+                                                <p class="card-text"><span th:text="'Price: $' + ${product4.price}"></span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3" th:if="${#lists.size(products) > 4}">
+                                        <div class="card">
+                                            <img class="card-img-topd" alt="100%x280" th:src="${product5.imagename}" width="200" height="200">
+                                            <div class="card-body">
+                                                <h4 class="card-title"><span th:text="${product5.name}"></span></h4>
+                                                <p class="card-text"><span th:text="'Price: $' + ${product5.price}"></span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3" th:if="${#lists.size(products) > 5}">
+                                        <div class="card">
+                                            <img class="card-img-top" alt="100%x280" th:src="${product6.imagename}" width="200" height="200">
+                                            <div class="card-body">
+                                                <h4 class="card-title"><span th:text="${product6.name}"></span></h4>
+                                                <p class="card-text"><span th:text="'Price: $' + ${product6.price}"></span></p>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="carousel-item">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card">
+                                            <img class="card-img-top" alt="100%x280" th:src="${product7.imagename}" width="200" height="200">
+                                            <div class="card-body">
+                                                <h4 class="card-title"><span th:text="${product7.name}"></span></h4>
+                                                <p class="card-text"><span th:text="'Price: $' + ${product7.price}"></span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3" >
+                                        <div class="card">
+                                            <img class="card-img-top" alt="100%x280" th:src="${product8.imagename}" width="200" height="200">
+                                            <div class="card-body">
+                                                <h4 class="card-title"><span th:text="${product8.name}"></span></h4>
+                                                <p class="card-text"><span th:text="'Price: $' + ${product8.price}"></span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card">
+                                            <img class="card-img-top" alt="100%x280" th:src="${product9.imagename}" width="200" height="200">
+                                            <div class="card-body">
+                                                <h4 class="card-title"><span th:text="${product9.name}"></span></h4>
+                                                <p class="card-text"><span th:text="'Price: $' + ${product9.price}"></span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <div class="container">
         <h3> Items</h3>
@@ -283,6 +524,7 @@
         </div>
     </div>
     </div>
+
     <br>
     <div id="mybutton">
         <!-- Button trigger modal -->
@@ -290,7 +532,6 @@
             Contact us
         </button>
     </div>
-
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -468,7 +709,6 @@
     </footer>
     <!-- Footer -->
 
-    <script type="text/javascript" th:src="@{/javascript/Home.js}"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

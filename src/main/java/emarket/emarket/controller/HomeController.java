@@ -89,7 +89,11 @@ public class HomeController {
         }
         modelAndView.addObject("products", products);
         modelAndView.addObject("present", true);
-        }
+      }
+
+      for(int i = 1; i <= products.size(); i++){
+          modelAndView.addObject("product" + i, products.get(i-1));
+      }
 
         modelAndView.addObject("search", new Search());
         modelAndView.addObject("count", products.size());
@@ -114,6 +118,7 @@ public class HomeController {
         modelAndView.setViewName("home");
         return modelAndView;
     }
+
 
     @PostMapping(path = {"/addFav"})
     public String addFav(@RequestParam String action, RedirectAttributes redirectAttrs ){
