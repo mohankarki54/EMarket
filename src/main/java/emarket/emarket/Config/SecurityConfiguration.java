@@ -42,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers(
-                "/signup**","/home**","/about**","/forgot-password**","/reset-password**",
+                "/signup**","/favicon.ico","/home**","/about**","/forgot-password**","/reset-password**",
                 "/confirm-account**","/error**","/js/**","/css/**","/images/**","/productInfo**","/category**","/productdisplay**","/sendEmailtoAdmin**").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -60,7 +60,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http
                 .csrf().disable();
-
 
     }
 

@@ -10,6 +10,7 @@ public class Contact {
     String message;
     String phonenum;
     String email;
+    String optionMessage;
 
     public Contact(){}
 

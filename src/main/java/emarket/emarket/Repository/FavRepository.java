@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface FavRepository extends JpaRepository<Favroite, Long> {
     List<Favroite> findFavroiteByOwner(String email);
-
+    Favroite findFavroiteById(Long id);
     @Modifying
     @Query("DELETE from Favroite u where u.productid = :id")
     void deleteFavProduct(@Param("id") Long id);

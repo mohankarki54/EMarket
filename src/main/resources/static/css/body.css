@@ -1,6 +1,6 @@
-/*:root {
-    --body_gradient_left:#7200D0;
-    --body_gradient_right: #C800C1;
+:root {
+    --body_gradient_left: #dad7dd;
+    --body_gradient_right: #e3dde3;
     --form_bg: #ffffff;
     --input_bg: #E5E5E5;
     --input_hover:#eaeaea;
@@ -13,12 +13,11 @@ body {
 
     font-family: 'Roboto',
     sans-serif;
-
     background-image: linear-gradient(to right, var(--body_gradient_left), var(--body_gradient_right));
-    display:flex;
-}*/
+}
 
+/*
 body {
     margin: 1px;
     background-image: linear-gradient(#e8e9e8, #efefef, #ebedee, #fcfcf8, #203A43, #0F2027);
-}
+}*/

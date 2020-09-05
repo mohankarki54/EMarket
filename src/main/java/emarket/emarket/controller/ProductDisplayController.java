@@ -37,6 +37,9 @@ public class ProductDisplayController {
         int value = Integer.parseInt(action);
         Helper.instance.setId(value);
         CommentBean commentBean = new CommentBean();
+        boolean isFavorite = favService.isUserFavroite(Account.instance.currentUserName(),Long.valueOf(value));
+        Long favID = favService.getUserFavroiteId(Account.instance.currentUserName(),Long.valueOf(value));
+
         List<Comment> comments = commentService.find(Long.valueOf(Helper.instance.getId()));
         Product product = service.get(Helper.instance.getId());
         String category = product.getCategory();
@@ -58,18 +61,22 @@ public class ProductDisplayController {
                 String image = "data:image/png;base64," + Base64.getEncoder().encodeToString(pro.getImage());
                 pro.setImagename(image);
             }
-
             modelAndView.addObject("productCategory", productCategory);
         }
-
+        modelAndView.addObject("cat", category);
         modelAndView.addObject("comments", comments);
         User seller = userService.findByEmail(product.getOwner());
         modelAndView.addObject("seller",seller);
         modelAndView.addObject("commentBean", commentBean);
         double seller_rating = ratingService.sellerRating(product.getOwner());
         if(seller_rating != 0){
-            modelAndView.addObject("seller_rating","Rating: "+seller_rating+" / 5");
+            modelAndView.addObject("seller_rating","Seller Rating: "+seller_rating+" / 5");
         }
+
+
+        modelAndView.addObject("isFavorite", isFavorite);
+        modelAndView.addObject("favID", favID);
+
         Contact contact = new Contact();
         modelAndView.addObject("contact",contact);
         Rating rating = new Rating();
@@ -90,7 +97,7 @@ public class ProductDisplayController {
         return "redirect:/productInfo?action="+action;
     }
 
-    @PostMapping(path = {"/addFavorite"})
+    @GetMapping(path = {"/addFavorite"})
     public String addFav(@RequestParam String action, RedirectAttributes redirectAttrs ){
         int value = Integer.parseInt(action);
         Product product = service.get(value);
@@ -100,6 +107,17 @@ public class ProductDisplayController {
         redirectAttrs.addAttribute("success","Added to the Favorite List" );
         return "redirect:/productInfo?action="+action;
     }
+
+    @GetMapping(path = {"/unFavorite"})
+    public String delete(@RequestParam String action, RedirectAttributes redirectAttrs) {
+        int value = Integer.parseInt(action);
+        Favroite favroite = favService.findFavroiteById(Long.valueOf(value));
+        Long productId = favroite.getProductid();
+        favService.delete(Long.valueOf(value));
+        redirectAttrs.addAttribute("favRemove","Successfully removed from favroite list." );
+        return "redirect:/productInfo?action="+productId;
+    }
+
 
     @PostMapping(path = {"/review"})
     public String saveReview(@RequestParam String action, RedirectAttributes redirectAttrs, @ModelAttribute("rating") Rating rating ){
@@ -122,6 +140,7 @@ public class ProductDisplayController {
     @PostMapping(path = {"/report"})
     public String sendReport(@RequestParam String action, RedirectAttributes redirectAttrs, @ModelAttribute("contact") Contact contact, HttpServletRequest request ){
         redirectAttrs.addAttribute("success","Thank you for reaching the us. We value your feedback and look forward to work it." );
+        System.out.println(contact.getOptionMessage());
         Product product = service.get(Integer.parseInt(action));
         Mail mail = new Mail();
         mail.setFrom("technewsandblog@gmail.com");

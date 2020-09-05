@@ -97,12 +97,12 @@ public class HomeController {
 
         modelAndView.addObject("search", new Search());
         modelAndView.addObject("count", products.size());
-        modelAndView.addObject("ecount", electronic.size());
-        modelAndView.addObject("vcount", vehicle.size());
-        modelAndView.addObject("bcount", beauty.size());
-        modelAndView.addObject("ccount", clothes.size());
-        modelAndView.addObject("rcount", realState.size());
-        modelAndView.addObject("fcount", furniture.size());
+        modelAndView.addObject("ecount", "Available: "+ electronic.size());
+        modelAndView.addObject("vcount", "Available: "+ vehicle.size());
+        modelAndView.addObject("bcount", "Available: "+ beauty.size());
+        modelAndView.addObject("ccount", "Available: "+ clothes.size());
+        modelAndView.addObject("rcount", "Available: "+ realState.size());
+        modelAndView.addObject("fcount", "Available: "+ furniture.size());
 
 
         modelAndView.addObject("electroDate", electroDate);
