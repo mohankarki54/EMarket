@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/icon/favicon.png}"/>
     <link rel="stylesheet" href="/css/nav.css" type="text/css" media="screen">
     <link rel="stylesheet" href="/css/scrollable.css" type="text/css" media="screen">
 
@@ -130,8 +131,7 @@
     </div>
 </div>
 <br>
-
-<div class="row">
+<div class="container">
     <div class="col-sm-6">
         <div class="card">
             <div class="card-body">
@@ -145,29 +145,165 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-6">
-    <div class="col-sm-6">
+</div>
+<br>
+<div class="container">
+    <div class="row">
+    <div class="col-lg-6">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Listed Product</h5>
                 <p class="card-text"><h6 th:text="${listed}"></h6></p>
-                <a href="#" class="btn btn-primary"> View all</a>
+                <a href="/listedproduct" class="btn btn-primary"> View all</a>
             </div>
         </div>
     </div>
-
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Favorite Product</h5>
-                    <p class="card-text"><h6 th:text="${favorite}"></h6></p>
-                    <a href="#" class="btn btn-primary"> View all</a>
-                </div>
+        <br>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Favorite Product</h5>
+                <p class="card-text"><h6 th:text="${favorite}"></h6></p>
+                <a href="/favorite" class="btn btn-primary"> View all</a>
             </div>
         </div>
+    </div>
     </div>
 </div>
 
+<br><br><br>
+
+<!-- Footer -->
+<footer class="page-footer font-small stylish-color-dark pt-4 y-4 bg-dark text-white-50">
+
+    <!-- Footer Links -->
+    <div class="container text-center text-md-left">
+
+        <!-- Grid row -->
+        <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-md-4 mx-auto">
+
+                <!-- Content -->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">EMarket</h5>
+                <p>It is the classified Ads where users can post their AD for free.</p>
+
+            </div>
+            <!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none">
+
+            <!-- Grid column -->
+            <div class="col-md-2 mx-auto">
+
+                <!-- Links -->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Category</h5>
+
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="/category/electronics">Electronics</a>
+                    </li>
+                    <li>
+                        <a href="/category/beauty">Beauty</a>
+                    </li>
+                    <li>
+                        <a href="/category/vehicle">Cars and Vehicle</a>
+                    </li>
+                    <li>
+                        <a href="/category/clothes">Clothes</a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none">
+
+            <!-- Grid column -->
+            <!--<div class="col-md-2 mx-auto">-->
+
+            <!-- Links
+            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+            <ul class="list-unstyled">
+                <li>
+                    <a href="#!">Link 1</a>
+                </li>
+                <li>
+                    <a href="#!">Link 2</a>
+                </li>
+                <li>
+                    <a href="#!">Link 3</a>
+                </li>
+                <li>
+                    <a href="#!">Link 4</a>
+                </li>
+            </ul>-->
+
+        </div>
+        <!-- Grid column -->
+
+        <hr class="clearfix w-100 d-md-none">
+
+        <!-- Grid column
+        <div class="col-md-2 mx-auto">
+
+           Links
+            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+            <ul class="list-unstyled">
+                <li>
+                    <a href="#!">Link 1</a>
+                </li>
+                <li>
+                    <a href="#!">Link 2</a>
+                </li>
+                <li>
+                    <a href="#!">Link 3</a>
+                </li>
+                <li>
+                    <a href="#!">Link 4</a>
+                </li>
+            </ul>
+
+        </div>-->
+        <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <hr>
+
+    <div sec:authorize="!isAuthenticated()">
+        <!-- Call to action -->
+        <ul class="list-unstyled list-inline text-center py-2">
+
+            <li class="list-inline-item">
+                <h5 class="mb-1">Register for free</h5>
+            </li>
+            <li class="list-inline-item">
+                <a href="/signup" class="btn btn-danger btn-rounded">Sign up!</a>
+            </li>
+
+        </ul>
+    </div>
+
+    <!-- Call to action -->
+
+    <hr>
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="/home"> EMarket </a>
+    </div>
+    <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

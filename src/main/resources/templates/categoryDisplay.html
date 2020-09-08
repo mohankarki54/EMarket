@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <title>EMarket</title>
+    <title>eMarket</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/icon/favicon.png}"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="/css/home.css" type="text/css" media="screen">
-    <link rel="stylesheet" href="/css/scrollable.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="/css/nav.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="/css/body.css" type="text/css" media="screen">
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="/home">
@@ -26,32 +26,17 @@
                     <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Post an Ad
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <div class="dropdown-item">
-                            <form method="get" th:action="@{/product}">
-                                <button type="submit" class="btn btn-light"  th:name="category" th:value="${'electronics'}">Electronics </button>
-                            </form>
-                        </div>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="/product/electronics">Electronics</a>
                         <div class="dropdown-divider"></div>
-                        <div class="dropdown-item">
-                            <form method="get" th:action="@{/product}">
-                                <button type="submit" class="btn btn-light"  th:name="category" th:value="${'beauty'}">Beauty</button>
-                            </form>
-                        </div>
+                        <a class="dropdown-item" href="/product/beauty">Beauty</a>
                         <div class="dropdown-divider"></div>
-                        <div class="dropdown-item">
-                            <form method="get" th:action="@{/product}">
-                                <button type="submit" class="btn btn-light"  th:name="category" th:value="${'vehicle'}">vehicle </button>
-                            </form>
-                        </div>
+                        <a class="dropdown-item" href="/product/vehicle">Cars and Vehicle</a>
                         <div class="dropdown-divider"></div>
-                        <div class="dropdown-item">
-                            <form method="get" th:action="@{/product}">
-                                <button type="submit" class="btn btn-light"  th:name="category" th:value="${'clothes'}">clothes </button>
-                            </form>
-                        </div>
+                        <a class="dropdown-item" href="/product/clothes">Clothes</a>
                     </div>
                 </li>
+
 
                 <li class="nav-item" th:if="${promoteFlag}">
                     <a class="nav-link" href="listedproduct">Promote Ad</a>
@@ -62,29 +47,13 @@
                         Category
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <div class="dropdown-item">
-                            <form method="get" th:action="@{/category}">
-                                <button type="submit" class="btn btn-light"  th:name="category" th:value="${'electronics'}">Electronics </button>
-                            </form>
-                        </div>
+                        <a class="dropdown-item" href="/category/electronics">Electronics</a>
                         <div class="dropdown-divider"></div>
-                        <div class="dropdown-item">
-                            <form method="get" th:action="@{/category}">
-                                <button type="submit" class="btn btn-light"  th:name="category" th:value="${'beauty'}">Beauty</button>
-                            </form>
-                        </div>
+                        <a class="dropdown-item" href="/category/beauty">Beauty</a>
                         <div class="dropdown-divider"></div>
-                        <div class="dropdown-item">
-                            <form method="get" th:action="@{/category}">
-                                <button type="submit" class="btn btn-light"  th:name="category" th:value="${'vehicle'}">vehicle </button>
-                            </form>
-                        </div>
+                        <a class="dropdown-item" href="/category/vehicle">Cars and Vehicle</a>
                         <div class="dropdown-divider"></div>
-                        <div class="dropdown-item">
-                            <form method="get" th:action="@{/category}">
-                                <button type="submit" class="btn btn-light"  th:name="category" th:value="${'clothes'}">clothes </button>
-                            </form>
-                        </div>
+                        <a class="dropdown-item" href="/category/clothes">Clothes</a>
                     </div>
                 </li>
 
@@ -124,7 +93,7 @@
 
     </div>
 </nav>
-
+<br>
 <div class="container-fluid ">
     <div class="card text-center col-12">
         <div class="card-header">
@@ -161,38 +130,159 @@
     </div>
 </div>
 
-<br><br>
+<br>
 
 <div class="text-center"><h3><span th:text="${message}"></span></h3></div>
 
 
 <div class="container">
-    <h3>Latest Items</h3>
-    <div class="row" style="display: flex; overflow-x: scroll">
-        <div class="card" th:each="product : ${products}">
-            <img th:src="${product.imagename}" class="card-img-top" alt="..." width="250" height="250">
-            <div class="card-body">
-                <h5 class="card-title"><h5 th:text="${product.name}"></h5></h5>
-                <p class="card-text"><p th:text="'Price: $'+${product.price}"> </p></p>
-                <div class="row">
-                    <div class="col-sm">
-                        <form method="get" th:action="@{/productInfo}">
-                            <button type="submit" class="btn btn-success"  th:name="action" th:value="${product.id}">View</button>
-                        </form>
-                    </div>
-                    <div class="col-sm">
-                        <div sec:authorize="isAuthenticated()">
-                            <form method="post" th:action="@{/addFav}">
-                                <button type="submit" class="btn btn-success"  th:name="action" th:value="${product.id}">Favorite</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+    <div class="row">
+        <div th:each="product : ${products}">
+            <div class="col-3">
+                <a class="stretched-link" th:href="'/productInfo?action=' + ${product.id}">
+                    <img  class="rounded" width="150" height="150" th:src="${product.imagename}" >
+                    <h5 style="color:#1bd6c6;"><span th:text="${product.name}"></span></h5>
+                </a>
+                <p><span th:text="'Price: $' + ${product.price}"></span></p>
             </div>
+            <hr>
         </div>
     </div>
 </div>
 <br>
+
+
+<!-- Footer -->
+<footer class="page-footer font-small stylish-color-dark pt-4 y-4 bg-dark text-white-50">
+
+    <!-- Footer Links -->
+    <div class="container text-center text-md-left">
+
+        <!-- Grid row -->
+        <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-md-4 mx-auto">
+
+                <!-- Content -->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">EMarket</h5>
+                <p>It is the classified Ads where users can post their AD for free.</p>
+
+            </div>
+            <!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none">
+
+            <!-- Grid column -->
+            <div class="col-md-2 mx-auto">
+
+                <!-- Links -->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Category</h5>
+
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="/category/electronics">Electronics</a>
+                    </li>
+                    <li>
+                        <a href="/category/beauty">Beauty</a>
+                    </li>
+                    <li>
+                        <a href="/category/vehicle">Cars and Vehicle</a>
+                    </li>
+                    <li>
+                        <a href="/category/clothes">Clothes</a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none">
+
+            <!-- Grid column -->
+            <!--<div class="col-md-2 mx-auto">-->
+
+            <!-- Links
+            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+            <ul class="list-unstyled">
+                <li>
+                    <a href="#!">Link 1</a>
+                </li>
+                <li>
+                    <a href="#!">Link 2</a>
+                </li>
+                <li>
+                    <a href="#!">Link 3</a>
+                </li>
+                <li>
+                    <a href="#!">Link 4</a>
+                </li>
+            </ul>-->
+
+        </div>
+        <!-- Grid column -->
+
+        <hr class="clearfix w-100 d-md-none">
+
+        <!-- Grid column
+        <div class="col-md-2 mx-auto">
+
+           Links
+            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+            <ul class="list-unstyled">
+                <li>
+                    <a href="#!">Link 1</a>
+                </li>
+                <li>
+                    <a href="#!">Link 2</a>
+                </li>
+                <li>
+                    <a href="#!">Link 3</a>
+                </li>
+                <li>
+                    <a href="#!">Link 4</a>
+                </li>
+            </ul>
+
+        </div>-->
+        <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <hr>
+
+    <div sec:authorize="!isAuthenticated()">
+        <!-- Call to action -->
+        <ul class="list-unstyled list-inline text-center py-2">
+
+            <li class="list-inline-item">
+                <h5 class="mb-1">Register for free</h5>
+            </li>
+            <li class="list-inline-item">
+                <a href="/signup" class="btn btn-danger btn-rounded">Sign up!</a>
+            </li>
+
+        </ul>
+    </div>
+
+    <!-- Call to action -->
+
+    <hr>
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="/home"> EMarket </a>
+    </div>
+    <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

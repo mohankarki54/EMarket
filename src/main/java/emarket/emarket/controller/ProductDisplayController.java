@@ -57,12 +57,28 @@ public class ProductDisplayController {
         }
 
         if (productCategory.size() != 0) {
-            for (Product pro : productCategory) {
-                String image = "data:image/png;base64," + Base64.getEncoder().encodeToString(pro.getImage());
-                pro.setImagename(image);
+            if(productCategory.size() < 13) {
+                for (Product pro : productCategory) {
+                    String image = "data:image/png;base64," + Base64.getEncoder().encodeToString(pro.getImage());
+                    pro.setImagename(image);
+                }
+                modelAndView.addObject("productCategory", productCategory);
             }
-            modelAndView.addObject("productCategory", productCategory);
+            else{
+                ArrayList<Product> proCategory = new ArrayList<Product>();
+                for(int i = 0; i < 13; i++){
+                    proCategory.add(productCategory.get(i));
+                }
+                for (Product pro : proCategory) {
+                    String image = "data:image/png;base64," + Base64.getEncoder().encodeToString(pro.getImage());
+                    pro.setImagename(image);
+                }
+                modelAndView.addObject("productCategory", proCategory);
+            }
         }
+
+
+
         modelAndView.addObject("cat", category);
         modelAndView.addObject("comments", comments);
         User seller = userService.findByEmail(product.getOwner());

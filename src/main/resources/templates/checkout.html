@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Checkout</title>
-    <link rel="stylesheet" href="/css/home.css" type="text/css" media="screen">
-    <link rel="stylesheet" href="/css/scrollable.css" type="text/css" media="screen">
-    <link rel="stylesheet" href="/css/scrollable.css" type="text/css" media="screen">
+    <link rel="shortcut icon" type="image/png" th:href="@{/icon/favicon.png}"/>
+    <link rel="stylesheet" href="/css/nav.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="/css/body.css" type="text/css" media="screen">
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -129,12 +129,17 @@
 <div class="container-fluid">
     <div class="card text-center col-12">
     <div class="card-header">
-        <h4>Feature Items</h4>
+        <h4>Promote</h4>
     </div>
     <div class="card-body">
-        <h5 class="card-title">Your product will be listed at the homepage.</h5>
-        <p class="card-text">Listing date will increase by 15 days more.</p>
-        <p class="card-text">Price: $<span th:text='${fee}' /></p>
+        <h5 class="card-title"><u>Product Information</u></h5>
+        <p class="card-text">
+            <img  class="rounded" width="150" height="150" th:src="${product.imagename}" >
+            <a th:href="'/productInfo?action=' + ${product.id}"><h5 style="color:#00b7ff;"><span th:text="${product.name}"></span></h5></a>
+            <p><span th:text="'Product Price: $' + ${product.price}"></span></p>
+            <p><span th:text="'Ad Id: ' + ${product.id}"></span></p>
+        </p>
+        <h5 class="card-text">Promotion Fee: $<span th:text='${fee}' /></h5>
         <form action='/charge' method='POST' id='checkout-form'>
             <input type='hidden' th:value='${amount}' name='amount' />
             <input type='hidden' th:value='${productid}' name='productid' />
@@ -148,8 +153,6 @@
             data-currency=${currency}'
                     data-name='EMarket'
                     data-description='Promote your item.'
-                    data-image
-                            ='https://www.baeldung.com/wp-content/themes/baeldung/favicon/android-chrome-192x192.png'
                     data-locale='auto'
                     data-zip-code='false'>
             </script>
@@ -161,6 +164,139 @@
     </div>
 </div>
 </div>
+<br> <br>
+<!-- Footer -->
+<footer class="page-footer font-small stylish-color-dark pt-4 y-4 bg-dark text-white-50">
+
+    <!-- Footer Links -->
+    <div class="container text-center text-md-left">
+
+        <!-- Grid row -->
+        <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-md-4 mx-auto">
+
+                <!-- Content -->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">EMarket</h5>
+                <p>It is the classified Ads where users can post their AD for free.</p>
+
+            </div>
+            <!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none">
+
+            <!-- Grid column -->
+            <div class="col-md-2 mx-auto">
+
+                <!-- Links -->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Category</h5>
+
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="/category/electronics">Electronics</a>
+                    </li>
+                    <li>
+                        <a href="/category/beauty">Beauty</a>
+                    </li>
+                    <li>
+                        <a href="/category/vehicle">Cars and Vehicle</a>
+                    </li>
+                    <li>
+                        <a href="/category/clothes">Clothes</a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none">
+
+            <!-- Grid column -->
+            <!--<div class="col-md-2 mx-auto">-->
+
+            <!-- Links
+            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+            <ul class="list-unstyled">
+                <li>
+                    <a href="#!">Link 1</a>
+                </li>
+                <li>
+                    <a href="#!">Link 2</a>
+                </li>
+                <li>
+                    <a href="#!">Link 3</a>
+                </li>
+                <li>
+                    <a href="#!">Link 4</a>
+                </li>
+            </ul>-->
+
+        </div>
+        <!-- Grid column -->
+
+        <hr class="clearfix w-100 d-md-none">
+
+        <!-- Grid column
+        <div class="col-md-2 mx-auto">
+
+           Links
+            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+            <ul class="list-unstyled">
+                <li>
+                    <a href="#!">Link 1</a>
+                </li>
+                <li>
+                    <a href="#!">Link 2</a>
+                </li>
+                <li>
+                    <a href="#!">Link 3</a>
+                </li>
+                <li>
+                    <a href="#!">Link 4</a>
+                </li>
+            </ul>
+
+        </div>-->
+        <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <hr>
+
+    <div sec:authorize="!isAuthenticated()">
+        <!-- Call to action -->
+        <ul class="list-unstyled list-inline text-center py-2">
+
+            <li class="list-inline-item">
+                <h5 class="mb-1">Register for free</h5>
+            </li>
+            <li class="list-inline-item">
+                <a href="/signup" class="btn btn-danger btn-rounded">Sign up!</a>
+            </li>
+
+        </ul>
+    </div>
+
+    <!-- Call to action -->
+
+    <hr>
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="/home"> EMarket </a>
+    </div>
+    <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

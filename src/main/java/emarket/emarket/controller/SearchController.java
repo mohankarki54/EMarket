@@ -54,7 +54,7 @@ public class SearchController {
             modelAndView.addObject("search", new Search());
         }
         if(products.size() == 0){
-            modelAndView.addObject("nodata","Sorry, currently there is no listing available near this zip code.");
+            modelAndView.addObject("nodata","Sorry, currently there is no listing available with keywords " + word);
         }
 
         modelAndView.setViewName("Searchshow");
@@ -69,8 +69,8 @@ public class SearchController {
             zipcode = Integer.parseInt(search.getWord());
         }
         catch (Exception e){
-            modelAndView.addObject("zip", "Zipcode Error");
-            modelAndView.setViewName("redirect:/home");
+            modelAndView.addObject("nodata", "Zipcode Error");
+            modelAndView.setViewName("Searchshow");
             return modelAndView;
         }
 
@@ -111,7 +111,7 @@ public class SearchController {
             modelAndView.addObject("search", new Search());
         }
         if(products.size() == 0){
-            modelAndView.addObject("nodata","Sorry, currently there is no listing available near this zip code.");
+            modelAndView.addObject("nodata","Sorry, currently there is no listing available near zip code: " + search.getWord());
         }
         modelAndView.setViewName("Searchshow");
         return modelAndView;
@@ -127,24 +127,5 @@ public class SearchController {
         redirectAttrs.addAttribute("success","Added to the Favorite List" );
         return "redirect:/productdisplay";
     }
-
-    /*@PostMapping(path = {"/productdisplay"})
-    public ModelAndView displaypro(@ModelAttribute("search") Search search, ModelAndView modelAndView){
-        Search.instance.setWord(search.getWord());
-        List<Product> products = new ArrayList<Product>();
-        products = service.productSearch(search.getWord());
-        if (products != null) {
-
-            for (Product product : products) {
-                String imagename = "data:image/png;base64," + Base64.getEncoder().encodeToString(product.getImage());
-                product.setImagename(imagename);
-            }
-
-            modelAndView.addObject("products", products);
-            modelAndView.addObject("search", new Search());
-        }
-        modelAndView.setViewName("home");
-        return modelAndView;
-    }*/
 
 }

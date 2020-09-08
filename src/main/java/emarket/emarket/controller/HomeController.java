@@ -154,6 +154,10 @@ public class HomeController {
             favproducts.add(f);
         }
 
+        if(favroites.size() == 0){
+            modelAndView.addObject("nodata", true);
+        }
+
         modelAndView.addObject("listProducts", favproducts);
         modelAndView.addObject("fav", favroites);
         modelAndView.setViewName("favorite");

@@ -82,7 +82,7 @@ public class AccController {
 
         product.setType(productRegistrationDTO.getType());
         service.save(product);
-        redirectAttrs.addAttribute("success","Product successfully edited." );
+        redirectAttrs.addAttribute("success","Product successfully updated." );
         return "redirect:/listedproduct";
     }
 
