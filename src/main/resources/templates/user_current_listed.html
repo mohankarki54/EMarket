@@ -100,94 +100,6 @@
 </nav>
 <br>
 
-<!--
-<div sec:authorize="isAuthenticated()">
-    <div id="mybutton1">
-
-        <button type="button" class="feedback1" data-toggle="modal" data-target="#reportSeller">
-            Report
-        </button>
-    </div>
-
-    <div id="mybutton2">
-
-        <button type="button" class="feedback1" data-toggle="modal" data-target="#rateSeller">
-            Rate Seller
-        </button>
-    </div>
-</div>
-
-<div class="modal fade" id="rateSeller" role="dialog">
-    <div class="modal-dialog">
-
-
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Rate Seller</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <form class="form-inline" method="post" th:action="@{/review1}" th:object="${rating}">
-                <div class="modal-body">
-                    <div class="row">
-                        <label> Rate : </label>
-                        <select th:field="*{ratingvalue}">
-                            <option th:value="${5}">Select value</option>
-                            <option th:value="${1}" th:text="${1}"></option>
-                            <option th:value="${2}" th:text="${2}"></option>
-                            <option th:value="${3}" th:text="${3}"></option>
-                            <option th:value="${4}" th:text="${4}"></option>
-                            <option th:value="${5}" th:text="${5}"></option>
-                        </select>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <label> Feedback </label>
-                        <textarea th:field="*{description}" placeholder="Some text message here" class="pb-cmnt-textarea" required="required"></textarea>
-                    </div>
-                    <br>
-                    <button class="btn btn-primary pull-right" type="submit" th:name="action" th:value="${product.id}">Submit Review</button>
-                </div>
-            </form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-
-        </div>
-
-    </div>
-</div>
-
-<div class="modal fade" id="reportSeller" role="dialog">
-    <div class="modal-dialog">
-
-
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Report</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <form class="form-inline" method="post" th:action="@{/report1}" th:object="${contact}">
-                <div class="modal-body">
-                    <br>
-                    <div class="row">
-                        <label> Please, provide your feedback about the seller. </label>
-                        <textarea th:field="*{message}" placeholder="Some text message here" class="pb-cmnt-textarea" required="required"></textarea>
-                    </div>
-                    <br>
-                    <button class="btn btn-primary pull-right" type="submit" th:name="action" th:value="${product.id}">Report</button>
-                </div>
-            </form>
-            <div class="modal-footer">
-                <h4>Thank you for your valuable time.</h4>
-            </div>
-
-        </div>
-
-    </div>
-</div>
-<br>
--->
-
 <div class="container text-center" th:if ="${message}">
     <div class="alert alert-success">
         <span th:text=" ${message}"></span>
@@ -197,6 +109,12 @@
 <div class="container text-center" th:if ="${#request.getParameter('success')}">
     <div class="alert alert-success">
         <span th:text="${#request.getParameter('success')}"></span>
+    </div>
+</div>
+
+<div class="container text-center" th:if ="${#request.getParameter('error')}">
+    <div class="alert alert-danger">
+        <span th:text="${#request.getParameter('error')}"></span>
     </div>
 </div>
 
@@ -235,13 +153,14 @@
                         </a>
                     </p>
                     <div class="collapse" id="collapseExample">
+                        Users Reviewed as
                         <div class="card card-body">
                             <div th:each="comment : ${comments}" >
-                                <div class="row">
-                                    <p class="card-text" th:text="${comment.description}"></p>
-                                </div>
-                                <div class="row">
-                                    <p class="card-text" th:text="${comment.username}"></p>
+                                <div class="panel panel-success">
+                                    <div class="panel-body">
+                                        <label> -> </label>
+                                        <span th:text="${comment.description}"></span>
+                                    </div><!-- /panel-body -->
                                 </div>
                                 <br>
                             </div>

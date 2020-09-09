@@ -215,7 +215,7 @@
                                     <div class="card card-body">
                                         <form class="form-inline" method="post" th:action="@{/sendEmail}" th:object="${contact}">
                                             <textarea th:field="*{message}" placeholder="Hello, Is this product still available?"  class="pb-cmnt-textarea" required="required"></textarea>
-                                            <button class="btn btn-primary pull-right" type="submit" th:name="action" th:value="${product.id}">Contact</button>
+                                            <button class="btn btn-primary pull-right" type="submit" th:name="action" th:value="${product.id}">Send</button>
                                         </form>
                                     </div>
                                 </div>
@@ -231,7 +231,7 @@
                                                     <label>Breif Message</label>
                                                     <textarea th:field="*{message}" placeholder="Hello, Do you like my offer price?" class="pb-cmnt-textarea" required="required"></textarea>
                                                     <br>
-                                                    <button class="btn btn-primary pull-right" type="submit" th:name="action" th:value="${product.id}">Contact</button>
+                                                    <button class="btn btn-primary pull-right" type="submit" th:name="action" th:value="${product.id}">Make an offer</button>
                                                 </div>
                                         </form>
                                     </div>
@@ -320,14 +320,13 @@
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                         <div class="card-body">
                             <div th:each="comment : ${comments}" >
-                                <div class="row">
-                                    <p class="card-text" th:text="${comment.description}"></p>
-                                </div>
-                                <div class="row">
-                                    <p class="card-text" th:text="${comment.username}"></p>
-                                </div>
-                                <div class="row">
-                                    <p class="card-text" th:text="${comment.created}"></p>
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                        <strong><span th:text="${comment.username}"></span></strong> <span class="text-muted"><span th:text="${comment.time}"></span></span>
+                                    </div>
+                                    <div class="panel-body">
+                                        <span th:text="${comment.description}"></span>
+                                    </div><!-- /panel-body -->
                                 </div>
                                 <br>
                             </div>

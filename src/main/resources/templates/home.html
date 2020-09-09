@@ -101,7 +101,7 @@
     </div>
 </nav>
 <br>
-    <div class="container-fluid ">
+    <div class="container">
         <div class="card text-center col-12">
             <div class="card-header">
                 <h3>Sell Out Old Bring in New</h3>
@@ -138,26 +138,27 @@
     </div>
     </div>
 
-    <div class="text-center"><h3 style="color:#ffaa00;"><span th:text=" ${#request.getParameter('success')}"></span></h3></div>
-    <div class="text-center"><h4 style="color:#ff8c00;"><span th:text=" ${#request.getParameter('contact')}"></span></h4></div>
+<br>
+<div class="container text-center" th:if ="${#request.getParameter('success')}">
+    <div class="alert alert-success">
+        <span th:text=" ${#request.getParameter('success')}"></span>
+    </div>
+</div>
 
-    <div class="container-fluid" th:if="${#request.getParameter('var')}">
-    <div class="card text-center col-12" >
-        <div class="card-header">
-            Verification Needed
-        </div>
-        <div class="card-body">
-            <p class="card-text"><span th:text=" ${#request.getParameter('verify')}"></span></p>
-            <!--<a href="/home" class="btn btn-primary">Resend Activation Link</a>-->
-        </div>
-        <div class="card-footer text-muted">
-            Thank you for joining with us.
-        </div>
-        <br><br>
+<div class="container text-center" th:if ="${#request.getParameter('contact')}">
+    <div class="alert alert-success">
+        <span th:text=" ${#request.getParameter('contact')}"></span>
     </div>
+</div>
+
+<div class="container text-center" th:if ="${#request.getParameter('var')}">
+    <div class="alert alert-success">
+        <span th:text=" ${#request.getParameter('verify')}"></span>
     </div>
-    <br>
-    <div class="container-fluid " th:if="${address}">
+</div>
+
+<br>
+    <div class="container" th:if="${address}">
         <div class="card text-center col-12">
         <div class="card-header">
             <h4>Reach More customer</h4>
@@ -165,10 +166,11 @@
         <div class="card-body">
             <h5 class="card-title">Update your Address</h5>
             <p class="card-text">Adding your address will help your too reach as many as customers.</p>
-            <a href="/address" class="btn btn-primary">Add</a>
+            <a href="/address" class="btn btn-primary">Update</a>
         </div>
         </div>
     </div>
+<br>
 
     <section class="pt-5 pb-5" th:if="${present}">
         <div class="container">

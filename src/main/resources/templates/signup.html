@@ -121,7 +121,11 @@
                 <i class="far fa-user"></i>
                 <input placeholder="Last name" type="text"  th:field="*{lastname}" id="field_email" class='input_field' required="true">
             </div>
-            <div class="error"><span th:text="${message}"></span></div>
+            <div class="container text-center" th:if ="${message}">
+                <div class="alert alert-danger">
+                    <span th:text="${message}"></span>
+                </div>
+            </div>
             <div class="input_container">
                 <i class="fas fa-envelope"></i>
                 <input placeholder="Email" type="email" th:field="*{email}" name="username" id="field_email" class='input_field' required="true">
@@ -130,7 +134,7 @@
                 <i class="fas fa-lock"></i>
                 <input  placeholder="Password" type="password" th:field="*{password}" name="password" id="field_password" class='input_field' required="true">
             </div>
-            <input type="submit" value="Login" id='input_submit' class='input_field'>
+            <input type="submit" value="Register" id='input_submit' class='input_field'>
             <span>Forgot <a th:href="@{/forgot-password}"> Password ?</a></span>
             <span id='create_account'>
                     <a href="/login">Already have an account ➡ </a>

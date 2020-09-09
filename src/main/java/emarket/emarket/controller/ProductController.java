@@ -78,7 +78,7 @@ public class ProductController {
             e.printStackTrace();
         }
         service.save(product);
-        redirectAttrs.addAttribute("success", "Your Ad with the title" +name+ "is successfully Listed.");
+        redirectAttrs.addAttribute("success", "Your Ad with the title " +name+ " is successfully Listed.");
         return "redirect:/product/"+category;
     }
 

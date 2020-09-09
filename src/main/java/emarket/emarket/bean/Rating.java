@@ -21,6 +21,7 @@ public class Rating {
     private String username;
     private String description;
 
+
     public Rating(){}
 
     public Rating(int ratingvalue, String description, String username){

@@ -23,6 +23,7 @@ public class Comment {
     String description;
     Long proid;
     Date created;
+    String time;
 
     public Comment(){}
 

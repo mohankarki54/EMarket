@@ -67,8 +67,8 @@ public class PasswordForgotController {
 
         Map<String, Object> model = new HashMap<>();
         model.put("token", token);
-        model.put("user", "Hello "+ user.getFirstname() + ", ");
-        model.put("signature", "https://emarket.com");
+        model.put("user", user.getFirstname());
+        //model.put("signature", "https://emarket.com");
         String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
         model.put("resetUrl", url + "/reset-password?token=" + token.getToken());
         mail.setModel(model);

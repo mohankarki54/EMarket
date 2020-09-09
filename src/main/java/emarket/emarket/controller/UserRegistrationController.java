@@ -4,6 +4,7 @@ import emarket.emarket.Repository.ConfirmationTokenRepository;
 import emarket.emarket.Service.EmailService;
 import emarket.emarket.Service.UserService;
 import emarket.emarket.bean.ConfirmationToken;
+import emarket.emarket.bean.Mail;
 import emarket.emarket.bean.User;
 import emarket.emarket.DTO.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Controller
@@ -66,15 +69,18 @@ public class UserRegistrationController {
             userService.save(registrationDto);
             ConfirmationToken confirmationToken = new ConfirmationToken(userService.findByEmail(registrationDto.getEmail()));
             confirmationTokenRepository.save(confirmationToken);
-            SimpleMailMessage mailMessage = new SimpleMailMessage();
-            mailMessage.setTo(registrationDto.getEmail());
-            mailMessage.setSubject("Complete Registration!");
-            mailMessage.setFrom("technewsandblog@gmail.com");
-            String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
-            mailMessage.setText("To confirm your account, please click here : "
-                    +url+ "/confirm-account?token="+confirmationToken.getConfirmationtoken());
 
-            emailService.sendRegisterEmail(mailMessage);
+            Mail mail = new Mail();
+            mail.setFrom("technewsandblog@gmail.com");
+            mail.setTo(registrationDto.getEmail());
+            mail.setSubject("Welcome to eMarket");
+            Map<String, Object> model = new HashMap<>();
+            model.put("token", confirmationToken.getConfirmationtoken());
+            model.put("user", registrationDto.getFirstname());
+            String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+            model.put("activateUrl", url + "/confirm-account?token="+confirmationToken.getConfirmationtoken());
+            mail.setModel(model);
+            emailService.sendRegisterEmail(mail);
 
             modelAndView.addObject("var", true);
             modelAndView.addObject("verify","A verification email has been sent to " + registrationDto.getEmail());

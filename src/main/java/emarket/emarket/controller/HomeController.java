@@ -177,11 +177,8 @@ public class HomeController {
         Mail mail = new Mail();
         mail.setFrom("technewsandblog@gmail.com");
         mail.setTo("technewsandblog@gmail.com");
-        mail.setSubject("User contact");
+        mail.setSubject("Attention: User contact");
         Map<String, Object> model = new HashMap<>();
-        model.put("user", "Hello, ");
-        model.put("signature", "https://emarket.com");
-        String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
         model.put("customer_email", "Customer Email: "+contact.getEmail());
         model.put("phone", "Phone number: " + contact.getPhonenum());
         model.put("msg", "Message: "+contact.getMessage());

@@ -41,6 +41,7 @@ public class ProductDisplayController {
         Long favID = favService.getUserFavroiteId(Account.instance.currentUserName(),Long.valueOf(value));
 
         List<Comment> comments = commentService.find(Long.valueOf(Helper.instance.getId()));
+
         Product product = service.get(Helper.instance.getId());
         String category = product.getCategory();
         List<Product> productCategory= service.categoryList(category);
@@ -78,10 +79,13 @@ public class ProductDisplayController {
             }
         }
 
-
+        for(Comment comment: comments){
+            String time = timeCalculation.timeDifference1(currentDate,comment.getCreated());
+            comment.setTime(time);
+        }
+        modelAndView.addObject("comments", comments);
 
         modelAndView.addObject("cat", category);
-        modelAndView.addObject("comments", comments);
         User seller = userService.findByEmail(product.getOwner());
         modelAndView.addObject("seller",seller);
         modelAndView.addObject("commentBean", commentBean);
@@ -143,7 +147,7 @@ public class ProductDisplayController {
         String seller = product.getOwner();
 
         if (!currentUser.trim().equals(seller.trim())){
-            Rating rating1 = new Rating(rating.getRatingvalue(), rating.getDescription(), currentUser);
+            Rating rating1 = new Rating(rating.getRatingvalue(), rating.getDescription(), seller);
             ratingService.save(rating1);
             redirectAttrs.addAttribute("success","Seller's Review successfully submitted. Thank you" );
         }
@@ -158,16 +162,18 @@ public class ProductDisplayController {
         redirectAttrs.addAttribute("success","Thank you for reaching the us. We value your feedback and look forward to work it." );
         System.out.println(contact.getOptionMessage());
         Product product = service.get(Integer.parseInt(action));
+        User user = userService.findByEmail(Account.instance.currentUserName());
         Mail mail = new Mail();
         mail.setFrom("technewsandblog@gmail.com");
         mail.setTo("technewsandblog@gmail.com");
-        mail.setSubject("Report from User");
+        mail.setSubject("Attention: Report from User");
         Map<String, Object> model = new HashMap<>();
-        model.put("user", "Hello, ");
-        model.put("signature", "https://emarket.com");
+        model.put("user", user.getFirstname()+ " likes to file the Report.");
+        model.put("productid", "Product id: " + action);
+        model.put("seller_email","Seller email: " + product.getOwner());
         model.put("customer_email", "Customer Email: "+Account.instance.currentUserName());
-        model.put("phone","Seller email: " + product.getOwner() + " , Ad id: "+ action);
         model.put("msg", "Message: "+contact.getMessage());
+        model.put("optmsg", "Breif Message: " +contact.getOptionMessage());
         mail.setModel(model);
         emailService.sendcontactEmailAdmin(mail);
         return "redirect:/productInfo?action="+action;
@@ -191,16 +197,16 @@ public class ProductDisplayController {
 
         Map<String, Object> model = new HashMap<>();
         model.put("user", "Hello "+ user.getFirstname() + ", ");
-        model.put("signature", "https://emarket.com");
-        String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+        model.put("id", "Product id: " + action);
         model.put("productname", "Product Name: "+product.getName());
         model.put("name", "Name: "+user_customer.getFirstname()+" "+ user_customer.getLastname());
         model.put("email", "Email: "+user_customer.getEmail());
-        model.put("price", "Offered Price: $"+contact.getPrice());
+        if(contact.getPrice() != 0){
+            model.put("price", "Offered Price: $"+contact.getPrice());
+        }
         model.put("msg", "Message: "+contact.getMessage());
         mail.setModel(model);
         emailService.sendcontactEmail(mail);
-
         return "redirect:/productInfo?action="+action;
     }
 
@@ -247,12 +253,12 @@ public class ProductDisplayController {
         String seller = product.getOwner();
 
         if (!currentUser.trim().equals(seller.trim())){
-            Rating rating1 = new Rating(rating.getRatingvalue(), rating.getDescription(), currentUser);
+            Rating rating1 = new Rating(rating.getRatingvalue(), rating.getDescription(), seller);
             ratingService.save(rating1);
             redirectAttrs.addAttribute("success","Seller's Review successfully submitted. Thank you" );
         }
         else{
-            redirectAttrs.addAttribute("success","Error: You cannot review your self." );
+            redirectAttrs.addAttribute("error","Error: You cannot review your self." );
         }
         return "redirect:/user_current_listed_product/"+action;
     }
@@ -260,17 +266,20 @@ public class ProductDisplayController {
     @PostMapping(path = {"/report1"})
     public String sendReport1(@RequestParam String action, RedirectAttributes redirectAttrs, @ModelAttribute("contact") Contact contact, HttpServletRequest request ){
         redirectAttrs.addAttribute("success","Thank you for reaching the us. We value your feedback and look forward to work it." );
+        System.out.println(contact.getOptionMessage());
         Product product = service.get(Integer.parseInt(action));
+        User user = userService.findByEmail(Account.instance.currentUserName());
         Mail mail = new Mail();
         mail.setFrom("technewsandblog@gmail.com");
         mail.setTo("technewsandblog@gmail.com");
-        mail.setSubject("Report from User");
+        mail.setSubject("Attention: Report from User");
         Map<String, Object> model = new HashMap<>();
-        model.put("user", "Hello, ");
-        model.put("signature", "https://emarket.com");
+        model.put("user", user.getFirstname()+ " likes to file the Report.");
+        model.put("productid", "Product id: " + action);
+        model.put("seller_email","Seller email: " + product.getOwner());
         model.put("customer_email", "Customer Email: "+Account.instance.currentUserName());
-        model.put("phone","Seller email: " + product.getOwner() + " , Ad id: "+ action);
         model.put("msg", "Message: "+contact.getMessage());
+        model.put("optmsg", "Breif Message: " +contact.getOptionMessage());
         mail.setModel(model);
         emailService.sendcontactEmailAdmin(mail);
         return "redirect:/user_current_listed_product/"+action;

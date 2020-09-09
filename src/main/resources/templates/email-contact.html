@@ -20,31 +20,31 @@
 
 <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse;">
     <tr>
-        <td align="center" bgcolor="#78ab46" style="padding: 40px 0 30px 0;">
-            <p>EMarket</p>
+        <td align="center" bgcolor="#FF5733" style="padding: 40px 0 30px 0;">
+            <h1>eMarket Community,</h1>
         </td>
     </tr>
     <tr>
         <td bgcolor="#eaeaea" style="padding: 40px 30px 40px 30px;">
-            <h3 th:text="${user}"></h3>
             <p>
                 The customer below wants to contact your for the product you enlisted.
                 <br>
+            <p th:text="${id}"></p>
             <p th:text="${productname}"></p>
-             <p th:text="${name}"></p>
+            <p th:text="${name}"></p>
             <p th:text="${email}"></p>
             <p th:text="${price}"></p>
             <p th:text="${msg}"></p>
             </p>
-            <p>Thanks</p>
         </td>
     </tr>
     <tr>
-        <td bgcolor="#eaeaea" style="padding: 30px 30px 30px 30px;">
-            <h6 th:text="${signature}"></h6>
+        <td align="center" bgcolor="#C6B407" style="padding: 30px 30px 30px 30px;">
+            <h2>Thanks</h2>
         </td>
     </tr>
 </table>
+
 
 </body>
 </html>
