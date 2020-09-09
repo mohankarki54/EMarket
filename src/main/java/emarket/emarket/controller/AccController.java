@@ -48,6 +48,8 @@ public class AccController {
         if(product1 != null){
             mav = new ModelAndView("edit_product");
             Product product = service.get(id);
+            String imagename = "data:image/png;base64," + Base64.getEncoder().encodeToString(product.getImage());
+            product.setImagename(imagename);
             mav.addObject("product", product);
         }
         else{
@@ -58,30 +60,10 @@ public class AccController {
     }
 
     @PostMapping("/save")
-    public String updateProduct(@RequestParam String action, @RequestParam("file") MultipartFile file, ModelAndView modelAndView, @ModelAttribute("product")Product productRegistrationDTO, RedirectAttributes redirectAttrs){
-        List<Product> allproduct = service.listAll();
+    public String updateProduct(@RequestParam String action, @ModelAttribute("product")Product productRegistrationDTO, RedirectAttributes redirectAttrs){
         int value = Integer.parseInt(action);
         Long val = Long.valueOf(value);
-        Product product = new Product();
-        product.setId(val);
-        product.setName(productRegistrationDTO.getName());
-        product.setPrice(productRegistrationDTO.getPrice());
-        product.setOwner(Account.instance.currentUserName());
-
-        if (file.isEmpty()){
-            product.setImage(allproduct.get(value-1).getImage());
-        }
-        else{
-            try {
-                byte[] bytes = file.getBytes();
-                product.setImage(bytes);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        product.setType(productRegistrationDTO.getType());
-        service.save(product);
+        service.updateProduct(productRegistrationDTO.getName(),productRegistrationDTO.getDescription(), productRegistrationDTO.getPrice(),val);
         redirectAttrs.addAttribute("success","Product successfully updated." );
         return "redirect:/listedproduct";
     }

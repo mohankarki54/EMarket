@@ -31,17 +31,19 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="/product/electronics">Electronics</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/product/beauty">Beauty</a>
-                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/product/vehicle">Cars and Vehicle</a>
                         <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/product/beauty">Beauty</a>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/product/clothes">Clothes</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/product/furniture">Furniture</a>
                     </div>
                 </li>
 
 
                 <li class="nav-item" th:if="${promoteFlag}">
-                    <a class="nav-link" href="listedproduct">Promote Ad</a>
+                    <a class="nav-link" href="/listedproduct">Promote Ad</a>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -51,11 +53,13 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/category/electronics">Electronics</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/category/beauty">Beauty</a>
-                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/category/vehicle">Cars and Vehicle</a>
                         <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/category/beauty">Beauty</a>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/category/clothes">Clothes</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/category/furniture">Furniture</a>
                     </div>
                 </li>
 
@@ -73,15 +77,15 @@
 
                     <div sec:authorize="isAuthenticated()">
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="dashboard">Dashboard</a>
+                            <a class="dropdown-item" href="/dashboard">Dashboard</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="favorite">Favorite</a>
+                            <a class="dropdown-item" href="/favorite">Favorite</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="listedproduct">Listed Product</a>
+                            <a class="dropdown-item" href="/listedproduct">Listed Product</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/forgot-password">Reset password</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="logout">Log out</a>
+                            <a class="dropdown-item" href="/logout">Log out</a>
                         </div>
                     </div>
 
@@ -113,22 +117,23 @@
             <div class="card card-body">
                 <ul class="list-unstyled">
                     <li>
-                        <a href="/category/electronics">Electronics</a>
+                        <a href="/product/electronics">Electronics</a>
                     </li>
                     <li>
-                        <a href="/category/beauty">Beauty</a>
+                        <a href="/product/beauty">Beauty</a>
                     </li>
                     <li>
-                        <a href="/category/vehicle">Cars and Vehicle</a>
+                        <a href="/product/vehicle">Cars and Vehicle</a>
                     </li>
                     <li>
-                        <a href="/category/clothes">Clothes</a>
+                        <a href="/product/clothes">Clothes</a>
+                    </li>
+                    <li>
+                        <a href="/product/furniture">Furniture</a>
                     </li>
                 </ul>
             </div>
         </div>
-    </div>
-    <div class="card-footer text-muted">
     </div>
 </div>
 
@@ -143,23 +148,23 @@
         <span th:text='${error}'></span>
     </div>
 </div>
+
 <div class="text-center">
-    <div th:if="${#request.getParameter('payment')}">
-        <h3 style='color: green;'>Success!</h3>
+    <div class="container alert alert-success" th:if="${#request.getParameter('payment')}">
+        <h3 >Success!</h3>
         <div>Status: <span th:text="${#request.getParameter('status')}" /></div>
         <div>Id.: <span th:text="${#request.getParameter('id')}" /></div>
         <div>Charge id.: <span th:text="${#request.getParameter('chargeId')}" /></div>
         <h5>A confirmation email has been sent to your email too.</h5>
     </div>
 </div>
-<br>
-
 <div class="container">
 <table class="table table-striped">
     <thead class="thead-dark">
     <tr>
+        <th scope="col">Ad Id</th>
         <th scope="col">Image</th>
-        <th scope="col">Name</th>
+        <th scope="col">Title</th>
         <th scope="col">Price</th>
         <th scope="">Listed</th>
         <th scope="">Expiry</th>
@@ -169,6 +174,7 @@
     </thead>
     <tbody>
     <tr th:each="product : ${listProducts}">
+        <td th:text="${product.id}"></td>
         <td><img th:src="${product.imagename}"  alt="..." width="100" height="100"></td>
         <td th:text="${product.name}">Name</td>
         <td th:text="${product.price}">Price</td>
@@ -192,6 +198,7 @@
 </table>
 </div>
 
+<br>
 <!-- Footer -->
 <footer class="page-footer font-small stylish-color-dark pt-4 y-4 bg-dark text-white-50">
 
@@ -206,7 +213,7 @@
 
                 <!-- Content -->
                 <h5 class="font-weight-bold text-uppercase mt-3 mb-4">EMarket</h5>
-                <p>It is the classified Ads where users can post their AD for free.</p>
+                <p>One of the best classified Ads website where users can post the Ad for free. </p>
 
             </div>
             <!-- Grid column -->
@@ -240,57 +247,35 @@
             <hr class="clearfix w-100 d-md-none">
 
             <!-- Grid column -->
-            <!--<div class="col-md-2 mx-auto">-->
+            <div class="col-md-2 mx-auto">
 
-            <!-- Links
-            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+                <!-- Links-->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Post Ad</h5>
 
-            <ul class="list-unstyled">
-                <li>
-                    <a href="#!">Link 1</a>
-                </li>
-                <li>
-                    <a href="#!">Link 2</a>
-                </li>
-                <li>
-                    <a href="#!">Link 3</a>
-                </li>
-                <li>
-                    <a href="#!">Link 4</a>
-                </li>
-            </ul>-->
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="/product/electronics">Electronics</a>
+                    </li>
+                    <li>
+                        <a href="/product/beauty">Cars and Vehicle</a>
+                    </li>
+                    <li>
+                        <a href="/product/vehicle">Beauty</a>
+                    </li>
+                    <li>
+                        <a href="/product/clothes">Clothes</a>
+                    </li>
+                    <li>
+                        <a href="/product/furniture">Furniture</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none">
 
         </div>
-        <!-- Grid column -->
-
-        <hr class="clearfix w-100 d-md-none">
-
-        <!-- Grid column
-        <div class="col-md-2 mx-auto">
-
-           Links
-            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
-
-            <ul class="list-unstyled">
-                <li>
-                    <a href="#!">Link 1</a>
-                </li>
-                <li>
-                    <a href="#!">Link 2</a>
-                </li>
-                <li>
-                    <a href="#!">Link 3</a>
-                </li>
-                <li>
-                    <a href="#!">Link 4</a>
-                </li>
-            </ul>
-
-        </div>-->
-        <!-- Grid column -->
-
-    </div>
-    <!-- Grid row -->
+        <!-- Grid row -->
 
     </div>
     <!-- Footer Links -->
@@ -313,6 +298,8 @@
 
     <!-- Call to action -->
 
+    <hr>
+    <p class="text-center">eMarket <a href="#"><u>Terms of Use</u></a> and <a href=""><u>Privacy Policy </u></a> </p>
     <hr>
 
     <!-- Copyright -->

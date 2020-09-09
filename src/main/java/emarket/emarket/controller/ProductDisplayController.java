@@ -54,6 +54,7 @@ public class ProductDisplayController {
             Date start = product.getListeddate();
             String posted = timeCalculation.timeDifference(currentDate, start);
             modelAndView.addObject("posted", posted);
+            modelAndView.addObject("condition", "Condition: " + product.getConditon());
         }
 
         if (productCategory.size() != 0) {
@@ -88,7 +89,6 @@ public class ProductDisplayController {
         if(seller_rating != 0){
             modelAndView.addObject("seller_rating","Seller Rating: "+seller_rating+" / 5");
         }
-
 
         modelAndView.addObject("isFavorite", isFavorite);
         modelAndView.addObject("favID", favID);
@@ -210,6 +210,8 @@ public class ProductDisplayController {
         String seller = product.getOwner();
         List<Product> products = service.listbyOwner(seller);
         User user = userService.findByEmail(seller);
+        List<Rating> comments = ratingService.findRatingByUsername(seller);
+
         if (products != null) {
             for (Product pro : products) {
                 String image = "data:image/png;base64," + Base64.getEncoder().encodeToString(pro.getImage());
@@ -218,12 +220,21 @@ public class ProductDisplayController {
 
             modelAndView.addObject("products", products);
         }
+
+        double seller_rating = ratingService.sellerRating(product.getOwner());
+        if(seller_rating != 0){
+            modelAndView.addObject("seller_rating","Seller Rating: "+seller_rating+" / 5");
+        }
+
+        modelAndView.addObject("user", user);
         modelAndView.addObject("product", product);
         Contact contact = new Contact();
         modelAndView.addObject("contact",contact);
         Rating rating = new Rating();
         modelAndView.addObject("rating", rating);
-        modelAndView.addObject("message", "All active Ads posted by " + user.getFirstname() + user.getLastname());
+        //modelAndView.addObject("message", "All active Ads posted by " + user.getFirstname() + user.getLastname());
+
+        modelAndView.addObject("comments", comments);
         modelAndView.setViewName("user_current_listed");
         return modelAndView;
     }

@@ -5,6 +5,7 @@ import emarket.emarket.bean.Product;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
@@ -65,6 +66,11 @@ public class ProductService {
     public void updateSponsorFlag(boolean sponsor, Date enddate, Long id){
         repo.updateSponsorFlag(sponsor,enddate,id);
     }
+
+    public  void updateProduct(String name,  String description,double price,Long id){
+        repo.updateProduct(name,description,price,id);
+    }
+
 
     public Date latestDate(String category){
         return repo.latestDate(category);

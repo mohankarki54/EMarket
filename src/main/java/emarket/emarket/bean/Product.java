@@ -19,7 +19,6 @@ public class Product {
     private Long id;
     @Lob
     private byte[] Image;
-
     @Lob
     private byte[] Image2;
     private String name;
@@ -28,6 +27,8 @@ public class Product {
     private String owner;
     private String Imagename;
     private String backname;
+
+    private String conditon;
 
     String model;
     String color;
@@ -43,9 +44,11 @@ public class Product {
     Date listeddate;
     Date enddate;
 
+
+
     public Product() {}
 
-    public Product(Boolean sponsor, String name, String type, double price,byte[] data, byte[] data1,  String model, String color, int year, int millage, String size, String owner, String category, String description, Date listeddate, Date enddate) {
+    public Product(Boolean sponsor, String name, String type, double price,byte[] data, byte[] data1,  String model, String color, int year, int millage, String size, String owner, String category, String description, Date listeddate, Date enddate, String conditon) {
         this.sponsor = sponsor;
         this.name= name;
         this.type = type;
@@ -63,5 +66,6 @@ public class Product {
         this.description = description;
         this.listeddate = listeddate;
         this.enddate = enddate;
+        this.conditon = conditon;
     }
 }

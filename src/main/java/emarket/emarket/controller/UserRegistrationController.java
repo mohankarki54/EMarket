@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 
 
 @Controller
@@ -61,6 +62,7 @@ public class UserRegistrationController {
             return modelAndView;
         }
         else{
+            registrationDto.setJoined(new Date());
             userService.save(registrationDto);
             ConfirmationToken confirmationToken = new ConfirmationToken(userService.findByEmail(registrationDto.getEmail()));
             confirmationTokenRepository.save(confirmationToken);

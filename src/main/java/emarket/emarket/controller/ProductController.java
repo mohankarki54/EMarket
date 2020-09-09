@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -39,13 +41,14 @@ public class ProductController {
     }
 
     @PostMapping("/product")
-    public String addProduct(@RequestParam("file") MultipartFile file,@RequestParam("file1") MultipartFile file1, @ModelAttribute("product")ProductRegistrationDTO productRegistrationDTO) throws IOException {
+    public String addProduct(@RequestParam("file") MultipartFile file,@RequestParam("file1") MultipartFile file1, @ModelAttribute("product")ProductRegistrationDTO productRegistrationDTO, RedirectAttributes redirectAttrs) throws IOException {
         String category = Helper.instance.getCategory();
         String owner= Account.instance.currentUserName();
         String name = productRegistrationDTO.getName();
         String type = productRegistrationDTO.getType();
         Double price = productRegistrationDTO.getPrice();
         String description = productRegistrationDTO.getDescription();
+        String condition = productRegistrationDTO.getCondition();
 
         //Vehicle
         String model = productRegistrationDTO.getModel();
@@ -68,16 +71,15 @@ public class ProductController {
         try {
             byte[] bytes = file.getBytes();
             byte[] bytes1 = file1.getBytes();
-            product = new Product(false, name,type, price, bytes,bytes1,model,color,year,millage,size ,owner,category,description, currentDate, currentDatePlusOne);
+            product = new Product(false, name,type, price, bytes,bytes1,model,color,year,millage,size ,owner,category,description, currentDate, currentDatePlusOne, condition);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         service.save(product);
-
-        return "redirect:/home";
+        redirectAttrs.addAttribute("success", "Your Ad with the title" +name+ "is successfully Listed.");
+        return "redirect:/product/"+category;
     }
 
 }

@@ -6,11 +6,11 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Date;
 
 @Getter
 @Setter
 @Entity
-
 @Table(name = "User", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User{
 
@@ -24,6 +24,7 @@ public class User{
     private String password;
     private boolean isEnabled;
     private boolean address;
+    private Date joined;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(

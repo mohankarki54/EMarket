@@ -9,12 +9,14 @@
     <link rel="stylesheet" href="/css/floating.css" type="text/css" media="screen">
     <link rel="stylesheet" href="/css/nav.css" type="text/css" media="screen">
     <link rel="stylesheet" href="/css/body.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="/css/imageModal.css" type="text/css" media="screen">
+
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="/home">
@@ -30,35 +32,22 @@
                     <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Post an Ad
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <div class="dropdown-item">
-                            <form method="get" th:action="@{/product}">
-                                <button type="submit" class="btn btn-light"  th:name="category" th:value="${'electronics'}">Electronics </button>
-                            </form>
-                        </div>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="/product/electronics">Electronics</a>
                         <div class="dropdown-divider"></div>
-                        <div class="dropdown-item">
-                            <form method="get" th:action="@{/product}">
-                                <button type="submit" class="btn btn-light"  th:name="category" th:value="${'beauty'}">Beauty</button>
-                            </form>
-                        </div>
+                        <a class="dropdown-item" href="/product/vehicle">Cars and Vehicle</a>
                         <div class="dropdown-divider"></div>
-                        <div class="dropdown-item">
-                            <form method="get" th:action="@{/product}">
-                                <button type="submit" class="btn btn-light"  th:name="category" th:value="${'vehicle'}">vehicle </button>
-                            </form>
-                        </div>
+                        <a class="dropdown-item" href="/product/beauty">Beauty</a>
                         <div class="dropdown-divider"></div>
-                        <div class="dropdown-item">
-                            <form method="get" th:action="@{/product}">
-                                <button type="submit" class="btn btn-light"  th:name="category" th:value="${'clothes'}">clothes </button>
-                            </form>
-                        </div>
+                        <a class="dropdown-item" href="/product/clothes">Clothes</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/product/furniture">Furniture</a>
                     </div>
                 </li>
 
+
                 <li class="nav-item" th:if="${promoteFlag}">
-                    <a class="nav-link" href="listedproduct">Promote Ad</a>
+                    <a class="nav-link" href="/listedproduct">Promote Ad</a>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -66,29 +55,15 @@
                         Category
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <div class="dropdown-item">
-                            <form method="get" th:action="@{/category}">
-                                <button type="submit" class="btn btn-light"  th:name="category" th:value="${'electronics'}">Electronics </button>
-                            </form>
-                        </div>
+                        <a class="dropdown-item" href="/category/electronics">Electronics</a>
                         <div class="dropdown-divider"></div>
-                        <div class="dropdown-item">
-                            <form method="get" th:action="@{/category}">
-                                <button type="submit" class="btn btn-light"  th:name="category" th:value="${'beauty'}">Beauty</button>
-                            </form>
-                        </div>
+                        <a class="dropdown-item" href="/category/vehicle">Cars and Vehicle</a>
                         <div class="dropdown-divider"></div>
-                        <div class="dropdown-item">
-                            <form method="get" th:action="@{/category}">
-                                <button type="submit" class="btn btn-light"  th:name="category" th:value="${'vehicle'}">vehicle </button>
-                            </form>
-                        </div>
+                        <a class="dropdown-item" href="/category/beauty">Beauty</a>
                         <div class="dropdown-divider"></div>
-                        <div class="dropdown-item">
-                            <form method="get" th:action="@{/category}">
-                                <button type="submit" class="btn btn-light"  th:name="category" th:value="${'clothes'}">clothes </button>
-                            </form>
-                        </div>
+                        <a class="dropdown-item" href="/category/clothes">Clothes</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/category/furniture">Furniture</a>
                     </div>
                 </li>
 
@@ -106,15 +81,15 @@
 
                     <div sec:authorize="isAuthenticated()">
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="dashboard">Dashboard</a>
+                            <a class="dropdown-item" href="/dashboard">Dashboard</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="favorite">Favorite</a>
+                            <a class="dropdown-item" href="/favorite">Favorite</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="listedproduct">Listed Product</a>
+                            <a class="dropdown-item" href="/listedproduct">Listed Product</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/forgot-password">Reset password</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="logout">Log out</a>
+                            <a class="dropdown-item" href="/logout">Log out</a>
                         </div>
                     </div>
 
@@ -128,8 +103,7 @@
 
     </div>
 </nav>
-
-
+<br>
 <div sec:authorize="isAuthenticated()">
 <div id="mybutton1">
 
@@ -172,10 +146,10 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img th:src="${product.imagename}" class="d-block w-100" alt="..." height="500">
+                        <img th:src="${product.imagename}" id="myImg" style="width:100%;max-width:600px" alt="..." height="500">
                     </div>
                     <div class="carousel-item">
-                        <img th:src="${product.backname}" class="d-block w-100" alt="..." height="500">
+                        <img th:src="${product.backname}" id="myImg1" style="width:100%;max-width:600px" alt="..." height="500">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -189,7 +163,12 @@
             </div>
         </div>
         <div class="col-6">
+            <h5>
+                <label>Ad id: <span class="card-text" th:text="${product.id}"></span></label>
+            </h5>
             <h6><span th:text="${posted}"></span></h6>
+            <h6><span th:text="${condition}"></span></h6>
+            <hr>
             <div id="accordion">
                 <div class="card">
                     <div class="card-header" id="headingOne">
@@ -199,7 +178,6 @@
                             </button>
                         </h5>
                     </div>
-
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                         <div class="card-body">
                             <div>
@@ -207,8 +185,8 @@
                                 <a th:href="'/user_current_listed_product/' + ${product.id}"><span class="card-text" th:text="${seller.firstname}"></span></a>
                             </div>
                             <div>
-                                <label>Joined: </label>
-                                <a th:href="'/user_current_listed_product/' + ${product.id}"><span class="card-text" th:text="..."></span></a>
+                                <label>Member since: </label>
+                               <span class="card-text" th:text="${seller.joined}"></span>
                             </div>
                             <div>
                                 <label><span class="card-text" th:text="${seller_rating}"></span></label>
@@ -217,7 +195,7 @@
                             <div sec:authorize="!isAuthenticated()">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h6 class="card-subtitle mb-2 text-muted">Please register or Login to see the contact information.</h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">Please register or Login to see the review and rate the seller.</h6>
                                         <a href="/signup" class="card-link">Register</a>
                                         <a href="/login" class="card-link">Login</a>
                                     </div>
@@ -263,6 +241,59 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="card" th:if="${cat == 'vehicle'}">
+                    <div class="card-header" id="headingFive">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                                Car Details
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseFive" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <div>
+                                <label>Make:</label>
+                                <span class="card-text" th:text="${product.name}"></span>
+                            </div>
+                            <div>
+                                <label>Model:</label>
+                                <span class="card-text" th:text="${product.model}"></span>
+                            </div>
+                            <div>
+                                <label>Color:</label>
+                                <span class="card-text" th:text="${product.color}"></span>
+                            </div>
+                            <div>
+                                <label>Year:</label>
+                                <span class="card-text" th:text="${product.year}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" th:if="${cat == 'clothes'}">
+                    <div class="card-header" id="headingFive">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                                Available size and Gender
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseFive" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <div>
+                                <label>Size: </label>
+                                <span class="card-text" th:text="${product.size}"></span>
+                            </div>
+                            <div>
+                                <label>Gender:</label>
+                                <span class="card-text" th:text="${product.type}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="card">
                     <div class="card-header" id="headingTwo">
                         <h5 class="mb-0">
@@ -398,24 +429,20 @@
 <div class="collapse" id="collapseExample3">
     <div class="card card-body">
         <form method="post" th:action="@{/review}" th:object="${rating}">
-                <div class="row">
-                    <label> Rate : </label>
+                    Rate :
                     <select th:field="*{ratingvalue}">
-                        <option th:value="${5}">Select value</option>
+                        <option th:value="${5}">Select value        </option>
                         <option th:value="${1}" th:text="${1}"></option>
                         <option th:value="${2}" th:text="${2}"></option>
                         <option th:value="${3}" th:text="${3}"></option>
                         <option th:value="${4}" th:text="${4}"></option>
                         <option th:value="${5}" th:text="${5}"></option>
                     </select>
-
-                <br>
-                    <label> Feedback </label>
-                    <textarea th:field="*{description}" placeholder="Some text message here" class="pb-cmnt-textarea" required="required"></textarea>
+                     <br>
+                    <textarea th:field="*{description}" placeholder="Write a Review" maxlength="250" class="pb-cmnt-textarea" required="required"></textarea>
 
                 <br>
                 <button class="btn btn-primary pull-right" type="submit" th:name="action" th:value="${product.id}">Submit Review</button>
-                </div>
         </form>
     </div>
 </div>
@@ -441,7 +468,68 @@
 <br>
 
 
+<!-- The Modal-->
+<div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01">
+    <div id="caption"></div>
+</div>
 
+<div id="myModal1" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img02">
+    <div id="caption1"></div>
+</div>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img = document.getElementById("myImg");
+    var modalImg = document.getElementById("img01");
+    var captionText = document.getElementById("caption");
+    img.onclick = function(){
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+</script>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal1");
+
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img = document.getElementById("myImg1");
+    var modalImg = document.getElementById("img02");
+    var captionText = document.getElementById("caption1");
+    img.onclick = function(){
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[1];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+</script>
+
+
+
+<br>
 <!-- Footer -->
 <footer class="page-footer font-small stylish-color-dark pt-4 y-4 bg-dark text-white-50">
 
@@ -456,7 +544,7 @@
 
                 <!-- Content -->
                 <h5 class="font-weight-bold text-uppercase mt-3 mb-4">EMarket</h5>
-                <p>It is the classified Ads where users can post their AD for free.</p>
+                <p>One of the best classified Ads website where users can post the Ad for free. </p>
 
             </div>
             <!-- Grid column -->
@@ -490,57 +578,35 @@
             <hr class="clearfix w-100 d-md-none">
 
             <!-- Grid column -->
-            <!--<div class="col-md-2 mx-auto">-->
+            <div class="col-md-2 mx-auto">
 
-            <!-- Links
-            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+                <!-- Links-->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Post Ad</h5>
 
-            <ul class="list-unstyled">
-                <li>
-                    <a href="#!">Link 1</a>
-                </li>
-                <li>
-                    <a href="#!">Link 2</a>
-                </li>
-                <li>
-                    <a href="#!">Link 3</a>
-                </li>
-                <li>
-                    <a href="#!">Link 4</a>
-                </li>
-            </ul>-->
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="/product/electronics">Electronics</a>
+                    </li>
+                    <li>
+                        <a href="/product/beauty">Cars and Vehicle</a>
+                    </li>
+                    <li>
+                        <a href="/product/vehicle">Beauty</a>
+                    </li>
+                    <li>
+                        <a href="/product/clothes">Clothes</a>
+                    </li>
+                    <li>
+                        <a href="/product/furniture">Furniture</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none">
 
         </div>
-        <!-- Grid column -->
-
-        <hr class="clearfix w-100 d-md-none">
-
-        <!-- Grid column
-        <div class="col-md-2 mx-auto">
-
-           Links
-            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
-
-            <ul class="list-unstyled">
-                <li>
-                    <a href="#!">Link 1</a>
-                </li>
-                <li>
-                    <a href="#!">Link 2</a>
-                </li>
-                <li>
-                    <a href="#!">Link 3</a>
-                </li>
-                <li>
-                    <a href="#!">Link 4</a>
-                </li>
-            </ul>
-
-        </div>-->
-        <!-- Grid column -->
-
-    </div>
-    <!-- Grid row -->
+        <!-- Grid row -->
 
     </div>
     <!-- Footer Links -->
@@ -563,6 +629,8 @@
 
     <!-- Call to action -->
 
+    <hr>
+    <p class="text-center">eMarket <a href="#"><u>Terms of Use</u></a> and <a href=""><u>Privacy Policy </u></a> </p>
     <hr>
 
     <!-- Copyright -->

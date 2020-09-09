@@ -1,10 +1,12 @@
 package emarket.emarket.DTO;
 
 import emarket.emarket.bean.Role;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Collection;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -14,6 +16,7 @@ public class UserRegistrationDto {
     private String email;
     private String password;
     private boolean address;
+    private Date joined;
 
     public UserRegistrationDto() {
     }
