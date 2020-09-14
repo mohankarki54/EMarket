@@ -71,6 +71,9 @@ public class ProductService {
         repo.updateProduct(name,description,price,id);
     }
 
+    public void updateViewed(int value, Long id){
+        repo.updateViewed(value,id);
+    }
 
     public Date latestDate(String category){
         return repo.latestDate(category);

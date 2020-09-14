@@ -29,6 +29,7 @@ public class Product {
     private String backname;
 
     private String conditon;
+    private int viewed;
 
     String model;
     String color;
@@ -48,7 +49,7 @@ public class Product {
 
     public Product() {}
 
-    public Product(Boolean sponsor, String name, String type, double price,byte[] data, byte[] data1,  String model, String color, int year, int millage, String size, String owner, String category, String description, Date listeddate, Date enddate, String conditon) {
+    public Product(Boolean sponsor, String name, String type, double price,byte[] data, byte[] data1,  String model, String color, int year, int millage, String size, String owner, String category, String description, Date listeddate, Date enddate, String conditon, int viewed) {
         this.sponsor = sponsor;
         this.name= name;
         this.type = type;
@@ -67,5 +68,6 @@ public class Product {
         this.listeddate = listeddate;
         this.enddate = enddate;
         this.conditon = conditon;
+        this.viewed = viewed;
     }
 }

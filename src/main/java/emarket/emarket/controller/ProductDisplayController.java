@@ -44,6 +44,12 @@ public class ProductDisplayController {
 
         Product product = service.get(Helper.instance.getId());
         String category = product.getCategory();
+
+        //calculate view
+        int current_view = product.getViewed();
+        int new_view = current_view + 1;
+        service.updateViewed(new_view, product.getId());
+
         List<Product> productCategory= service.categoryList(category);
         Collections.shuffle(productCategory);
         if (product != null) {
@@ -164,8 +170,8 @@ public class ProductDisplayController {
         Product product = service.get(Integer.parseInt(action));
         User user = userService.findByEmail(Account.instance.currentUserName());
         Mail mail = new Mail();
-        mail.setFrom("technewsandblog@gmail.com");
-        mail.setTo("technewsandblog@gmail.com");
+        mail.setFrom("emarketofficial123@gmail.com");
+        mail.setTo("emarketofficial123@gmail.com");
         mail.setSubject("Attention: Report from User");
         Map<String, Object> model = new HashMap<>();
         model.put("user", user.getFirstname()+ " likes to file the Report.");
@@ -191,7 +197,7 @@ public class ProductDisplayController {
         User user_customer = userService.findByEmail(user_email);
 
         Mail mail = new Mail();
-        mail.setFrom("technewsandblog@gmail.com");
+        mail.setFrom("emarketofficial123@gmail.com");
         mail.setTo(user.getEmail());
         mail.setSubject("Product contact from customer");
 
@@ -270,8 +276,8 @@ public class ProductDisplayController {
         Product product = service.get(Integer.parseInt(action));
         User user = userService.findByEmail(Account.instance.currentUserName());
         Mail mail = new Mail();
-        mail.setFrom("technewsandblog@gmail.com");
-        mail.setTo("technewsandblog@gmail.com");
+        mail.setFrom("emarketofficial123@gmail.com");
+        mail.setTo("emarketofficial123@gmail.com");
         mail.setSubject("Attention: Report from User");
         Map<String, Object> model = new HashMap<>();
         model.put("user", user.getFirstname()+ " likes to file the Report.");

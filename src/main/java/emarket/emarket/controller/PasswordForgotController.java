@@ -61,7 +61,7 @@ public class PasswordForgotController {
         tokenRepository.save(token);
 
         Mail mail = new Mail();
-        mail.setFrom("technewsandblog@gmail.com");
+        mail.setFrom("emarketofficial123@gmail.com");
         mail.setTo(user.getEmail());
         mail.setSubject("Password reset request");
 

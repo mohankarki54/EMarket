@@ -10,7 +10,7 @@
     </parent>
     <groupId>emarket</groupId>
     <artifactId>emarket</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>emarket</name>
     <description>Senior year project for Summer 2020 UTA</description>
 
@@ -66,7 +66,9 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
+            <version>8.0.13</version>
         </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

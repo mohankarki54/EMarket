@@ -175,8 +175,8 @@ public class HomeController {
     public String sendEmailToAdmin(RedirectAttributes redirectAttrs, @ModelAttribute("contact") Contact contact, HttpServletRequest request ){
         redirectAttrs.addAttribute("contact","Thank you for reaching the us. One of the associate will soon contact you as soon as possible." );
         Mail mail = new Mail();
-        mail.setFrom("technewsandblog@gmail.com");
-        mail.setTo("technewsandblog@gmail.com");
+        mail.setFrom("emarketofficial123@gmail.com");
+        mail.setTo("emarketofficial123@gmail.com");
         mail.setSubject("Attention: User contact");
         Map<String, Object> model = new HashMap<>();
         model.put("customer_email", "Customer Email: "+contact.getEmail());

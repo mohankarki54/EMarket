@@ -163,8 +163,11 @@
             </div>
         </div>
         <div class="col-6">
-            <h5>
+            <h4>
                 <label>Ad id: <span class="card-text" th:text="${product.id}"></span></label>
+            </h4>
+            <h5>
+                <label>Viewed: <span class="card-text" th:text="${product.viewed}"></span> times</label>
             </h5>
             <h6><span th:text="${posted}"></span></h6>
             <h6><span th:text="${condition}"></span></h6>

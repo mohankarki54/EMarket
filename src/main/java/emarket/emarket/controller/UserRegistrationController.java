@@ -71,7 +71,7 @@ public class UserRegistrationController {
             confirmationTokenRepository.save(confirmationToken);
 
             Mail mail = new Mail();
-            mail.setFrom("technewsandblog@gmail.com");
+            mail.setFrom("emarketofficial123@gmail.com");
             mail.setTo(registrationDto.getEmail());
             mail.setSubject("Welcome to eMarket");
             Map<String, Object> model = new HashMap<>();

@@ -61,6 +61,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable();
 
+
     }
 
     @Bean(name = BeanIds.AUTHENTICATION_MANAGER)

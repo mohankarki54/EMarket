@@ -38,6 +38,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("select max(u.listeddate) from Product u where u.category = :category")
     Date latestDate(@Param("category") String category);
 
+    @Modifying
+    @Query("update Product u set u.viewed = :value where u.id = :id")
+    void updateViewed(@Param("value") int value, @Param("id") Long id);
+
 
 
 }

@@ -110,10 +110,4 @@ public class EmailService {
 
 
 
-   /* @Async
-    public void sendRegisterEmail(SimpleMailMessage email) {
-        emailSender.send(email);
-    }*/
-
-
 }
